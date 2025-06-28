@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: "en-US" }}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>sugarlump-AR</title>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=0-0000000000"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', '0-0000000000');
+    </script>
+
+    <style>
+        /* Global styles for html and body */
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            /* Prevents horizontal scrolling */
+            font-family: Google Sans, Noto, Roboto, Helvetica Neue, sans-serif;
+            /* Keep generic fonts for broader compatibility */
+            color: #244376;
+            /* Default text color */
+        }
+
+        /* Main container styling */
+        .container {
+            max-width: 600px;
+            /* Max width for larger screens */
+            width: 100%;
+            /* Default 100% width, constrained by max-width */
+            box-sizing: border-box;
+            /* Include padding in width calculation */
+            padding: 0 10px;
+            /* Default side padding for all screens */
+        }
+
+        /* Card styling */
+        .card {
+            break-inside: avoid;
+            /* For multi-column layouts, prevents breaking cards */
+            background-color: rgb(255, 255, 153);
+            border: 2px solid rgb(255, 255, 153);
+            padding: 10px;
+            margin: 0 0 1em 0;
+            /* Space between cards */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* Centers content horizontally within the card */
+            text-align: center;
+            /* Centers inline text within the card */
+            border-radius: 6px;
+            /* Keep border-radius if desired for rounded corners */
+            overflow: hidden;
+            /* Keeps content within rounded corners */
+        }
+
+        .card1 {
+            /* Specific for card1 if used */
+            break-inside: avoid;
+            background-color: #ffff99;
+            border: 2px solid rgb(255, 255, 153);
+            padding: 5px;
+            margin: 0 0 1em 0;
+        }
+
+        .stack-top {
+            z-index: 9;
+        }
+
+        .marginauto {
+            display: block;
+            margin: 10px auto;
+            /* Centers block elements with this class */
+        }
+
+        .centerImage {
+            /* Redundant with .card's flex centering, but harmless */
+            text-align: center;
+            display: block;
+        }
+
+        .center {
+            /* Likely redundant with .card's flex centering */
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+
+        a {
+            color: #59cbe8;
+        }
+
+        /* Custom button container for AR and print buttons */
+        .button-container {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        /* Main button styling (for AR and print) */
+        .main-button {
+            background-color: #ffffff;
+            border-radius: 8px;
+            border: 2px solid #59cbe8;
+            height: 60px;
+            /* Fixed height for consistent button size */
+            min-width: 250px;
+            /* Minimum width for the button */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .main-button:hover {
+            background-color: #f0f8ff;
+            border-color: #48b0cc;
+        }
+
+        .main-button-text {
+            font-size: 32px;
+            color: #000099;
+            font-family: 'Chalet LondonNineteenEighty Regular', sans-serif;
+            white-space: nowrap;
+            /* Prevent text from wrapping */
+        }
+
+        /* Specific spacing for hyperlinks within cards */
+        .card h2 p {
+            margin-top: 5px;
+            /* Reduce top margin for paragraphs within h2 */
+            margin-bottom: 5px;
+            /* Reduce bottom margin for paragraphs within h2 */
+        }
+
+        .card h2 {
+            margin-top: 5px;
+            /* Reduce default top margin of h2 */
+            margin-bottom: 5px;
+            /* Reduce default bottom margin of h2 */
+        }
+
+        /* Adjust these pixel values (e.g., 5px) for desired spacing */
+
+
+        /* model-viewer specific styling */
+        model-viewer {
+            --progress-bar-color: #59cbe8;
+            /* Custom progress bar color */
+        }
+
+        /* Default <model-viewer> AR button hidden */
+        model-viewer::part(ar-button) {
+            display: none !important;
+        }
+
+        /* Video styling */
+        video {
+            object-fit: cover;
+            /* Keeps aspect ratio and fills container, may crop */
+        }
+
+        /* Font face definitions (must be in a style block) */
+        @font-face {
+            font-family: 'Chalet LondonNineteenEighty Regular';
+            src: url('fonts/Chalet LondonNineteenEighty Regular.otf') format('opentype');
+        }
+
+        @font-face {
+            font-family: 'DaisyByhapppyal-Regular';
+            src: url('fonts/DaisyByhapppyal-Regular.otf') format('opentype');
+        }
+
+        .custom-text {
+            /* For a specific custom text element, if used */
+            font-family: 'Chalet LondonNineteenEighty Regular', sans-serif;
+            color: #FFFFFF;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 48px;
+        }
+
+        .daisy-text {
+            /* For a specific daisy text element, if used */
+            font-family: 'DaisyByhapppyal-Regular', sans-serif;
+            color: #000099;
+            font-size: 60px;
+        }
+
+        /* Media queries for responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 5px;
+                /* Slightly less padding on mobile */
+            }
+
+            .custom-text {
+                font-size: 18px;
+                /* Smaller font on mobile */
+                top: 10px;
+                left: 10px;
+            }
+
+            model-viewer {
+                height: 300px;
+                /* Adjust model size for mobile */
+            }
+
+            /* Adjust AR button for mobile, using its actual class: main-button */
+            .main-button {
+                /* Changed width from 90% to a max-width and then min-width
+                                    This ensures they don't get too big, but also don't break below a certain size. */
+                width: 100%;
+                /* Take up full available width within parent */
+                max-width: 250px;
+                /* Example: limit button width to 250px on mobile */
+                height: 50px;
+                /* Slightly reduced button height on mobile */
+                /* Removed font-size here as we'll size the span directly */
+            }
+
+            /* NEW: Scaling for image and text inside main-button on mobile */
+            .main-button img {
+                height: 3em !important;
+                /* Scale image relative to font size, or a fixed smaller px value */
+                width: auto;
+                margin-right: 3px;
+                /* Slightly reduce margin */
+            }
+
+            .main-button span {
+                font-size: 24px !important;
+                /* Scale text down for mobile */
+            }
+
+            /* Specific override for the "print certificate" button's span to make text fit better */
+            #viewPrintCertificateButton span {
+                font-size: 18px !important;
+                /* Even smaller for this specific button if needed */
+            }
+        }
+    </style>
+</head>
+
+<body bgcolor="#ffff99" style="display: flex; flex-direction: column; align-items: center;">
+
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-0000000" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <div class="container">
+        <div class="card">
+            <img src="images/erin_video_scenes-32.png" alt="Logo"
+                style="width: 350px; height: auto; display: block; margin: auto;">
+        </div>
+
+        <div class="card" style="position: relative;">
+            <div style="display: flex; justify-content: center; width: 100%;">
+                <model-viewer id="reveal" src="Models/entire_family_99cm.glb?sound=Sound/sweet_neighbor_of_mine3.mp3"
+                    shadow-intensity="1" ar ar-modes="scene-viewer webxr quick-look" ar-scale="auto"
+                    ar-preferred ar-placement="floor" camera-controls camera-orbit="0deg 90deg 100%" loading="lazy"
+                    slot="ar-button" poster="images/Video Poster_2.png" alt="Sugarlump Demo"
+                    style="width: 100%; height: 200px; position: absolute; top: 0; left: 0; z-index: 1;"
+                    ios-src="Models/GIRL_converted.usdz" interaction-prompt="none">
+                </model-viewer>
+            </div>
+
+            <div
+                style="position: relative; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 2;">
+                <video id="video-overlay"
+                    style="width: 100%; max-width: 100%; height: 100%; object-fit: cover; margin: auto; display: block;"
+                    poster="images/Video Poster_2.png" playsinline muted>
+                    <source src="Video/sugarlump_intro_erin_2.mp4" type="video/mp4">
+                </video>
+
+                <button id="play-pause-button" style="
+                    position: absolute; z-index: 3; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                    background-color: rgba(255, 255, 255, 0.8); border: none; border-radius: 50%;
+                    padding: 10px 15px; font-size: 24px; font-weight: bold; cursor: pointer;">
+                    ▶
+                </button>
+            </div>
+        </div>
+
+        <div style="width: 100%; display: flex; flex-direction: column; align-items: center; margin-top: 30px;">
+            <button id="ar-button" class="main-button" style="width: 250px;">
+                <img src="images/Heart button.png" style="height: 4em; width: auto; margin-right: 5px;"
+                    alt="Custom Icon">
+                <span
+                    style="font-size: 32px; color: #000099; font-family: 'Chalet LondonNineteenEighty Regular', sans-serif; white-space: nowrap;">
+                    <strong>push here</strong>
+                </span>
+            </button>
+
+            <button id="viewPrintCertificateButton" class="main-button" style="width: 250px; margin-top: 10px;">
+                <img src="images/sl_ribbon2.png"
+                    style="height: 4em; width: auto; margin-right: 5px; opacity: 0.8;" alt="Certificate Icon">
+                <span
+                    style="font-size: 20px; color: #000099; font-family: 'Chalet LondonNineteenEighty Regular', sans-serif; white-space: nowrap;">
+                    <strong>print certificate</strong>
+                </span>
+            </button>
+        </div>
+
+        <div class="card">
+            <img class="marginauto" src="images/erin_video_scenes-34.png" alt="Logo" style="width: 300px; height: auto">
+            <h2>
+                <p style="font-family:Chalet LondonNineteenEighty Regular; font-weight: bold; color: #ff69b4;"><b>about:</b><a
+                        href="https://sugarlump.love/about" target="_blank" rel="noopener noreferrer"><b
+                                style="color:#59cbe8;"> creativity + kindness</b></a></p>
+            </h2>
+            <h2>
+                <p style="font-family:Chalet LondonNineteenEighty Regular; font-weight: bold; color: #ff69b4;"><b>rewards:</b><a
+                        href="https://sugarlump.love/" target="_blank" rel="noopener noreferrer"><b
+                                style="color:#59cbe8;"><b> the kindness project</b></b></a></p>
+            </h2>
+            <h2>
+                <p style="font-family:Chalet LondonNineteenEighty Regular; font-weight: bold; color: #ff69b4;"><b>join:</b><a
+                        href="https://sugarlump.love/the-club" target="_blank" rel="noopener noreferrer"><b
+                                style="color:#59cbe8;"> sugarlump kindness club</b></a></p>
+            </h2>
+            <h2>
+                <p style="font-family:Chalet LondonNineteenEighty Regular; font-weight: bold; color: #ff69b4;"><b>shop:</b><a
+                        href="https://sugarlump.love/shop" target="_blank" rel="noopener noreferrer"><b
+                                style="color:#59cbe8;"> creative kindness kits</b></a></p>
+            </h2>
+            <h2>
+                <p style="font-family:Chalet LondonNineteenEighty Regular; font-weight: bold; color: #ff69b4;"><b>brag
+                                tags:</b><a href="https://www.schoollife.com/bragtags-intro" target="_blank"
+                        rel="noopener noreferrer"><b style="color:#59cbe8;"> accomplishment, recognition,
+                                confidence</b></a></p>
+            </h2>
+            <h2>
+                <p style="font-family:Chalet LondonNineteenEighty Regular; font-weight: bold; color: #ff69b4;"><b>sponsors:</b><a
+                        href="https://sugarlump.love/contact" target="_blank" rel="noopener noreferrer"><b
+                                style="color:#59cbe8;"><b> get involved</b></b></a></p>
+            </h2>
+            <br>
+            <h1>
+                <p style="font-family:DaisyByhapppyal-Regular; font-weight: bold; color: #000099;"><em> THIS KINDNESS
+                                PROJECT SPONSORED BY</em></p>
+            </h1>
+            <img class="marginauto" src="images/erin_video_scenes-37.png" alt="Logo" style="width: 300px; height: auto">
+        </div>
+
+        <div class="centerImage">
+            <button onclick="window.open('https://www.tercekrealestate.com/', '_blank')" type="button"
+                id="SponsorButton"
+                style="z-index: 9; background-color: #ffffff; border-radius: 8px; border: 2px solid #59cbe8; height: 35px; width: auto; color: #000099; font-family: 'Chalet LondonNineteenEighty Regular', sans-serif; font-size: 20px;">
+                <strong>&nbsp; visit &nbsp;</strong>
+            </button>
+        </div>
+
+        <div class="card">
+            <h2>
+                <p style="font-family:Chalet LondonNineteenEighty Regular; font-weight: bold; color: #000099;">
+                    Experience 4D Augmented Reality On Your Phone</p>
+            </h2>
+            <img alt="AR Instructions" src="images/erin_video_scenes-41.png" class="marginauto"
+                style="max-width: 100%; max-height: 350px">
+            <h3>
+                <p style="font-family:Chalet LondonNineteenEighty Regular; font-weight: bold; color: #000099;"><em> If
+                                AR button does not appear on mobile device, use another browser.</em></p>
+            </h3>
+        </div>
+
+        <div class="card">
+            <h4><a href="https://avertek.net/" target="_blank" rel="noopener noreferrer">
+                    <p style="font-family:Chalet LondonNineteenEighty Regular; color:##59cbe8;"> Contact AVERtek to
+                        learn more about AR marketing.</p>
+                </a></h4>
+        </div>
+    </div>
+
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.js"></script>
+    <script nomodule="" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <script src="{{ "/assets/js/scale.fix.js" | relative_url }}"></script>
+    <script src="https://unpkg.com/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="https://unpkg.com/intersection-observer/intersection-observer.js"></script>
+    <script src="https://unpkg.com/resize-observer-polyfill/dist/ResizeObserver.js"></script>
+
+    <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+    <script src="https://unpkg.com/@pdf-lib/fontkit/dist/fontkit.umd.min.js"></script>
+
+    <script>
+        // Your existing Sync, playNow, jumpTo, getOutboundLink functions
+        function Sync(selector, audioSelector) {
+            var modelViewer = document.querySelector(selector);
+            var sound = document.querySelector(audioSelector);
+            var playRequest = document.querySelector("#overlay");
+
+            sound.addEventListener("timeupdate", () => {
+                modelViewer.currentTime = sound.currentTime;
+                console.log("modelViewer time: " + modelViewer.currentTime);
+            });
+
+            sound.addEventListener("pause", () => {
+                modelViewer.pause();
+            });
+
+            sound.addEventListener("play", () => {
+                modelViewer.play();
+
+                playRequest.classList.add("hide");
+            });
+
+            document.addEventListener("visibilitychange", () => {
+                if (document.visibilityState !== "visible") {
+                    sound.pause();
+                }
+            });
+            var promise = sound.play();
+            if (promise !== undefined) {
+                promise
+                    .then(_ => {
+                        console.log("Autoplay has worked");
+                        playRequest.classList.add("hide");
+                    })
+                    .catch(error => {
+                        // Show a "Play" button so that user can start playback.
+                        console.log("Autoplay has not worked");
+
+                        // show the modal dialogue to play this
+                        playRequest.classList.remove("hide");
+                    });
+            }
+
+        }
+
+        function playNow() {
+            var playRequest = document.querySelector("#overlay");
+            playRequest.classList.add("hide");
+
+            var sound = document.querySelector("#sound");
+            sound.play();
+        }
+
+        function jumpTo(time) {
+            var sound = document.querySelector("#sound");
+            sound.currentTime = time;
+        }
+
+        var getOutboundLink = function (url) {
+            gtag('event', 'click', {
+                'event_category': 'outbound',
+                'event_label': url,
+                'transport_type': 'beacon',
+                'event_callback': function () {
+                    document.location = url;
+                }
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const video = document.getElementById('video-overlay');
+            const playPauseButton = document.getElementById('play-pause-button');
+            const arButton = document.getElementById('ar-button');
+            const modelViewer = document.getElementById('reveal');
+            const viewPrintCertificateButton = document.getElementById('viewPrintCertificateButton');
+
+            // Initial state for video and button
+            playPauseButton.style.display = 'block';
+            playPauseButton.innerHTML = "▶";
+            video.muted = true; // Ensure muted on load for autoplay policies
+
+            function toggleVideo() {
+                if (video.paused || video.ended) {
+                    video.play();
+                    video.muted = false; // Unmute when user plays
+                    playPauseButton.innerHTML = "❚❚";
+                    playPauseButton.style.display = "none";
+                    modelViewer.pause();
+                } else {
+                    video.pause();
+                    playPauseButton.innerHTML = "▶";
+                    playPauseButton.style.display = "block";
+                    modelViewer.play();
+                }
+            }
+
+            video.addEventListener('click', toggleVideo);
+            playPauseButton.addEventListener('click', toggleVideo);
+
+            video.addEventListener('play', () => {
+                playPauseButton.style.display = "none";
+            });
+
+            video.addEventListener('pause', () => {
+                playPauseButton.style.display = "block";
+            });
+
+            function launchAR() {
+                if (!video.paused) {
+                    video.pause();
+                }
+
+                video.style.display = 'none';
+                playPauseButton.style.display = 'none';
+
+                // Only exit fullscreen if the document is *currently* in fullscreen mode
+                if (document.fullscreenElement) {
+                    document.exitFullscreen();
+                } else if (document.webkitFullscreenElement) { // Safari/iOS
+                    document.webkitExitFullscreen();
+                } else if (document.mozFullScreenElement) { // Firefox
+                    document.mozCancelFullScreen();
+                } else if (document.msFullscreenElement) { // IE/Edge
+                    document.msExitFullscreen();
+                }
+
+                if (modelViewer.canActivateAR) {
+                    modelViewer.activateAR();
+                } else {
+                    alert("AR is not available on this device.");
+                    video.style.display = 'block';
+                    if (video.paused) {
+                        playPauseButton.style.display = 'block';
+                    }
+                }
+            }
+
+            arButton.addEventListener('click', launchAR);
+
+            // Function to detect if the user is on a mobile device
+            function isMobileDevice() {
+                return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            }
+
+            // --- Modified openPdfInNewTab function ---
+            function openPdfInNewTab(blob, certificateNumber) {
+                const url = URL.createObjectURL(blob);
+                const fileName = `SweetNeighborCertificate_${certificateNumber}.pdf`;
+
+                if (isMobileDevice()) {
+                    // For mobile devices, trigger a direct download
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = fileName; // This attribute prompts the "Save As" dialog
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    // Revoke the object URL after the download is initiated
+                    setTimeout(() => URL.revokeObjectURL(url), 100); 
+                } else {
+                    // For desktop devices, open in a new tab
+                    const newWindow = window.open(url, '_blank');
+                    if (newWindow) {
+                        newWindow.focus();
+                    } else {
+                        alert('Please allow pop-ups for this website to view the certificate.');
+                        // Fallback to direct download if new tab is blocked on desktop
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = fileName;
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                    }
+                    // Revoke URL after a short delay to allow the new tab to load
+                    setTimeout(() => URL.revokeObjectURL(url), 1000);
+                }
+            }
+
+
+            // --- START PDF-LIB INTEGRATION (Save As functionality implemented) ---
+            async function generateStampedCertificate() {
+                // Check if PDFLib is loaded and available
+                if (typeof PDFLib === 'undefined' || typeof PDFLib.PDFDocument === 'undefined') {
+                    console.error("PDFLib is not loaded. Cannot generate certificate.");
+                    alert("Certificate generation is not ready. Please try again or refresh the page.");
+                    return;
+                }
+
+                const {
+                    PDFDocument,
+                    rgb,
+                    StandardFonts
+                } = PDFLib;
+
+                const pdfPath = 'certificates/sugarlump_app_certificate.pdf'; // Verify this path is correct
+                try {
+                    const existingPdfBytes = await fetch(pdfPath).then(res => {
+                        if (!res.ok) {
+                            throw new Error(`HTTP error! status: ${res.status} - Could not fetch PDF from ${pdfPath}. Please check the file path and server.`);
+                        }
+                        return res.arrayBuffer();
+                    });
+                    const pdfDoc = await PDFDocument.load(existingPdfBytes);
+
+                    const today = new Date();
+                    const dateOptions = {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    };
+                    const currentDateString = today.toLocaleDateString('en-US', dateOptions);
+
+                    const futureDate = new Date(today);
+                    futureDate.setDate(today.getDate() + 30);
+                    const futureDateString = futureDate.toLocaleDateString('en-US', dateOptions);
+
+                    const noteTextLine1 = `Download Date: ${currentDateString}`;
+                    const noteTextLine2 = `Valid until: ${futureDateString}`;
+
+                    const sponsorText = "Tercek Real Estate Group"; // New line for "Sponsor"
+                    const newTopLineText = "Sweet Neighbor of Mine";
+
+                    const padTwoDigits = (num) => String(num).padStart(2, '0');
+
+                    const year = today.getFullYear() % 100;
+                    const month = today.getMonth() + 1;
+                    const day = today.getDate();
+                    const hours = today.getHours();
+                    const minutes = today.getMinutes();
+
+                    const certificateNumber =
+                        `${padTwoDigits(year)}` +
+                        `${padTwoDigits(month)}` +
+                        `${padTwoDigits(day)}` +
+                        `${padTwoDigits(hours)}` +
+                        `${padTwoDigits(minutes)}`;
+
+                    const certificateText = `Certificate No: ${certificateNumber}`;
+
+                    const pages = pdfDoc.getPages();
+                    if (pages.length === 0) {
+                        throw new Error("The PDF document contains no pages.");
+                    }
+                    const firstPage = pages[0];
+
+                    const {
+                        width,
+                        height
+                    } = firstPage.getSize();
+                    console.log(`PDF Page Dimensions: Width = ${width}, Height = ${height}`);
+
+                    const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
+                    const helveticaBoldFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+
+                    const baseLineY = height - 250;
+
+                    // New: Sponsor Text positioning
+                    const sponsorFontSize = 16; // Adjust as needed
+                    const sponsorX = 80; // Align with other text
+                    const sponsorY = baseLineY + 20; // Position above newTopLineText
+
+                    const newTopLineFontSize = 16;
+                    const newTopLineX = 80;
+                    const newTopLineY = baseLineY;
+
+                    const certificateNoFontSize = 12;
+                    const certificateNoX = 80;
+                    const certificateNoY = newTopLineY - newTopLineFontSize - 5;
+
+                    const downloadDateFontSize = 12;
+                    const downloadDateX = 80;
+                    const downloadDateY = certificateNoY - certificateNoFontSize - 5;
+
+                    const validUntilFontSize = 14;
+                    const validUntilX = 80;
+                    const validUntilY = downloadDateY - downloadDateFontSize - 5;
+
+                    // NEW: Draw "Sponsor"
+                    firstPage.drawText(sponsorText, {
+                        x: sponsorX,
+                        y: sponsorY,
+                        font: helveticaBoldFont, // You can choose a different font/style if desired
+                        size: sponsorFontSize,
+                        color: rgb(8 / 255, 119 / 255, 144 / 255), // Example color, adjust as needed
+                    });
+
+                    // 1. Draw "Kindness Project"
+                    firstPage.drawText(newTopLineText, {
+                        x: newTopLineX,
+                        y: newTopLineY,
+                        font: helveticaBoldFont,
+                        size: newTopLineFontSize,
+                        color: rgb(254 / 255, 63 / 255, 178 / 255),
+                    });
+
+                    // 2. Draw "Certificate No."
+                    firstPage.drawText(certificateText, {
+                        x: certificateNoX,
+                        y: certificateNoY,
+                        font: helveticaFont,
+                        size: certificateNoFontSize,
+                        color: rgb(8 / 255, 119 / 255, 144 / 255),
+                    });
+
+                    // 3. Draw "Download Date"
+                    firstPage.drawText(noteTextLine1, {
+                        x: downloadDateX,
+                        y: downloadDateY,
+                        font: helveticaFont,
+                        size: downloadDateFontSize,
+                        color: rgb(8 / 255, 119 / 255, 144 / 255),
+                    });
+
+                    // 4. Draw "Valid until"
+                    firstPage.drawText(noteTextLine2, {
+                        x: validUntilX,
+                        y: validUntilY,
+                        font: helveticaBoldFont,
+                        size: validUntilFontSize,
+                        color: rgb(0.8, 0.2, 0.2),
+                    });
+
+                    const pdfBytes = await pdfDoc.save();
+                    const blob = new Blob([pdfBytes], {
+                        type: 'application/pdf'
+                    });
+
+                    // --- MODIFIED: Always open in new tab for viewing ---
+                    openPdfInNewTab(blob, certificateNumber);
+
+                } catch (error) {
+                    console.error("Error generating stamped certificate:", error);
+                    alert("Failed to generate certificate. Please check the console for details. Make sure 'certificates/sugarlump_app_certificate.pdf' exists at the correct path.");
+                }
+            }
+            viewPrintCertificateButton.addEventListener('click', generateStampedCertificate);
+            // --- END PDF-LIB INTEGRATION ---
+        });
+    </script>
+</body>
+
+</html>
