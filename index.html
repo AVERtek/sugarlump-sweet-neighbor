@@ -34,8 +34,10 @@
         .main-button img { height: 40px; margin-right: 10px; }
         .main-button span { color: #000099; font-weight: bold; font-size: 26px; }
 
+        /* AR Invisible Layer */
         model-viewer#reveal { display: none; width: 1px; height: 1px; position: absolute; }
 
+        /* Link Sizes: All Uniform */
         .links-group { margin: 20px 0; line-height: 2; color: #ff69b4; font-weight: bold; font-size: 18px; }
         .links-group a { color: #59cbe8; text-decoration: none; }
         
@@ -54,13 +56,13 @@
             font-size: 24px; color: #59cbe8; display: flex; align-items: center; justify-content: center;
         }
 
-        /* PDF Preview Modal */
+        /* Modal for Viewing Certificate */
         #cert-modal {
             display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%;
             background-color: rgba(0,0,0,0.85); flex-direction: column; align-items: center; justify-content: center;
         }
-        #cert-iframe { width: 90%; height: 75%; border: none; background: #fff; border-radius: 10px; }
-        .close-modal { margin-top: 15px; background: #ff69b4; color: #fff; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 18px; }
+        #cert-iframe { width: 90%; height: 80%; border: none; background: #fff; border-radius: 10px; }
+        .close-modal { margin-top: 15px; background: #ff69b4; color: #fff; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; }
 
         @font-face { font-family: 'Chalet LondonNineteenEighty Regular'; src: url('fonts/Chalet LondonNineteenEighty Regular.otf'); }
         @font-face { font-family: 'DaisyByhapppyal-Regular'; src: url('fonts/DaisyByhapppyal-Regular.otf'); }
@@ -94,7 +96,7 @@
             <div>rewards: <a href="https://sugarlump.love/" target="_blank">the kindness project</a></div>
             <div>join: <a href="https://sugarlump.love/contact" target="_blank">sugarlump kindness club</a></div>
             <div>shop: <a href="https://sugarlump.love/shop" target="_blank">creative kindness kits</a></div>
-            <div style="font-size: 14px;">brag tags: <a href="https://www.schoollife.com/bragtags-intro" target="_blank">accomplishment, recognition, confidence</a></div>
+            <div>brag tags: <a href="https://www.schoollife.com/bragtags-intro" target="_blank">accomplishment, recognition, confidence</a></div>
             <div>sponsors: <a href="https://sugarlump.love/sponsors" target="_blank">get involved</a></div>
         </div>
 
@@ -118,10 +120,6 @@
             </video>
             <button id="play-btn" class="play-btn">▶</button>
         </div>
-
-        <p style="margin-top: 40px; font-size: 14px; padding-bottom: 30px;">
-            <a href="https://avertek.net/" target="_blank" style="color:#000099; text-decoration: none;">Contact AVERtek to learn more about AR marketing.</a>
-        </p>
     </div>
 
     <div id="cert-modal">
@@ -133,12 +131,12 @@
 
     <script>
         const mv = document.getElementById('reveal');
-        const arBtn = document.getElementById('ar-launch');
         const arAudio = document.getElementById('ar-audio');
         const video = document.getElementById('intro-video');
         const playBtn = document.getElementById('play-btn');
 
-        arBtn.addEventListener('click', () => {
+        // Restore AR Functionality
+        document.getElementById('ar-launch').addEventListener('click', () => {
             video.pause();
             playBtn.style.display = 'flex';
             if (mv.canActivateAR) {
@@ -168,7 +166,7 @@
         playBtn.addEventListener('click', toggleVideo);
         video.addEventListener('click', toggleVideo);
 
-        // --- FIXED CERTIFICATE ALIGNMENT & FONT SIZE ---
+        // --- PDF LOGIC: CORRECT ALIGNMENT AND FONT SIZES ---
         async function generateCertificate() {
             const { PDFDocument, rgb, StandardFonts } = PDFLib;
             const url = 'certificates/sugarlump_app_certificate.pdf';
@@ -181,44 +179,38 @@
                 const firstPage = pdfDoc.getPages()[0];
                 const { height } = firstPage.getSize();
 
-                const now = new Date();
-                const expDate = new Date(); expDate.setDate(now.getDate() + 30);
-                const dateStr = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+                const dateStr = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+                const expDate = new Date(); expDate.setDate(expDate.getDate() + 30);
                 const expStr = expDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
                 const certId = "260" + Math.floor(Math.random() * 10000000);
 
-                // COORD ADJUSTMENT: Shifted left and increased font size
-                const leftX = 70; // Shifting block further left to mirror the instructions
-                const yPos = height - 330; 
+                // POSITIONING: Mirrored to "INSTRUCTIONS" block
+                const mirrorX = 100; // Aligned to the left
+                const mirrorY = height - 325; 
 
-                // Sponsor & I Love Me (Increased to size 15 for prominence)
-                firstPage.drawText('Tercek Real Estate Group', { x: leftX, y: yPos, size: 15, font: fontBold, color: rgb(0.12, 0.44, 0.53) });
-                firstPage.drawText('I Love Me', { x: leftX, y: yPos - 20, size: 15, font: fontBold, color: rgb(0.95, 0.25, 0.55) });
+                // Tercek Block (Size 15)
+                firstPage.drawText('Tercek Real Estate Group', { x: mirrorX, y: mirrorY, size: 15, font: fontBold, color: rgb(0.12, 0.44, 0.53) });
+                firstPage.drawText('I Love Me', { x: mirrorX, y: mirrorY - 20, size: 15, font: fontBold, color: rgb(0.95, 0.25, 0.55) });
 
-                // Meta Info (Size 10)
-                firstPage.drawText(`Certificate No: ${certId}`, { x: leftX, y: yPos - 45, size: 10, font: fontReg, color: rgb(0.12, 0.44, 0.53) });
-                firstPage.drawText(`Download Date: ${dateStr}`, { x: leftX, y: yPos - 58, size: 10, font: fontReg, color: rgb(0.12, 0.44, 0.53) });
+                // Cert Info (Size 10)
+                firstPage.drawText(`Certificate No: ${certId}`, { x: mirrorX, y: mirrorY - 45, size: 10, font: fontReg, color: rgb(0.12, 0.44, 0.53) });
+                firstPage.drawText(`Download Date: ${dateStr}`, { x: mirrorX, y: mirrorY - 58, size: 10, font: fontReg, color: rgb(0.12, 0.44, 0.53) });
                 
                 // Expiry (Bold Red)
-                firstPage.drawText(`Valid until: ${expStr}`, { x: leftX, y: yPos - 72, size: 11, font: fontBold, color: rgb(0.8, 0, 0) });
+                firstPage.drawText(`Valid until: ${expStr}`, { x: mirrorX, y: mirrorY - 72, size: 11, font: fontBold, color: rgb(0.8, 0, 0) });
 
                 const pdfBytes = await pdfDoc.save();
                 const blob = new Blob([pdfBytes], { type: 'application/pdf' });
                 const blobUrl = URL.createObjectURL(blob);
 
-                // Show in Modal Preview
                 document.getElementById('cert-iframe').src = blobUrl;
                 document.getElementById('cert-modal').style.display = 'flex';
 
-                // Download Link
                 const link = document.createElement('a');
                 link.href = blobUrl;
                 link.download = `Sugarlump_Kindness_${certId}.pdf`;
                 link.click();
-            } catch (err) {
-                console.error(err);
-                alert("Could not generate certificate.");
-            }
+            } catch (err) { console.error(err); }
         }
         document.getElementById('btn-cert').addEventListener('click', generateCertificate);
     </script>
