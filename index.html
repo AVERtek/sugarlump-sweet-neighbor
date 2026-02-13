@@ -54,7 +54,6 @@
             font-size: 24px; color: #59cbe8; display: flex; align-items: center; justify-content: center;
         }
 
-        /* Certificate Preview Modal */
         #cert-modal {
             display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%;
             background-color: rgba(0,0,0,0.85); flex-direction: column; align-items: center; justify-content: center;
@@ -133,14 +132,21 @@
         const video = document.getElementById('intro-video');
         const playBtn = document.getElementById('play-btn');
 
-        // FIXED: AR Button now explicitly pauses video
+        // FIXED: Now includes mobile support check and warning alert
         document.getElementById('ar-launch').addEventListener('click', () => {
             video.pause();
             playBtn.style.display = 'flex';
-            if (mv.canActivateAR) {
+
+            // Check if device is likely mobile
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+            if (isMobile && mv.canActivateAR) {
                 mv.style.display = 'block';
                 arAudio.play().then(() => { arAudio.pause(); });
                 mv.activateAR();
+            } else {
+                // Feature restored: Desktop warning alert
+                alert("This Augmented Reality experience is designed for mobile devices. Please open this page on your smartphone or tablet to 'push here'!");
             }
         });
 
@@ -159,10 +165,11 @@
         playBtn.addEventListener('click', toggleVideo);
         video.addEventListener('click', toggleVideo);
 
-        // --- INTEGRATED ROBUST CERTIFICATE GENERATION ---
+        // --- FULL ROBUST PDF-LIB INTEGRATION RESTORED ---
         async function generateStampedCertificate() {
-            if (typeof PDFLib === 'undefined') {
-                alert("Certificate generator loading... please wait a moment.");
+            if (typeof PDFLib === 'undefined' || typeof PDFLib.PDFDocument === 'undefined') {
+                console.error("PDFLib is not loaded.");
+                alert("Certificate generation is not ready. Please try again or refresh the page.");
                 return;
             }
 
@@ -171,69 +178,81 @@
 
             try {
                 const existingPdfBytes = await fetch(pdfPath).then(res => {
-                    if (!res.ok) throw new Error("Could not find certificate template.");
+                    if (!res.ok) {
+                        throw new Error(`HTTP error! status: ${res.status} - Could not fetch PDF from ${pdfPath}. Please check path.`);
+                    }
                     return res.arrayBuffer();
                 });
-                
+
                 const pdfDoc = await PDFDocument.load(existingPdfBytes);
+                const pages = pdfDoc.getPages();
+                if (pages.length === 0) throw new Error("The PDF document contains no pages.");
+                const firstPage = pages[0];
+
+                // Detailed date logic restored
+                const today = new Date();
+                const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+                const currentDateString = today.toLocaleDateString('en-US', dateOptions);
+
+                const futureDate = new Date(today);
+                futureDate.setDate(today.getDate() + 30);
+                const futureDateString = futureDate.toLocaleDateString('en-US', dateOptions);
+
+                // ID Padding logic restored
+                const padTwoDigits = (num) => String(num).padStart(2, '0');
+                const certificateNumber = `${padTwoDigits(today.getFullYear() % 100)}${padTwoDigits(today.getMonth() + 1)}${padTwoDigits(today.getDate())}${padTwoDigits(today.getHours())}${padTwoDigits(today.getMinutes())}`;
+
                 const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
                 const helveticaBoldFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
-                const firstPage = pdfDoc.getPages()[0];
-                const { height } = firstPage.getSize();
 
-                const today = new Date();
-                const dateStr = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-                const expDate = new Date(today); expDate.setDate(today.getDate() + 30);
-                const expStr = expDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-                
-                const certId = "260" + Math.floor(Math.random() * 10000000);
-
-                // ALIGNMENT: Mirrored to the "INSTRUCTIONS" block
                 const alignX = 95;
-                const baseLineY = 365; // SNAPS to the baseline of "INSTRUCTIONS"
+                const baseLineY = 365; // Balanced with "INSTRUCTIONS"
 
-                // 1. Sponsor Title
+                // 1. Sponsor
                 firstPage.drawText("Tercek Real Estate Group", {
-                    x: alignX, y: baseLineY, size: 18, font: helveticaBoldFont, color: rgb(0.03, 0.46, 0.56)
+                    x: alignX, y: baseLineY, size: 18, font: helveticaBoldFont, color: rgb(8/255, 119/255, 144/255)
                 });
 
-                // 2. Project Name
+                // 2. Project
                 firstPage.drawText("Sweet Neighbor of Mine", {
-                    x: alignX, y: baseLineY - 24, size: 18, font: helveticaBoldFont, color: rgb(0.95, 0.22, 0.53)
+                    x: alignX, y: baseLineY - 24, size: 18, font: helveticaBoldFont, color: rgb(254/255, 63/255, 178/255)
                 });
 
-                // 3. Metadata
-                firstPage.drawText(`Certificate No: ${certId}`, {
-                    x: alignX, y: baseLineY - 50, size: 10, font: helveticaFont, color: rgb(0.03, 0.46, 0.56)
-                });
-                firstPage.drawText(`Download Date: ${dateStr}`, {
-                    x: alignX, y: baseLineY - 62, size: 10, font: helveticaFont, color: rgb(0.03, 0.46, 0.56)
+                // 3. No.
+                firstPage.drawText(`Certificate No: ${certificateNumber}`, {
+                    x: alignX, y: baseLineY - 50, size: 10, font: helveticaFont, color: rgb(8/255, 119/255, 144/255)
                 });
 
-                // 4. Expiry
-                firstPage.drawText(`Valid until: ${expStr}`, {
-                    x: alignX, y: baseLineY - 76, size: 12, font: helveticaBoldFont, color: rgb(0.8, 0, 0)
+                // 4. Download Date
+                firstPage.drawText(`Download Date: ${currentDateString}`, {
+                    x: alignX, y: baseLineY - 62, size: 10, font: helveticaFont, color: rgb(8/255, 119/255, 144/255)
+                });
+
+                // 5. Expiry
+                firstPage.drawText(`Valid until: ${futureDateString}`, {
+                    x: alignX, y: baseLineY - 76, size: 12, font: helveticaBoldFont, color: rgb(0.8, 0.2, 0.2)
                 });
 
                 const pdfBytes = await pdfDoc.save();
                 const blob = new Blob([pdfBytes], { type: 'application/pdf' });
                 const blobUrl = URL.createObjectURL(blob);
 
-                // ACTION: Show in popup AND trigger download
+                // Show in UI
                 document.getElementById('cert-iframe').src = blobUrl;
                 document.getElementById('cert-modal').style.display = 'flex';
 
+                // Download trigger
                 const link = document.createElement('a');
                 link.href = blobUrl;
-                link.download = `Sugarlump_Kindness_${certId}.pdf`;
+                link.download = `Sugarlump_Kindness_${certificateNumber}.pdf`;
                 link.click();
 
             } catch (error) {
-                console.error("PDF Error:", error);
-                alert("Please ensure the certificate template exists in the 'certificates' folder.");
+                console.error("Error generating stamped certificate:", error);
+                alert("Failed to generate certificate. Check console for details.");
             }
         }
-        
+
         document.getElementById('btn-cert').addEventListener('click', generateStampedCertificate);
     </script>
 </body>
