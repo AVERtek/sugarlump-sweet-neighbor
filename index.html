@@ -17,154 +17,181 @@
 
     <style>
         html, body { margin: 0; padding: 0; overflow-x: hidden; font-family: Google Sans, Noto, Roboto, sans-serif; color: #244376; background-color: #ffff99; }
-        .container { max-width: 600px; width: 100%; box-sizing: border-box; padding: 0 10px; margin: 0 auto; }
+        .container { max-width: 600px; width: 100%; box-sizing: border-box; padding: 0 10px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
+        .card { width: 100%; background-color: #ffff99; border: 2px solid #ffff99; padding: 10px; margin-bottom: 1em; display: flex; flex-direction: column; align-items: center; text-align: center; border-radius: 6px; overflow: hidden; box-sizing: border-box; }
         
-        .card { break-inside: avoid; background-color: #ffff99; border: 2px solid #ffff99; padding: 10px; margin-bottom: 1em; display: flex; flex-direction: column; align-items: center; text-align: center; border-radius: 6px; overflow: hidden; }
+        /* THE ENGINE: Invisible model-viewer */
+        #reveal { width: 1px; height: 1px; visibility: hidden; position: absolute; }
         
-        /* INVISIBLE MODEL VIEWER ENGINE */
-        #reveal { width: 1px; height: 1px; position: absolute; left: -10000px; }
-        
-        .main-button { 
-            background-color: #ffffff; border-radius: 8px; border: 2px solid #59cbe8; 
-            height: 60px; min-width: 250px; display: flex; align-items: center; 
-            justify-content: center; padding: 10px; cursor: pointer; transition: 0.3s;
-        }
+        .main-button { background-color: #ffffff; border-radius: 8px; border: 2px solid #59cbe8; height: 60px; min-width: 250px; display: flex; align-items: center; justify-content: center; padding: 10px; cursor: pointer; transition: 0.3s; }
         .main-button:hover { background-color: #f0f8ff; }
-        
+        .main-button span { font-family: 'Chalet LondonNineteenEighty Regular', sans-serif; color: #000099; white-space: nowrap; }
+
         @font-face { font-family: 'Chalet LondonNineteenEighty Regular'; src: url('fonts/Chalet LondonNineteenEighty Regular.otf') format('opentype'); }
         @font-face { font-family: 'DaisyByhapppyal-Regular'; src: url('fonts/DaisyByhapppyal-Regular.otf') format('opentype'); }
-        
+
         a { color: #59cbe8; text-decoration: none; }
-        video { width: 100%; border-radius: 8px; }
+        .marginauto { display: block; margin: 10px auto; }
+        video { width: 100%; border-radius: 8px; background: #000; }
     </style>
 </head>
 
 <body>
     <div class="container">
         <div class="card">
-            <img src="images/erin_video_scenes-32.png" alt="Logo" style="width: 350px; height: auto; margin: auto;">
+            <img src="images/erin_video_scenes-32.png" alt="Logo" style="width: 350px; height: auto;">
         </div>
 
-        <model-viewer id="reveal" 
-            src="Models/entire_family_99cm.glb" 
+        <model-viewer id="reveal" src="Models/entire_family_99cm.glb" 
             ios-src="Models/GIRL_converted.usdz"
-            ar ar-modes="webxr scene-viewer quick-look" 
-            ar-placement="floor" 
-            loading="eager">
+            ar ar-modes="scene-viewer webxr quick-look" 
+            ar-placement="floor" camera-controls interaction-prompt="none">
         </model-viewer>
 
-        <div style="text-align: center; margin: 20px 0;">
+        <div style="text-align: center; margin-bottom: 10px;">
             <p style="font-family: 'Chalet LondonNineteenEighty Regular'; font-weight: bold; color: #000099;">Make Sure Wi-Fi and Sound is On!</p>
         </div>
 
-        <div style="width: 100%; display: flex; flex-direction: column; align-items: center; gap: 10px;">
-            <button id="ar-launch-trigger" class="main-button">
-                <img src="images/Heart button.png" style="height: 4em; margin-right: 5px;" alt="AR">
-                <span style="font-size: 32px; color: #000099; font-family: 'Chalet LondonNineteenEighty Regular';"><strong>push here</strong></span>
+        <div style="width: 100%; display: flex; flex-direction: column; align-items: center; gap: 10px; margin-bottom: 30px;">
+            <button id="ar-button" class="main-button">
+                <img src="images/Heart button.png" style="height: 4em; margin-right: 5px;" alt="Heart">
+                <span style="font-size: 32px;"><strong>push here</strong></span>
             </button>
 
             <button id="viewPrintCertificateButton" class="main-button">
-                <img src="images/sl_ribbon2.png" style="height: 4em; margin-right: 5px; opacity: 0.8;" alt="Cert">
-                <span style="font-size: 20px; color: #000099; font-family: 'Chalet LondonNineteenEighty Regular';"><strong>print certificate</strong></span>
+                <img src="images/sl_ribbon2.png" style="height: 4em; margin-right: 5px; opacity: 0.8;" alt="Ribbon">
+                <span style="font-size: 20px;"><strong>print certificate</strong></span>
             </button>
         </div>
 
-        <audio id="sound">
-            <source id="audio-source" src="Sound/sweet_neighbor_of_mine3.mp3" type="audio/mpeg">
-        </audio>
-
-        <div class="card" style="margin-top:20px;">
-            <img src="images/erin_video_scenes-34.png" style="width: 300px;">
+        <div class="card">
+            <img class="marginauto" src="images/erin_video_scenes-34.png" style="width: 300px;">
             <p style="font-family: 'Chalet LondonNineteenEighty Regular'; font-weight: bold; color: #ff69b4;"><b>about:</b><a href="https://sugarlump.love/about"> creativity + kindness</a></p>
             <p style="font-family: 'Chalet LondonNineteenEighty Regular'; font-weight: bold; color: #ff69b4;"><b>rewards:</b><a href="https://sugarlump.love/"> the kindness project</a></p>
             <p style="font-family: 'Chalet LondonNineteenEighty Regular'; font-weight: bold; color: #ff69b4;"><b>join:</b><a href="https://sugarlump.love/contact"> sugarlump kindness club</a></p>
-        </div>
-
-        <div style="position: relative; margin: 20px 0;">
-            <video id="video-overlay" poster="images/Video Poster_2.png" playsinline muted>
-                <source src="Video/sugarlump_intro_erin_2.mp4" type="video/mp4">
-            </video>
-            <button id="play-pause-button" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(255,255,255,0.8); border-radius: 50%; padding: 15px; border:none; cursor:pointer;">▶</button>
+            <br>
+            <h1 style="font-family: 'DaisyByhapppyal-Regular'; color: #000099;">THIS KINDNESS PROJECT SPONSORED BY</h1>
+            <img src="images/erin_video_scenes-37.png" style="width: 300px;">
+            <button onclick="window.open('https://www.tercekrealestate.com/', '_blank')" class="main-button" style="height: 40px; min-width: 120px; font-size: 18px; margin-top: 10px;"><strong>visit</strong></button>
         </div>
 
         <div class="card">
             <h2 style="font-family: 'Chalet LondonNineteenEighty Regular'; color: #000099;">Experience 4D Augmented Reality On Your Phone</h2>
-            <img src="images/erin_video_scenes-41.png" style="max-width: 100%;">
-            <p style="font-size: 12px; color: #000099;"><em>If AR button does not appear, use another browser.</em></p>
+            <img src="images/erin_video_scenes-41.png" style="max-width: 100%; height: auto;">
+            <p style="font-family: 'Chalet LondonNineteenEighty Regular'; font-size: 12px; color: #000099;"><em>If AR button does not appear, use another browser.</em></p>
+        </div>
+
+        <div style="position: relative; width: 100%; margin-top: 20px;">
+            <video id="video-overlay" poster="images/Video Poster_2.png" playsinline muted>
+                <source src="Video/sugarlump_intro_erin_2.mp4" type="video/mp4">
+            </video>
+            <button id="play-pause-button" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(255,255,255,0.8); border: none; border-radius: 50%; width: 60px; height: 60px; font-size: 24px; cursor: pointer;">▶</button>
+        </div>
+
+        <div class="card" style="margin-top: 20px;">
+            <a href="https://avertek.net/" target="_blank"><p style="font-family: 'Chalet LondonNineteenEighty Regular';">Contact AVERtek for AR marketing.</p></a>
         </div>
     </div>
+
+    <audio id="ar-sound" src="Sound/sweet_neighbor_of_mine3.mp3"></audio>
 
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.js"></script>
     <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
 
     <script>
-        const modelViewer = document.getElementById('reveal');
-        const arTrigger = document.getElementById('ar-launch-trigger');
-        const audio = document.getElementById('sound');
-        const audioSource = document.getElementById('audio-source');
-        const video = document.getElementById('video-overlay');
-        const playBtn = document.getElementById('play-pause-button');
+        document.addEventListener("DOMContentLoaded", function () {
+            const video = document.getElementById('video-overlay');
+            const playPauseButton = document.getElementById('play-pause-button');
+            const arButton = document.getElementById('ar-button');
+            const modelViewer = document.getElementById('reveal');
+            const arSound = document.getElementById('ar-sound');
+            const viewPrintBtn = document.getElementById('viewPrintCertificateButton');
 
-        // Audio Assets
-        const webAudio = "Sound/sweet_neighbor_of_mine3.mp3";
-        const arAudio = "Sound/sweet_neighbor_of_mine3.mp3"; // Swap if you have a shorter AR version
-
-        // --- AR HANDSHAKE LOGIC ---
-        arTrigger.addEventListener('click', () => {
-            // 1. Stop other media
-            video.pause();
-            
-            // 2. Prepare audio handshake
-            audio.pause();
-            audioSource.src = arAudio;
-            audio.load();
-            
-            // Prime for iOS
-            audio.play().then(() => {
-                audio.pause();
-                audio.currentTime = 0;
-            }).catch(e => console.log("Priming audio"));
-
-            // 3. Launch AR
-            if (modelViewer.canActivateAR) {
-                modelViewer.activateAR();
-            } else {
-                alert("AR is not supported on this browser.");
+            // --- VIDEO LOGIC ---
+            function toggleVideo() {
+                if (video.paused) {
+                    video.play();
+                    video.muted = false;
+                    playPauseButton.style.display = 'none';
+                } else {
+                    video.pause();
+                    playPauseButton.style.display = 'block';
+                }
             }
-        });
+            video.addEventListener('click', toggleVideo);
+            playPauseButton.addEventListener('click', toggleVideo);
 
-        // --- AR STATUS SYNC ---
-        modelViewer.addEventListener('ar-status', (event) => {
-            if (event.detail.status === 'object-placed') {
-                audio.play();
-            }
-            if (event.detail.status === 'not-presenting') {
-                audio.pause();
-                // Reset to web audio
-                audioSource.src = webAudio;
-                audio.load();
-            }
-        });
-
-        // --- VIDEO PLAYER LOGIC ---
-        function toggleVideo() {
-            if (video.paused) {
-                video.play();
-                video.muted = false;
-                playBtn.style.display = "none";
-                audio.pause();
-            } else {
+            // --- AR LAUNCH LOGIC ---
+            arButton.addEventListener('click', () => {
                 video.pause();
-                playBtn.style.display = "block";
-            }
-        }
-        video.addEventListener('click', toggleVideo);
-        playBtn.addEventListener('click', toggleVideo);
+                playPauseButton.style.display = 'block';
+                
+                // Handshake for audio
+                arSound.play().then(() => {
+                    arSound.pause();
+                    arSound.currentTime = 0;
+                });
 
-        // --- PDF LOGIC (Placeholder for your existing PDF function) ---
-        document.getElementById('viewPrintCertificateButton').addEventListener('click', async () => {
-            // Insert your existing generateStampedCertificate() logic here
-            alert("Generating Certificate...");
+                if (modelViewer.canActivateAR) {
+                    modelViewer.activateAR();
+                } else {
+                    alert("AR is not supported on this device.");
+                }
+            });
+
+            modelViewer.addEventListener('ar-status', (event) => {
+                if (event.detail.status === 'object-placed') {
+                    arSound.play();
+                } else if (event.detail.status === 'not-presenting') {
+                    arSound.pause();
+                }
+            });
+
+            // --- PDF GENERATION LOGIC ---
+            function isMobileDevice() {
+                return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            }
+
+            async function generateStampedCertificate() {
+                if (typeof PDFLib === 'undefined') return alert("PDF Engine loading...");
+                
+                const { PDFDocument, rgb, StandardFonts } = PDFLib;
+                const pdfPath = 'certificates/sugarlump_app_certificate.pdf';
+
+                try {
+                    const existingPdfBytes = await fetch(pdfPath).then(res => res.arrayBuffer());
+                    const pdfDoc = await PDFDocument.load(existingPdfBytes);
+                    const pages = pdfDoc.getPages();
+                    const firstPage = pages[0];
+                    const { height } = firstPage.getSize();
+                    const font = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+
+                    const now = new Date();
+                    const certNo = now.getTime().toString().slice(-10);
+                    
+                    // Drawing Info
+                    firstPage.drawText(`Sponsor: Tercek Real Estate Group`, { x: 80, y: height - 230, size: 14, font, color: rgb(0, 0, 0.6) });
+                    firstPage.drawText(`Cert No: ${certNo}`, { x: 80, y: height - 250, size: 12, font });
+
+                    const pdfBytes = await pdfDoc.save();
+                    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+                    const url = URL.createObjectURL(blob);
+
+                    if (isMobileDevice()) {
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = `Certificate_${certNo}.pdf`;
+                        a.click();
+                    } else {
+                        window.open(url, '_blank');
+                    }
+                } catch (e) {
+                    console.error(e);
+                    alert("Error creating certificate.");
+                }
+            }
+
+            viewPrintBtn.addEventListener('click', generateStampedCertificate);
         });
     </script>
 </body>
