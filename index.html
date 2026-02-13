@@ -22,23 +22,32 @@
             padding: 20px; box-sizing: border-box; text-align: center;
         }
 
-        /* UI Elements */
         .header-logo { width: 100%; max-width: 400px; height: auto; margin-bottom: 20px; }
+        
         .main-button { 
             background: #fff; border: 2px solid #59cbe8; border-radius: 12px;
             width: 280px; height: 60px; display: flex; align-items: center; 
             justify-content: center; cursor: pointer; margin-bottom: 12px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
+
         .main-button img { height: 40px; margin-right: 10px; }
         .main-button span { color: #000099; font-weight: bold; font-size: 26px; }
 
-        /* AR Hidden */
         model-viewer#reveal { display: none; width: 1px; height: 1px; position: absolute; }
 
-        /* Video */
+        .links-group { margin: 20px 0; line-height: 2; color: #ff69b4; font-weight: bold; font-size: 18px; }
+        .links-group a { color: #59cbe8; text-decoration: none; }
+        
+        .sponsor-box { margin-top: 30px; width: 100%; }
+        .sponsor-logo { width: 100%; max-width: 350px; margin: 15px 0; }
+        .visit-btn { 
+            border: 2px solid #59cbe8; background: #fff; color: #000099;
+            padding: 8px 30px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 18px;
+        }
+
         .video-container { position: relative; width: 100%; max-width: 500px; margin-top: 30px; border-radius: 15px; overflow: hidden; border: 3px solid #fff; }
-        video { width: 100%; display: block; }
+        video { width: 100%; display: block; cursor: pointer; }
         .play-btn { 
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
             background: rgba(255,255,255,0.9); border: none; border-radius: 50%; width: 60px; height: 60px; cursor: pointer;
@@ -48,34 +57,60 @@
         /* PDF Preview Modal */
         #cert-modal {
             display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.8); flex-direction: column; align-items: center; justify-content: center;
+            background-color: rgba(0,0,0,0.85); flex-direction: column; align-items: center; justify-content: center;
         }
-        #cert-iframe { width: 90%; height: 80%; border: none; background: #fff; border-radius: 10px; }
-        .close-modal { margin-top: 15px; background: #ff69b4; color: #fff; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        #cert-iframe { width: 90%; height: 75%; border: none; background: #fff; border-radius: 10px; }
+        .close-modal { margin-top: 15px; background: #ff69b4; color: #fff; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 18px; }
 
-        .links-group { margin: 20px 0; color: #ff69b4; font-weight: bold; font-size: 18px; line-height: 2; }
-        .links-group a { color: #59cbe8; text-decoration: none; }
+        @font-face { font-family: 'Chalet LondonNineteenEighty Regular'; src: url('fonts/Chalet LondonNineteenEighty Regular.otf'); }
+        @font-face { font-family: 'DaisyByhapppyal-Regular'; src: url('fonts/DaisyByhapppyal-Regular.otf'); }
     </style>
 </head>
 
 <body>
     <div class="container">
         <img src="images/erin_video_scenes-32.png" class="header-logo">
-        
-        <model-viewer id="reveal" src="Models/entire_family_99cm.glb" ios-src="Models/GIRL_converted.usdz" ar ar-modes="webxr scene-viewer quick-look" ar-placement="floor"></model-viewer>
+        <p style="color: #000099; font-size: 18px; margin-bottom: 25px;"><b>Make Sure Wi-Fi and Sound is On!</b></p>
+
+        <model-viewer id="reveal" src="Models/entire_family_99cm.glb" 
+            ios-src="Models/GIRL_converted.usdz"
+            ar ar-modes="webxr scene-viewer quick-look" 
+            ar-placement="floor" loading="eager" autoplay animation-name="*">
+        </model-viewer>
 
         <div class="ui-group">
-            <button id="ar-launch" class="main-button"><img src="images/Heart button.png"><span>push here</span></button>
-            <button id="btn-cert" class="main-button"><img src="images/sl_ribbon2.png"><span style="font-size:20px;">print certificate</span></button>
+            <button id="ar-launch" class="main-button">
+                <img src="images/Heart button.png">
+                <span>push here</span>
+            </button>
+            <button id="btn-cert" class="main-button">
+                <img src="images/sl_ribbon2.png">
+                <span style="font-size: 20px;">print certificate</span>
+            </button>
         </div>
 
         <div class="links-group">
-            <div>about: <a href="https://sugarlump.love/about">creativity + kindness</a></div>
-            <div>rewards: <a href="https://sugarlump.love/">the kindness project</a></div>
-            <div>join: <a href="https://sugarlump.love/contact">sugarlump kindness club</a></div>
-            <div>shop: <a href="https://sugarlump.love/shop">creative kindness kits</a></div>
-            <div>sponsors: <a href="https://sugarlump.love/sponsors">get involved</a></div>
+            <div>about: <a href="https://sugarlump.love/about" target="_blank">creativity + kindness</a></div>
+            <div>rewards: <a href="https://sugarlump.love/" target="_blank">the kindness project</a></div>
+            <div>join: <a href="https://sugarlump.love/contact" target="_blank">sugarlump kindness club</a></div>
+            <div>shop: <a href="https://sugarlump.love/shop" target="_blank">creative kindness kits</a></div>
+            <div style="font-size: 14px;">brag tags: <a href="https://www.schoollife.com/bragtags-intro" target="_blank">accomplishment, recognition, confidence</a></div>
+            <div>sponsors: <a href="https://sugarlump.love/sponsors" target="_blank">get involved</a></div>
         </div>
+
+        <div class="sponsor-box">
+            <p style="font-family: 'DaisyByhapppyal-Regular', cursive; color: #000099; font-size: 26px;">THIS KINDNESS PROJECT SPONSORED BY</p>
+            <img src="images/erin_video_scenes-37.png" class="sponsor-logo">
+            <br>
+            <button class="visit-btn" onclick="window.open('https://www.tercekrealestate.com/')">visit</button>
+        </div>
+
+        <div style="margin-top: 45px; color: #000099;">
+            <p style="font-size: 22px; font-weight: bold;">Experience 4D Augmented Reality On Your Phone</p>
+            <img src="images/erin_video_scenes-41.png" style="width: 100%; max-width: 420px; border-radius: 10px; margin-top: 15px;">
+        </div>
+
+        <p style="color: #ff69b4; font-size: 28px; margin-top: 40px; font-weight: bold;">join the hunt; tell your friends</p>
 
         <div class="video-container">
             <video id="intro-video" poster="images/Video Poster_2.png" playsinline muted>
@@ -83,6 +118,10 @@
             </video>
             <button id="play-btn" class="play-btn">▶</button>
         </div>
+
+        <p style="margin-top: 40px; font-size: 14px; padding-bottom: 30px;">
+            <a href="https://avertek.net/" target="_blank" style="color:#000099; text-decoration: none;">Contact AVERtek to learn more about AR marketing.</a>
+        </p>
     </div>
 
     <div id="cert-modal">
@@ -90,35 +129,46 @@
         <button class="close-modal" onclick="document.getElementById('cert-modal').style.display='none'">Close Preview</button>
     </div>
 
-    <audio id="ar-audio" src="Sound/sweet_neighbor_of_mine3.mp3"></audio>
+    <audio id="ar-audio" src="Sound/sweet_neighbor_of_mine3.mp3" preload="auto"></audio>
 
     <script>
         const mv = document.getElementById('reveal');
+        const arBtn = document.getElementById('ar-launch');
         const arAudio = document.getElementById('ar-audio');
         const video = document.getElementById('intro-video');
         const playBtn = document.getElementById('play-btn');
 
-        // AR Logic
-        document.getElementById('ar-launch').addEventListener('click', () => {
+        arBtn.addEventListener('click', () => {
             video.pause();
+            playBtn.style.display = 'flex';
             if (mv.canActivateAR) {
                 mv.style.display = 'block';
-                arAudio.play().then(() => arAudio.pause());
+                arAudio.play().then(() => { arAudio.pause(); });
                 mv.activateAR();
             }
         });
 
-        mv.addEventListener('ar-status', (e) => {
-            if (e.detail.status === 'object-placed') arAudio.play();
-            else if (e.detail.status === 'not-presenting') mv.style.display = 'none';
+        mv.addEventListener('ar-status', (event) => {
+            if (event.detail.status === 'object-placed') {
+                arAudio.currentTime = 0;
+                arAudio.play();
+            } else if (event.detail.status === 'not-presenting') {
+                arAudio.pause();
+                mv.style.display = 'none';
+            }
         });
 
-        // Video Logic
-        playBtn.addEventListener('click', () => {
-            video.play(); video.muted = false; playBtn.style.display = 'none';
-        });
+        function toggleVideo() {
+            if (video.paused) {
+                video.play(); video.muted = false; playBtn.style.display = 'none';
+            } else {
+                video.pause(); playBtn.style.display = 'flex';
+            }
+        }
+        playBtn.addEventListener('click', toggleVideo);
+        video.addEventListener('click', toggleVideo);
 
-        // --- UPDATED ALIGNED CERTIFICATE LOGIC ---
+        // --- FIXED CERTIFICATE ALIGNMENT & FONT SIZE ---
         async function generateCertificate() {
             const { PDFDocument, rgb, StandardFonts } = PDFLib;
             const url = 'certificates/sugarlump_app_certificate.pdf';
@@ -129,43 +179,47 @@
                 const fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
                 const fontReg = await pdfDoc.embedFont(StandardFonts.Helvetica);
                 const firstPage = pdfDoc.getPages()[0];
-                const { width, height } = firstPage.getSize();
+                const { height } = firstPage.getSize();
 
-                const dateStr = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-                const expDate = new Date(); expDate.setDate(expDate.getDate() + 30);
+                const now = new Date();
+                const expDate = new Date(); expDate.setDate(now.getDate() + 30);
+                const dateStr = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
                 const expStr = expDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
                 const certId = "260" + Math.floor(Math.random() * 10000000);
 
-                // ALIGNMENT: Mirrored to the "Instructions" block on the right
-                const leftMirrorX = 85; 
-                const yAnchor = height - 335; 
+                // COORD ADJUSTMENT: Shifted left and increased font size
+                const leftX = 70; // Shifting block further left to mirror the instructions
+                const yPos = height - 330; 
 
-                // Sponsor Name
-                firstPage.drawText('Tercek Real Estate Group', { x: leftMirrorX, y: yAnchor, size: 13, font: fontBold, color: rgb(0.12, 0.44, 0.53) });
-                // I Love Me
-                firstPage.drawText('I Love Me', { x: leftMirrorX, y: yAnchor - 18, size: 13, font: fontBold, color: rgb(0.95, 0.25, 0.55) });
-                // IDs and Dates
-                firstPage.drawText(`Certificate No: ${certId}`, { x: leftMirrorX, y: yAnchor - 40, size: 9, font: fontReg, color: rgb(0.12, 0.44, 0.53) });
-                firstPage.drawText(`Download Date: ${dateStr}`, { x: leftMirrorX, y: yAnchor - 52, size: 9, font: fontReg, color: rgb(0.12, 0.44, 0.53) });
-                // Valid Until in Red
-                firstPage.drawText(`Valid until: ${expStr}`, { x: leftMirrorX, y: yAnchor - 65, size: 10, font: fontBold, color: rgb(0.8, 0.1, 0.1) });
+                // Sponsor & I Love Me (Increased to size 15 for prominence)
+                firstPage.drawText('Tercek Real Estate Group', { x: leftX, y: yPos, size: 15, font: fontBold, color: rgb(0.12, 0.44, 0.53) });
+                firstPage.drawText('I Love Me', { x: leftX, y: yPos - 20, size: 15, font: fontBold, color: rgb(0.95, 0.25, 0.55) });
+
+                // Meta Info (Size 10)
+                firstPage.drawText(`Certificate No: ${certId}`, { x: leftX, y: yPos - 45, size: 10, font: fontReg, color: rgb(0.12, 0.44, 0.53) });
+                firstPage.drawText(`Download Date: ${dateStr}`, { x: leftX, y: yPos - 58, size: 10, font: fontReg, color: rgb(0.12, 0.44, 0.53) });
+                
+                // Expiry (Bold Red)
+                firstPage.drawText(`Valid until: ${expStr}`, { x: leftX, y: yPos - 72, size: 11, font: fontBold, color: rgb(0.8, 0, 0) });
 
                 const pdfBytes = await pdfDoc.save();
                 const blob = new Blob([pdfBytes], { type: 'application/pdf' });
                 const blobUrl = URL.createObjectURL(blob);
 
-                // 1. Show on Screen
+                // Show in Modal Preview
                 document.getElementById('cert-iframe').src = blobUrl;
                 document.getElementById('cert-modal').style.display = 'flex';
 
-                // 2. Auto Download
+                // Download Link
                 const link = document.createElement('a');
                 link.href = blobUrl;
                 link.download = `Sugarlump_Kindness_${certId}.pdf`;
                 link.click();
-            } catch (err) { console.error(err); }
+            } catch (err) {
+                console.error(err);
+                alert("Could not generate certificate.");
+            }
         }
-
         document.getElementById('btn-cert').addEventListener('click', generateCertificate);
     </script>
 </body>
