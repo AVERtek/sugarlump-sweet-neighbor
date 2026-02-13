@@ -36,8 +36,9 @@
 
         model-viewer#reveal { display: none; width: 1px; height: 1px; position: absolute; }
 
+        /* Fixed Uniform Link Sizes */
         .links-group { margin: 20px 0; line-height: 2; color: #ff69b4; font-weight: bold; font-size: 18px; }
-        .links-group a { color: #59cbe8; text-decoration: none; }
+        .links-group a { color: #59cbe8; text-decoration: none; font-size: 18px; }
         
         .sponsor-box { margin-top: 30px; width: 100%; }
         .sponsor-logo { width: 100%; max-width: 350px; margin: 15px 0; }
@@ -54,6 +55,7 @@
             font-size: 24px; color: #59cbe8; display: flex; align-items: center; justify-content: center;
         }
 
+        /* Certificate Modal */
         #cert-modal {
             display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%;
             background-color: rgba(0,0,0,0.85); flex-direction: column; align-items: center; justify-content: center;
@@ -132,13 +134,17 @@
         const video = document.getElementById('intro-video');
         const playBtn = document.getElementById('play-btn');
 
+        // FIXED AR BUTTON LOGIC
         document.getElementById('ar-launch').addEventListener('click', () => {
             video.pause();
             playBtn.style.display = 'flex';
             if (mv.canActivateAR) {
                 mv.style.display = 'block';
+                // Trigger sound pre-load
                 arAudio.play().then(() => { arAudio.pause(); });
                 mv.activateAR();
+            } else {
+                alert("AR is not supported on this device/browser.");
             }
         });
 
@@ -162,7 +168,7 @@
         playBtn.addEventListener('click', toggleVideo);
         video.addEventListener('click', toggleVideo);
 
-        // --- FINAL PDF ALIGNMENT LOGIC ---
+        // --- FINAL PDF ALIGNMENT: SNAP TO INSTRUCTIONS BASELINE ---
         async function generateCertificate() {
             const { PDFDocument, rgb, StandardFonts } = PDFLib;
             const url = 'certificates/sugarlump_app_certificate.pdf';
@@ -180,27 +186,30 @@
                 const expStr = expDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
                 const certId = "260" + Math.floor(Math.random() * 10000000);
 
-                // ALIGNMENT: x:95 mirrors the instruction block. y:height-332 snaps to the "INSTRUCTIONS" baseline.
+                // COORDINATE FIX: 
+                // alignX: 95 mirrors the instruction block.
+                // alignY: height - 322 aligns "Tercek" exactly with the "INSTRUCTIONS" header[cite: 16, 20].
                 const alignX = 95; 
-                const alignY = height - 332; 
+                const alignY = height - 322; 
 
-                // Sponsor Header - Matched to Instruction baseline 
-                firstPage.drawText('Tercek Real Estate Group', { x: alignX, y: alignY, size: 16, font: fontBold, color: rgb(0.1, 0.41, 0.5) });
+                // Sponsor Header - Larger Size (18pt) to match visual weight [cite: 20]
+                firstPage.drawText('Tercek Real Estate Group', { x: alignX, y: alignY, size: 18, font: fontBold, color: rgb(0.1, 0.41, 0.5) });
                 
-                // I Love Me - Matching pink color from layout 
-                firstPage.drawText('I Love Me', { x: alignX, y: alignY - 22, size: 16, font: fontBold, color: rgb(0.95, 0.22, 0.53) });
+                // I Love Me - Matching Pink [cite: 20]
+                firstPage.drawText('I Love Me', { x: alignX, y: alignY - 24, size: 18, font: fontBold, color: rgb(0.95, 0.22, 0.53) });
 
-                // Metadata - Professional sizing [cite: 21, 22]
-                firstPage.drawText(`Certificate No: ${certId}`, { x: alignX, y: alignY - 48, size: 10, font: fontReg, color: rgb(0.1, 0.41, 0.5) });
-                firstPage.drawText(`Download Date: ${dateStr}`, { x: alignX, y: alignY - 60, size: 10, font: fontReg, color: rgb(0.1, 0.41, 0.5) });
+                // Metadata Block - Adjusted for spacing [cite: 21, 22]
+                firstPage.drawText(`Certificate No: ${certId}`, { x: alignX, y: alignY - 52, size: 10, font: fontReg, color: rgb(0.1, 0.41, 0.5) });
+                firstPage.drawText(`Download Date: ${dateStr}`, { x: alignX, y: alignY - 65, size: 10, font: fontReg, color: rgb(0.1, 0.41, 0.5) });
                 
                 // Expiry - Bold Red [cite: 23]
-                firstPage.drawText(`Valid until: ${expStr}`, { x: alignX, y: alignY - 74, size: 11, font: fontBold, color: rgb(0.8, 0, 0) });
+                firstPage.drawText(`Valid until: ${expStr}`, { x: alignX, y: alignY - 80, size: 12, font: fontBold, color: rgb(0.8, 0, 0) });
 
                 const pdfBytes = await pdfDoc.save();
                 const blob = new Blob([pdfBytes], { type: 'application/pdf' });
                 const blobUrl = URL.createObjectURL(blob);
 
+                // Dual Action: Show and Download
                 document.getElementById('cert-iframe').src = blobUrl;
                 document.getElementById('cert-modal').style.display = 'flex';
 
