@@ -9,7 +9,6 @@
     <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
 
     <style>
-        /* Responsive scaling for PC and Mobile */
         html, body { 
             margin: 0; padding: 0; width: 100%; min-height: 100vh;
             background-color: #ffff99; 
@@ -18,13 +17,11 @@
         }
 
         .container { 
-            width: 100%; max-width: 600px; /* Better PC width */
+            width: 100%; max-width: 600px; 
             display: flex; flex-direction: column; align-items: center; 
-            padding: 20px; box-sizing: border-box;
-            text-align: center;
+            padding: 20px; box-sizing: border-box; text-align: center;
         }
 
-        /* UI Element Styling */
         .header-logo { width: 100%; max-width: 400px; height: auto; margin-bottom: 20px; }
         
         .main-button { 
@@ -36,15 +33,11 @@
 
         .main-button img { height: 40px; margin-right: 10px; }
         .main-button span { color: #000099; font-weight: bold; font-size: 26px; }
-        #btn-cert span { font-size: 20px; }
 
-        /* Invisible but active AR Engine */
-        model-viewer#reveal {
-            width: 1px; height: 1px; position: absolute; pointer-events: none; opacity: 0;
-        }
+        model-viewer#reveal { display: none; width: 1px; height: 1px; position: absolute; }
 
         .links-group { margin: 20px 0; line-height: 2; color: #ff69b4; font-weight: bold; font-size: 18px; }
-        .links-group a { color: #59cbe8; text-decoration: none; }
+        .links-group a { color: #59cbe8; text-decoration: none; font-size: 18px; }
         
         .sponsor-box { margin-top: 30px; width: 100%; }
         .sponsor-logo { width: 100%; max-width: 350px; margin: 15px 0; }
@@ -53,12 +46,21 @@
             padding: 8px 30px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 18px;
         }
 
-        .video-container { position: relative; width: 100%; max-width: 500px; margin-top: 30px; border-radius: 15px; overflow: hidden; }
-        video { width: 100%; display: block; }
+        .video-container { position: relative; width: 100%; max-width: 500px; margin-top: 30px; border-radius: 15px; overflow: hidden; border: 3px solid #fff; }
+        video { width: 100%; display: block; cursor: pointer; }
         .play-btn { 
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
             background: rgba(255,255,255,0.9); border: none; border-radius: 50%; width: 60px; height: 60px; cursor: pointer;
+            font-size: 24px; color: #59cbe8; display: flex; align-items: center; justify-content: center;
         }
+
+        /* Certificate Preview Modal */
+        #cert-modal {
+            display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.85); flex-direction: column; align-items: center; justify-content: center;
+        }
+        #cert-iframe { width: 90%; height: 80%; border: none; background: #fff; border-radius: 10px; }
+        .close-modal { margin-top: 15px; background: #ff69b4; color: #fff; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 16px; }
 
         @font-face { font-family: 'Chalet LondonNineteenEighty Regular'; src: url('fonts/Chalet LondonNineteenEighty Regular.otf'); }
         @font-face { font-family: 'DaisyByhapppyal-Regular'; src: url('fonts/DaisyByhapppyal-Regular.otf'); }
@@ -67,50 +69,48 @@
 
 <body>
     <div class="container">
-        <img src="images/erin_video_scenes-32.png" class="header-logo" alt="Sugarlump">
-
-        <p style="color: #000099; font-size: 16px;"><b>Make Sure Wi-Fi and Sound is On!</b></p>
+        <img src="images/erin_video_scenes-32.png" class="header-logo">
+        <p style="color: #000099; font-size: 18px; margin-bottom: 25px;"><b>Make Sure Wi-Fi and Sound is On!</b></p>
 
         <model-viewer id="reveal" src="Models/entire_family_99cm.glb" 
             ios-src="Models/GIRL_converted.usdz"
             ar ar-modes="webxr scene-viewer quick-look" 
-            ar-placement="floor" loading="eager"
-            autoplay animation-name="*">
+            ar-placement="floor" loading="eager" autoplay animation-name="*">
         </model-viewer>
 
-        <div class="ui-group" style="margin-top: 15px;">
+        <div class="ui-group">
             <button id="ar-launch" class="main-button">
                 <img src="images/Heart button.png">
                 <span>push here</span>
             </button>
             <button id="btn-cert" class="main-button">
                 <img src="images/sl_ribbon2.png">
-                <span>print certificate</span>
+                <span style="font-size: 20px;">print certificate</span>
             </button>
         </div>
 
         <div class="links-group">
-            <div>about: <a href="https://sugarlump.love/about">creativity + kindness</a></div>
-            <div>rewards: <a href="https://sugarlump.love/">the kindness project</a></div>
-            <div>join: <a href="https://sugarlump.love/contact">sugarlump kindness club</a></div>
-            <div>shop: <a href="https://sugarlump.love/shop">creative kindness kits</a></div>
-            <div style="font-size: 14px;">brag tags: <a href="https://www.schoollife.com/bragtags-intro">accomplishment, recognition, confidence</a></div>
-            <div>sponsors: <a href="https://sugarlump.love/sponsors">get involved</a></div>
+            <div>about: <a href="https://sugarlump.love/about" target="_blank">creativity + kindness</a></div>
+            <div>rewards: <a href="https://sugarlump.love/" target="_blank">the kindness project</a></div>
+            <div>join: <a href="https://sugarlump.love/contact" target="_blank">sugarlump kindness club</a></div>
+            <div>shop: <a href="https://sugarlump.love/shop" target="_blank">creative kindness kits</a></div>
+            <div>brag tags: <a href="https://www.schoollife.com/bragtags-intro" target="_blank">accomplishment, recognition, confidence</a></div>
+            <div>sponsors: <a href="https://sugarlump.love/sponsors" target="_blank">get involved</a></div>
         </div>
 
         <div class="sponsor-box">
-            <p style="font-family: 'DaisyByhapppyal-Regular'; color: #000099; font-size: 24px;">THIS KINDNESS PROJECT SPONSORED BY</p>
+            <p style="font-family: 'DaisyByhapppyal-Regular', cursive; color: #000099; font-size: 26px;">THIS KINDNESS PROJECT SPONSORED BY</p>
             <img src="images/erin_video_scenes-37.png" class="sponsor-logo">
             <br>
             <button class="visit-btn" onclick="window.open('https://www.tercekrealestate.com/')">visit</button>
         </div>
 
-        <div style="margin-top: 40px; color: #000099;">
-            <p style="font-size: 20px; font-weight: bold;">Experience 4D Augmented Reality On Your Phone</p>
-            <img src="images/erin_video_scenes-41.png" style="width: 100%; max-width: 400px;">
+        <div style="margin-top: 45px; color: #000099;">
+            <p style="font-size: 22px; font-weight: bold;">Experience 4D Augmented Reality On Your Phone</p>
+            <img src="images/erin_video_scenes-41.png" style="width: 100%; max-width: 420px; border-radius: 10px; margin-top: 15px;">
         </div>
 
-        <p style="color: #ff69b4; font-size: 26px; margin-top: 30px;">join the hunt; tell your friends</p>
+        <p style="color: #ff69b4; font-size: 28px; margin-top: 40px; font-weight: bold;">join the hunt; tell your friends</p>
 
         <div class="video-container">
             <video id="intro-video" poster="images/Video Poster_2.png" playsinline muted>
@@ -118,85 +118,123 @@
             </video>
             <button id="play-btn" class="play-btn">▶</button>
         </div>
+    </div>
 
-        <p style="margin-top: 30px; font-size: 13px;"><a href="https://avertek.net/" style="color:#000099">Contact AVERtek to learn more about AR marketing.</a></p>
+    <div id="cert-modal">
+        <iframe id="cert-iframe"></iframe>
+        <button class="close-modal" onclick="document.getElementById('cert-modal').style.display='none'">Close Preview</button>
     </div>
 
     <audio id="ar-audio" src="Sound/sweet_neighbor_of_mine3.mp3" preload="auto"></audio>
 
     <script>
         const mv = document.getElementById('reveal');
-        const arBtn = document.getElementById('ar-launch');
         const arAudio = document.getElementById('ar-audio');
         const video = document.getElementById('intro-video');
         const playBtn = document.getElementById('play-btn');
 
-        // --- 1. AR LOGIC ---
-        arBtn.addEventListener('click', () => {
+        // FIXED: AR Button now explicitly pauses video
+        document.getElementById('ar-launch').addEventListener('click', () => {
             video.pause();
-            playBtn.style.display = 'block';
-
+            playBtn.style.display = 'flex';
             if (mv.canActivateAR) {
-                // Pre-prime audio for mobile (stays silent until triggered by placement)
+                mv.style.display = 'block';
                 arAudio.play().then(() => { arAudio.pause(); });
                 mv.activateAR();
-            } else {
-                alert("AR is not supported on this device/browser.");
             }
         });
 
-        // This ensures sound and animation ONLY play if the model is actually placed in the room
         mv.addEventListener('ar-status', (event) => {
             if (event.detail.status === 'object-placed') {
-                arAudio.currentTime = 0;
-                arAudio.play();
-                // Forces animation restart on placement
-                mv.play(); 
+                arAudio.currentTime = 0; arAudio.play();
             } else if (event.detail.status === 'not-presenting') {
-                arAudio.pause();
+                arAudio.pause(); mv.style.display = 'none';
             }
         });
 
-        // --- 2. VIDEO LOGIC ---
-        playBtn.addEventListener('click', () => {
-            video.play();
-            video.muted = false;
-            playBtn.style.display = 'none';
-        });
+        function toggleVideo() {
+            if (video.paused) { video.play(); video.muted = false; playBtn.style.display = 'none'; }
+            else { video.pause(); playBtn.style.display = 'flex'; }
+        }
+        playBtn.addEventListener('click', toggleVideo);
+        video.addEventListener('click', toggleVideo);
 
-        // --- 3. ORIGINAL CERTIFICATE LOGIC ---
-        async function generateCertificate() {
+        // --- INTEGRATED ROBUST CERTIFICATE GENERATION ---
+        async function generateStampedCertificate() {
+            if (typeof PDFLib === 'undefined') {
+                alert("Certificate generator loading... please wait a moment.");
+                return;
+            }
+
             const { PDFDocument, rgb, StandardFonts } = PDFLib;
-            const url = 'certificates/sugarlump_app_certificate.pdf';
-            
+            const pdfPath = 'certificates/sugarlump_app_certificate.pdf';
+
             try {
-                const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer());
+                const existingPdfBytes = await fetch(pdfPath).then(res => {
+                    if (!res.ok) throw new Error("Could not find certificate template.");
+                    return res.arrayBuffer();
+                });
+                
                 const pdfDoc = await PDFDocument.load(existingPdfBytes);
-                const font = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
-                const pages = pdfDoc.getPages();
-                const firstPage = pages[0];
+                const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
+                const helveticaBoldFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+                const firstPage = pdfDoc.getPages()[0];
                 const { height } = firstPage.getSize();
 
-                const dateString = new Date().toLocaleDateString();
-                const certId = "SL-" + Math.floor(Math.random() * 1000000);
+                const today = new Date();
+                const dateStr = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+                const expDate = new Date(today); expDate.setDate(today.getDate() + 30);
+                const expStr = expDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+                
+                const certId = "260" + Math.floor(Math.random() * 10000000);
 
-                // Reinserting the "stamps"
-                firstPage.drawText(`Date: ${dateString}`, { x: 50, y: height - 50, size: 12, font, color: rgb(0, 0, 0) });
-                firstPage.drawText(`ID: ${certId}`, { x: 50, y: height - 70, size: 12, font, color: rgb(0, 0, 0) });
+                // ALIGNMENT: Mirrored to the "INSTRUCTIONS" block
+                const alignX = 95;
+                const baseLineY = 365; // SNAPS to the baseline of "INSTRUCTIONS"
+
+                // 1. Sponsor Title
+                firstPage.drawText("Tercek Real Estate Group", {
+                    x: alignX, y: baseLineY, size: 18, font: helveticaBoldFont, color: rgb(0.03, 0.46, 0.56)
+                });
+
+                // 2. Project Name
+                firstPage.drawText("Sweet Neighbor of Mine", {
+                    x: alignX, y: baseLineY - 24, size: 18, font: helveticaBoldFont, color: rgb(0.95, 0.22, 0.53)
+                });
+
+                // 3. Metadata
+                firstPage.drawText(`Certificate No: ${certId}`, {
+                    x: alignX, y: baseLineY - 50, size: 10, font: helveticaFont, color: rgb(0.03, 0.46, 0.56)
+                });
+                firstPage.drawText(`Download Date: ${dateStr}`, {
+                    x: alignX, y: baseLineY - 62, size: 10, font: helveticaFont, color: rgb(0.03, 0.46, 0.56)
+                });
+
+                // 4. Expiry
+                firstPage.drawText(`Valid until: ${expStr}`, {
+                    x: alignX, y: baseLineY - 76, size: 12, font: helveticaBoldFont, color: rgb(0.8, 0, 0)
+                });
 
                 const pdfBytes = await pdfDoc.save();
                 const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+                const blobUrl = URL.createObjectURL(blob);
+
+                // ACTION: Show in popup AND trigger download
+                document.getElementById('cert-iframe').src = blobUrl;
+                document.getElementById('cert-modal').style.display = 'flex';
+
                 const link = document.createElement('a');
-                link.href = URL.createObjectURL(blob);
-                link.download = 'Sugarlump_Certificate.pdf';
+                link.href = blobUrl;
+                link.download = `Sugarlump_Kindness_${certId}.pdf`;
                 link.click();
-            } catch (err) {
-                console.error(err);
-                alert("Could not generate certificate. Please check file path.");
+
+            } catch (error) {
+                console.error("PDF Error:", error);
+                alert("Please ensure the certificate template exists in the 'certificates' folder.");
             }
         }
-
-        document.getElementById('btn-cert').addEventListener('click', generateCertificate);
+        
+        document.getElementById('btn-cert').addEventListener('click', generateStampedCertificate);
     </script>
 </body>
 </html>
