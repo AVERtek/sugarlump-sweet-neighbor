@@ -9,7 +9,6 @@
     <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
 
     <style>
-        /* Responsive scaling for PC and Mobile */
         html, body { 
             margin: 0; padding: 0; width: 100%; min-height: 100vh;
             background-color: #ffff99; 
@@ -24,7 +23,6 @@
             text-align: center;
         }
 
-        /* UI Element Styling */
         .header-logo { width: 100%; max-width: 400px; height: auto; margin-bottom: 20px; }
         
         .main-button { 
@@ -38,11 +36,7 @@
         .main-button span { color: #000099; font-weight: bold; font-size: 26px; }
         #btn-cert span { font-size: 20px; }
 
-        /* FIX: Ensure the 3D model is completely hidden and doesn't take up space */
-        model-viewer#reveal {
-            display: none;
-            width: 1px; height: 1px; position: absolute;
-        }
+        model-viewer#reveal { display: none; width: 1px; height: 1px; position: absolute; }
 
         .links-group { margin: 20px 0; line-height: 2; color: #ff69b4; font-weight: bold; font-size: 18px; }
         .links-group a { color: #59cbe8; text-decoration: none; }
@@ -69,7 +63,7 @@
 
 <body>
     <div class="container">
-        <img src="images/erin_video_scenes-32.png" class="header-logo" alt="Sugarlump">
+        <img src="images/erin_video_scenes-32.png" class="header-logo">
         <p style="color: #000099; font-size: 18px; margin-bottom: 25px;"><b>Make Sure Wi-Fi and Sound is On!</b></p>
 
         <model-viewer id="reveal" src="Models/entire_family_99cm.glb" 
@@ -81,11 +75,11 @@
 
         <div class="ui-group">
             <button id="ar-launch" class="main-button">
-                <img src="images/Heart button.png" alt="heart">
+                <img src="images/Heart button.png">
                 <span>push here</span>
             </button>
             <button id="btn-cert" class="main-button">
-                <img src="images/sl_ribbon2.png" alt="ribbon">
+                <img src="images/sl_ribbon2.png">
                 <span>print certificate</span>
             </button>
         </div>
@@ -101,7 +95,7 @@
 
         <div class="sponsor-box">
             <p style="font-family: 'DaisyByhapppyal-Regular', cursive; color: #000099; font-size: 26px; margin-bottom: 10px;">THIS KINDNESS PROJECT SPONSORED BY</p>
-            <img src="images/erin_video_scenes-37.png" class="sponsor-logo" alt="Sponsor">
+            <img src="images/erin_video_scenes-37.png" class="sponsor-logo">
             <br>
             <button class="visit-btn" onclick="window.open('https://www.tercekrealestate.com/')">visit</button>
         </div>
@@ -134,15 +128,11 @@
         const video = document.getElementById('intro-video');
         const playBtn = document.getElementById('play-btn');
 
-        // --- 1. AR LOGIC ---
         arBtn.addEventListener('click', () => {
             video.pause();
             playBtn.style.display = 'flex';
-
             if (mv.canActivateAR) {
-                // Ensure the element is active in DOM before calling AR
                 mv.style.display = 'block';
-                // Prime audio for iOS/Android
                 arAudio.play().then(() => { arAudio.pause(); });
                 mv.activateAR();
             } else {
@@ -156,26 +146,21 @@
                 arAudio.play();
             } else if (event.detail.status === 'not-presenting') {
                 arAudio.pause();
-                mv.style.display = 'none'; // Hide again when done
+                mv.style.display = 'none';
             }
         });
 
-        // --- 2. VIDEO LOGIC ---
         function toggleVideo() {
             if (video.paused) {
-                video.play();
-                video.muted = false;
-                playBtn.style.display = 'none';
+                video.play(); video.muted = false; playBtn.style.display = 'none';
             } else {
-                video.pause();
-                playBtn.style.display = 'flex';
+                video.pause(); playBtn.style.display = 'flex';
             }
         }
-
         playBtn.addEventListener('click', toggleVideo);
         video.addEventListener('click', toggleVideo);
 
-        // --- 3. CERTIFICATE LOGIC ---
+        // --- UPDATED CERTIFICATE LOGIC TO MATCH IMAGE ---
         async function generateCertificate() {
             const { PDFDocument, rgb, StandardFonts } = PDFLib;
             const url = 'certificates/sugarlump_app_certificate.pdf';
@@ -183,24 +168,53 @@
             try {
                 const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer());
                 const pdfDoc = await PDFDocument.load(existingPdfBytes);
-                const font = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+                const fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+                const fontRegular = await pdfDoc.embedFont(StandardFonts.Helvetica);
+                
                 const pages = pdfDoc.getPages();
                 const firstPage = pages[0];
-                const { height } = firstPage.getSize();
+                const { width, height } = firstPage.getSize();
 
-                const dateString = new Date().toLocaleDateString();
-                const certId = "SL-" + Math.floor(Math.random() * 1000000);
+                // Logic for Dates
+                const now = new Date();
+                const expDate = new Date();
+                expDate.setDate(now.getDate() + 30); // 30 days valid
 
-                // Placement of stamps
-                firstPage.drawText(`Date: ${dateString}`, { x: 50, y: height - 50, size: 12, font, color: rgb(0, 0, 0) });
-                firstPage.drawText(`ID: ${certId}`, { x: 50, y: height - 70, size: 12, font, color: rgb(0, 0, 0) });
+                const dateStr = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+                const expStr = expDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+                const certId = "260" + Math.floor(Math.random() * 10000000);
+
+                // MATCHING IMAGE LAYOUT (X and Y coordinates may need minor tweaks based on your PDF size)
+                const leftMargin = 100;
+                const topStart = height - 320;
+
+                // Sponsor Name
+                firstPage.drawText('Tercek Real Estate Group', { x: leftMargin, y: topStart, size: 14, font: fontBold, color: rgb(0.1, 0.4, 0.5) });
+                
+                // Sub-header (I Love Me)
+                firstPage.drawText('I Love Me', { x: leftMargin, y: topStart - 20, size: 14, font: fontBold, color: rgb(0.9, 0.1, 0.5) });
+
+                // Metadata Block
+                firstPage.drawText(`Certificate No: ${certId}`, { x: leftMargin, y: topStart - 45, size: 10, font: fontRegular, color: rgb(0.1, 0.4, 0.5) });
+                firstPage.drawText(`Download Date: ${dateStr}`, { x: leftMargin, y: topStart - 60, size: 10, font: fontRegular, color: rgb(0.1, 0.4, 0.5) });
+                
+                // Expiration (Red Text)
+                firstPage.drawText(`Valid until: ${expStr}`, { x: leftMargin, y: topStart - 75, size: 11, font: fontBold, color: rgb(0.8, 0, 0) });
 
                 const pdfBytes = await pdfDoc.save();
                 const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+                const blobUrl = URL.createObjectURL(blob);
+
+                // --- VIEW ON SCREEN & DOWNLOAD ---
+                // Open in new window for immediate viewing
+                window.open(blobUrl, '_blank');
+
+                // Trigger automatic download
                 const link = document.createElement('a');
-                link.href = URL.createObjectURL(blob);
-                link.download = 'Sugarlump_Certificate.pdf';
+                link.href = blobUrl;
+                link.download = `Sugarlump_Kindness_${certId}.pdf`;
                 link.click();
+
             } catch (err) {
                 console.error(err);
                 alert("Could not generate certificate. Please check file path.");
