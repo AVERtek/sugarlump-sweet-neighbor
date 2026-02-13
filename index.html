@@ -34,10 +34,8 @@
         .main-button img { height: 40px; margin-right: 10px; }
         .main-button span { color: #000099; font-weight: bold; font-size: 26px; }
 
-        /* AR Invisible Layer */
         model-viewer#reveal { display: none; width: 1px; height: 1px; position: absolute; }
 
-        /* Link Sizes: All Uniform */
         .links-group { margin: 20px 0; line-height: 2; color: #ff69b4; font-weight: bold; font-size: 18px; }
         .links-group a { color: #59cbe8; text-decoration: none; }
         
@@ -56,13 +54,12 @@
             font-size: 24px; color: #59cbe8; display: flex; align-items: center; justify-content: center;
         }
 
-        /* Modal for Viewing Certificate */
         #cert-modal {
             display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%;
             background-color: rgba(0,0,0,0.85); flex-direction: column; align-items: center; justify-content: center;
         }
         #cert-iframe { width: 90%; height: 80%; border: none; background: #fff; border-radius: 10px; }
-        .close-modal { margin-top: 15px; background: #ff69b4; color: #fff; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        .close-modal { margin-top: 15px; background: #ff69b4; color: #fff; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 16px; }
 
         @font-face { font-family: 'Chalet LondonNineteenEighty Regular'; src: url('fonts/Chalet LondonNineteenEighty Regular.otf'); }
         @font-face { font-family: 'DaisyByhapppyal-Regular'; src: url('fonts/DaisyByhapppyal-Regular.otf'); }
@@ -135,7 +132,6 @@
         const video = document.getElementById('intro-video');
         const playBtn = document.getElementById('play-btn');
 
-        // Restore AR Functionality
         document.getElementById('ar-launch').addEventListener('click', () => {
             video.pause();
             playBtn.style.display = 'flex';
@@ -166,7 +162,7 @@
         playBtn.addEventListener('click', toggleVideo);
         video.addEventListener('click', toggleVideo);
 
-        // --- PDF LOGIC: CORRECT ALIGNMENT AND FONT SIZES ---
+        // --- FINAL PDF ALIGNMENT LOGIC ---
         async function generateCertificate() {
             const { PDFDocument, rgb, StandardFonts } = PDFLib;
             const url = 'certificates/sugarlump_app_certificate.pdf';
@@ -184,20 +180,22 @@
                 const expStr = expDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
                 const certId = "260" + Math.floor(Math.random() * 10000000);
 
-                // POSITIONING: Mirrored to "INSTRUCTIONS" block
-                const mirrorX = 100; // Aligned to the left
-                const mirrorY = height - 325; 
+                // ALIGNMENT: x:95 mirrors the instruction block. y:height-332 snaps to the "INSTRUCTIONS" baseline.
+                const alignX = 95; 
+                const alignY = height - 332; 
 
-                // Tercek Block (Size 15)
-                firstPage.drawText('Tercek Real Estate Group', { x: mirrorX, y: mirrorY, size: 15, font: fontBold, color: rgb(0.12, 0.44, 0.53) });
-                firstPage.drawText('I Love Me', { x: mirrorX, y: mirrorY - 20, size: 15, font: fontBold, color: rgb(0.95, 0.25, 0.55) });
-
-                // Cert Info (Size 10)
-                firstPage.drawText(`Certificate No: ${certId}`, { x: mirrorX, y: mirrorY - 45, size: 10, font: fontReg, color: rgb(0.12, 0.44, 0.53) });
-                firstPage.drawText(`Download Date: ${dateStr}`, { x: mirrorX, y: mirrorY - 58, size: 10, font: fontReg, color: rgb(0.12, 0.44, 0.53) });
+                // Sponsor Header - Matched to Instruction baseline 
+                firstPage.drawText('Tercek Real Estate Group', { x: alignX, y: alignY, size: 16, font: fontBold, color: rgb(0.1, 0.41, 0.5) });
                 
-                // Expiry (Bold Red)
-                firstPage.drawText(`Valid until: ${expStr}`, { x: mirrorX, y: mirrorY - 72, size: 11, font: fontBold, color: rgb(0.8, 0, 0) });
+                // I Love Me - Matching pink color from layout 
+                firstPage.drawText('I Love Me', { x: alignX, y: alignY - 22, size: 16, font: fontBold, color: rgb(0.95, 0.22, 0.53) });
+
+                // Metadata - Professional sizing [cite: 21, 22]
+                firstPage.drawText(`Certificate No: ${certId}`, { x: alignX, y: alignY - 48, size: 10, font: fontReg, color: rgb(0.1, 0.41, 0.5) });
+                firstPage.drawText(`Download Date: ${dateStr}`, { x: alignX, y: alignY - 60, size: 10, font: fontReg, color: rgb(0.1, 0.41, 0.5) });
+                
+                // Expiry - Bold Red [cite: 23]
+                firstPage.drawText(`Valid until: ${expStr}`, { x: alignX, y: alignY - 74, size: 11, font: fontBold, color: rgb(0.8, 0, 0) });
 
                 const pdfBytes = await pdfDoc.save();
                 const blob = new Blob([pdfBytes], { type: 'application/pdf' });
