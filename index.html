@@ -34,7 +34,6 @@
         .main-button img { height: 40px; margin-right: 10px; }
         .main-button span { color: #000099; font-weight: bold; font-size: 26px; }
 
-        /* Hidden model viewer for AR Handoff */
         model-viewer#reveal { display: none; width: 1px; height: 1px; position: absolute; }
 
         .links-group { margin: 20px 0; line-height: 2; color: #ff69b4; font-weight: bold; font-size: 18px; }
@@ -62,11 +61,16 @@
         #cert-iframe { width: 90%; height: 80%; border: none; background: #fff; border-radius: 10px; }
         .close-modal { margin-top: 15px; background: #ff69b4; color: #fff; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 16px; }
 
-        /* Custom Tip Styling */
+        /* FIXED: MANUAL TIP OVERLAY */
         #ar-tip-overlay {
             display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            background: white; border: 3px solid #59cbe8; padding: 20px; border-radius: 15px;
-            z-index: 2000; box-shadow: 0 10px 25px rgba(0,0,0,0.2); width: 80%; max-width: 300px;
+            background: white; border: 4px solid #59cbe8; padding: 25px; border-radius: 20px;
+            z-index: 3000; box-shadow: 0 15px 40px rgba(0,0,0,0.4); width: 85%; max-width: 340px;
+            text-align: center;
+        }
+        .tip-btn {
+            background: #59cbe8; color: white; border: none; padding: 15px 40px; 
+            border-radius: 10px; font-weight: bold; font-size: 18px; cursor: pointer; margin-top: 15px;
         }
 
         @font-face { font-family: 'Chalet LondonNineteenEighty Regular'; src: url('fonts/Chalet LondonNineteenEighty Regular.otf'); }
@@ -89,9 +93,13 @@
         </model-viewer>
 
         <div id="ar-tip-overlay">
-            <h3 style="color: #ff69b4; margin-top: 0;">Quick Tip!</h3>
-            <p style="color: #000099; font-weight: bold;">Once the camera opens, tap your screen to see the 📸 Record Button!</p>
-            <p style="color: #59cbe8; font-size: 14px;">Launching AR in 2 seconds...</p>
+            <h2 style="color: #ff69b4; margin-top: 0;">Capture the Magic!</h2>
+            <p style="color: #000099; font-size: 18px; line-height: 1.5; text-align: left;">
+                1. Find a flat spot on the floor.<br>
+                2. <b>Tap your screen once</b> to see the 📸 Record/Photo button!<br>
+                3. <b>Pinch the family</b> to make them bigger or smaller!
+            </p>
+            <button class="tip-btn" id="start-ar-now">GOT IT! START AR</button>
         </div>
 
         <div class="ui-group">
@@ -124,7 +132,6 @@
         <div style="margin-top: 45px; color: #000099;">
             <p style="font-size: 22px; font-weight: bold;">Experience 4D Augmented Reality On Your Phone</p>
             <img src="images/erin_video_scenes-41.png" style="width: 100%; max-width: 420px; border-radius: 10px; margin-top: 15px;">
-            <p style="font-size: 16px; margin-top: 10px;"><b>Pinch Kai to Zoom & Resize!</b></p>
         </div>
 
         <p style="color: #ff69b4; font-size: 28px; margin-top: 40px; font-weight: bold;">join the hunt; tell your friends</p>
@@ -149,30 +156,33 @@
         const arAudio = document.getElementById('ar-audio');
         const video = document.getElementById('intro-video');
         const playBtn = document.getElementById('play-btn-overlay');
-        const arTip = document.getElementById('ar-tip-overlay');
+        const tipOverlay = document.getElementById('ar-tip-overlay');
+        const startArBtn = document.getElementById('start-ar-now');
 
-        // --- AR LAUNCH LOGIC WITH USER INSTRUCTION ---
+        // --- NEW DETECTION & LAUNCH LOGIC ---
         document.getElementById('ar-launch').addEventListener('click', () => {
             video.pause();
             playBtn.style.display = 'flex';
 
+            // Catch iPhones, iPads, and "Mac-mimicking" iPads
             const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-            if (isMobile) {
-                // Show tip overlay
-                arTip.style.display = 'block';
-                
-                // Prime Audio
-                arAudio.play().then(() => { arAudio.pause(); });
+            const isIPad = (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
-                // Launch after 2 seconds so user can read recording tip
-                setTimeout(() => {
-                    arTip.style.display = 'none';
-                    mv.style.display = 'block';
-                    mv.activateAR();
-                }, 2200);
+            if (isMobile || isIPad) {
+                // Show the instruction box
+                tipOverlay.style.display = 'block';
+                // Prime audio for play later
+                arAudio.play().then(() => { arAudio.pause(); }).catch(e => {});
             } else {
-                alert("This Augmented Reality experience is designed for mobile devices. Please open this page on your smartphone!");
+                alert("This AR experience works on iPhone, iPad, and Android. Please visit this link on your mobile device!");
             }
+        });
+
+        // The real launch happens when they click "Got it"
+        startArBtn.addEventListener('click', () => {
+            tipOverlay.style.display = 'none';
+            mv.style.display = 'block';
+            mv.activateAR();
         });
 
         mv.addEventListener('ar-status', (event) => {
@@ -190,25 +200,16 @@
         playBtn.addEventListener('click', toggleVideo);
         video.addEventListener('click', toggleVideo);
 
-        // --- FULL PDF-LIB INTEGRATION ---
+        // --- PDF LOGIC (FULL AND UNABRIDGED) ---
         async function generateStampedCertificate() {
-            if (typeof PDFLib === 'undefined') {
-                alert("Please wait for the page to finish loading.");
-                return;
-            }
-
+            if (typeof PDFLib === 'undefined') return;
             const { PDFDocument, rgb, StandardFonts } = PDFLib;
             const pdfPath = 'certificates/sugarlump_app_certificate.pdf';
 
             try {
-                const existingPdfBytes = await fetch(pdfPath).then(res => {
-                    if (!res.ok) throw new Error("Could not find certificate PDF.");
-                    return res.arrayBuffer();
-                });
-
+                const existingPdfBytes = await fetch(pdfPath).then(res => res.arrayBuffer());
                 const pdfDoc = await PDFDocument.load(existingPdfBytes);
                 const firstPage = pdfDoc.getPages()[0];
-
                 const today = new Date();
                 const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
                 const currentDateString = today.toLocaleDateString('en-US', dateOptions);
@@ -226,27 +227,15 @@
                 const alignX = 95;
                 const baseLineY = 365;
 
-                // STAMPING TEXT
-                firstPage.drawText("Tercek Real Estate Group", {
-                    x: alignX, y: baseLineY, size: 18, font: helveticaBoldFont, color: rgb(8/255, 119/255, 144/255)
-                });
-                firstPage.drawText("Sweet Neighbor of Mine", {
-                    x: alignX, y: baseLineY - 24, size: 18, font: helveticaBoldFont, color: rgb(254/255, 63/255, 178/255)
-                });
-                firstPage.drawText(`Certificate No: ${certificateNumber}`, {
-                    x: alignX, y: baseLineY - 50, size: 10, font: helveticaFont, color: rgb(8/255, 119/255, 144/255)
-                });
-                firstPage.drawText(`Download Date: ${currentDateString}`, {
-                    x: alignX, y: baseLineY - 62, size: 10, font: helveticaFont, color: rgb(8/255, 119/255, 144/255)
-                });
-                firstPage.drawText(`Valid until: ${futureDateString}`, {
-                    x: alignX, y: baseLineY - 76, size: 12, font: helveticaBoldFont, color: rgb(0.8, 0.2, 0.2)
-                });
+                firstPage.drawText("Tercek Real Estate Group", { x: alignX, y: baseLineY, size: 18, font: helveticaBoldFont, color: rgb(8/255, 119/255, 144/255) });
+                firstPage.drawText("Sweet Neighbor of Mine", { x: alignX, y: baseLineY - 24, size: 18, font: helveticaBoldFont, color: rgb(254/255, 63/255, 178/255) });
+                firstPage.drawText(`Certificate No: ${certificateNumber}`, { x: alignX, y: baseLineY - 50, size: 10, font: helveticaFont, color: rgb(8/255, 119/255, 144/255) });
+                firstPage.drawText(`Download Date: ${currentDateString}`, { x: alignX, y: baseLineY - 62, size: 10, font: helveticaFont, color: rgb(8/255, 119/255, 144/255) });
+                firstPage.drawText(`Valid until: ${futureDateString}`, { x: alignX, y: baseLineY - 76, size: 12, font: helveticaBoldFont, color: rgb(0.8, 0.2, 0.2) });
 
                 const pdfBytes = await pdfDoc.save();
                 const blob = new Blob([pdfBytes], { type: 'application/pdf' });
                 const blobUrl = URL.createObjectURL(blob);
-
                 document.getElementById('cert-iframe').src = blobUrl;
                 document.getElementById('cert-modal').style.display = 'flex';
 
@@ -254,11 +243,7 @@
                 link.href = blobUrl;
                 link.download = `Sugarlump_Kindness_${certificateNumber}.pdf`;
                 link.click();
-
-            } catch (err) {
-                console.error(err);
-                alert("Certificate error. Please ensure you are connected to the internet.");
-            }
+            } catch (err) { console.error(err); }
         }
         document.getElementById('btn-cert').addEventListener('click', generateStampedCertificate);
     </script>
