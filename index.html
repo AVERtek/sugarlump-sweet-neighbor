@@ -9,169 +9,130 @@
     <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
 
     <style>
-        body { 
-            margin: 0; padding: 0; background-color: #ffff99; 
-            font-family: sans-serif; display: flex; justify-content: center; 
-        }
-        .container { 
-            width: 100%; max-width: 500px; padding: 20px; 
-            display: flex; flex-direction: column; align-items: center; text-align: center;
-        }
-        .header-logo { width: 100%; max-width: 350px; margin-bottom: 20px; }
+        body { margin: 0; padding: 0; background-color: #ffff99; font-family: sans-serif; text-align: center; color: #000099; }
+        .container { width: 100%; max-width: 500px; margin: 0 auto; padding: 20px; box-sizing: border-box; }
+        .header-logo { width: 100%; max-width: 350px; height: auto; margin-bottom: 10px; }
         
-        /* UI Buttons */
-        .ui-group { display: flex; flex-direction: column; gap: 15px; margin: 20px 0; z-index: 10; }
-        .main-button {
-            background: #fff; border: 3px solid #59cbe8; border-radius: 15px;
-            width: 280px; height: 65px; display: flex; align-items: center; 
-            justify-content: center; cursor: pointer; font-size: 22px; font-weight: bold; color: #000099;
+        /* Main UI Buttons */
+        .button-stack { display: flex; flex-direction: column; align-items: center; gap: 12px; margin: 20px 0; }
+        .btn {
+            background: #fff; border: 3px solid #59cbe8; border-radius: 12px;
+            width: 280px; height: 60px; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; font-size: 22px; font-weight: bold; text-decoration: none; color: #000099;
         }
-        .main-button img { height: 40px; margin-right: 12px; }
+        .btn img { height: 35px; margin-right: 10px; }
 
-        /* AR Modal/Overlay */
+        /* The Tip Overlay - Simplified to prevent click-blocking */
         #ar-tip-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8); z-index: 9999; justify-content: center; align-items: center;
-        }
-        .tip-content {
-            background: white; width: 85%; max-width: 320px; padding: 25px; 
-            border-radius: 20px; border: 4px solid #59cbe8; text-align: center;
-        }
-        .tip-btn {
-            background: #ff69b4; color: white; border: none; padding: 15px 30px; 
-            border-radius: 10px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 15px;
+            background: rgba(255,255,153,0.98); z-index: 10000; flex-direction: column; align-items: center; justify-content: center;
         }
 
-        /* Certificate Modal */
-        #cert-modal {
-            display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); flex-direction: column; align-items: center; justify-content: center;
-        }
-        #cert-iframe { width: 90%; height: 75%; border-radius: 10px; background: white; }
-        
-        /* Hidden Viewer */
-        model-viewer#reveal { display: none; width: 1px; height: 1px; }
-
-        .links-group { margin-top: 20px; line-height: 2; color: #ff69b4; font-weight: bold; }
+        /* Links Section */
+        .links-group { margin: 25px 0; line-height: 2.2; font-weight: bold; font-size: 18px; color: #ff69b4; }
         .links-group a { color: #59cbe8; text-decoration: none; }
+
+        /* Hidden Viewer */
+        model-viewer { display: block; width: 1px; height: 1px; position: absolute; pointer-events: none; opacity: 0; }
+
+        /* Video */
+        .video-box { width: 100%; border: 4px solid #fff; border-radius: 15px; overflow: hidden; margin-top: 20px; }
+        video { width: 100%; display: block; }
     </style>
 </head>
 
 <body>
     <div class="container">
         <img src="images/erin_video_scenes-32.png" class="header-logo">
-        
-        <model-viewer id="reveal" 
+        <p><b>Ensure Sound is ON!</b></p>
+
+        <div class="button-stack">
+            <div id="btn-ar" class="btn"><img src="images/Heart button.png"><span>push here</span></div>
+            <div id="btn-cert" class="btn"><img src="images/sl_ribbon2.png"><span>print certificate</span></div>
+        </div>
+
+        <div class="links-group">
+            <div>about: <a href="https://sugarlump.love/about" target="_blank">creativity + kindness</a></div>
+            <div>rewards: <a href="https://sugarlump.love/" target="_blank">the kindness project</a></div>
+            <div>join: <a href="https://sugarlump.love/contact" target="_blank">sugarlump kindness club</a></div>
+            <div>shop: <a href="https://sugarlump.love/shop" target="_blank">creative kindness kits</a></div>
+            <div>brag tags: <a href="https://www.schoollife.com/bragtags-intro" target="_blank">accomplishment</a></div>
+            <div>sponsors: <a href="https://sugarlump.love/be-a-sponsor" target="_blank">get involved</a></div>
+        </div>
+
+        <div class="video-box">
+            <video id="v" poster="images/Video Poster_2.png" playsinline controls>
+                <source src="Video/sugarlump_intro_erin_2.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <model-viewer id="mv" 
             src="Models/entire_family_99cm.glb" 
             ios-src="Models/GIRL_converted.usdz#allowsScaling=1"
             ar ar-modes="webxr scene-viewer quick-look" 
             ar-placement="floor" ar-scale="auto">
         </model-viewer>
 
-        <div class="ui-group">
-            <div id="ar-launch" class="main-button">
-                <img src="images/Heart button.png">
-                <span>push here</span>
-            </div>
-            <div id="btn-cert" class="main-button">
-                <img src="images/sl_ribbon2.png">
-                <span>print certificate</span>
-            </div>
-        </div>
-
-        <div class="links-group">
-            <div>about: <a href="https://sugarlump.love/about" target="_blank">creativity + kindness</a></div>
-            <div>shop: <a href="https://sugarlump.love/shop" target="_blank">kindness kits</a></div>
-        </div>
-
         <div id="ar-tip-overlay">
-            <div class="tip-content">
-                <h2 style="color: #ff69b4; margin-top: 0;">Camera Tips</h2>
-                <p style="color: #000099; text-align: left; font-size: 16px;">
-                    1. <b>Tap screen once</b> to see the 📸 Record circle.<br><br>
-                    2. <b>Pinch your fingers</b> on the family to zoom!
-                </p>
-                <button id="launch-trigger" class="tip-btn">GOT IT! START</button>
-            </div>
-        </div>
-
-        <div id="cert-modal">
-            <iframe id="cert-iframe"></iframe>
-            <button class="tip-btn" onclick="document.getElementById('cert-modal').style.display='none'">CLOSE</button>
+            <h2 style="color:#ff69b4">Quick Tips</h2>
+            <p style="padding: 20px; font-size: 18px;">
+                1. <b>Tap screen once</b> to see the 📸 Record circle.<br><br>
+                2. <b>Pinch screen</b> to zoom the family!
+            </p>
+            <button id="real-launch" style="background:#59cbe8; color:white; border:none; padding:15px 40px; border-radius:10px; font-size:20px; font-weight:bold;">START CAMERA</button>
         </div>
     </div>
 
-    <audio id="ar-audio" src="Sound/sweet_neighbor_of_mine3.mp3" preload="auto"></audio>
+    <audio id="snd" src="Sound/sweet_neighbor_of_mine3.mp3" preload="auto"></audio>
 
     <script>
-        const mv = document.getElementById('reveal');
-        const arAudio = document.getElementById('ar-audio');
-        const tipOverlay = document.getElementById('ar-tip-overlay');
-        const launchTrigger = document.getElementById('launch-trigger');
-        const certBtn = document.getElementById('btn-cert');
-        const arBtn = document.getElementById('ar-launch');
+        const mv = document.getElementById('mv');
+        const snd = document.getElementById('snd');
+        const tip = document.getElementById('ar-tip-overlay');
 
-        // 1. CLICK "PUSH HERE"
-        arBtn.addEventListener('click', () => {
-            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-            const isIPad = (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-
-            if (isMobile || isIPad) {
-                tipOverlay.style.display = 'flex';
-                // Unlock audio for later
-                arAudio.play().then(() => { arAudio.pause(); }).catch(e => {});
+        // LAUNCH AR FLOW
+        document.getElementById('btn-ar').onclick = () => {
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+            if (isMobile) {
+                tip.style.display = 'flex';
+                // Important: Prime audio
+                snd.play().then(() => { snd.pause(); }).catch(e => {});
             } else {
-                alert("Please open this on your phone or iPad!");
+                alert("Please use a phone or iPad!");
             }
-        });
+        };
 
-        // 2. CLICK "GOT IT! START"
-        launchTrigger.addEventListener('click', () => {
-            tipOverlay.style.display = 'none';
-            mv.style.display = 'block';
+        // THE FINAL TRIGGER (Direct click to AR)
+        document.getElementById('real-launch').onclick = () => {
+            tip.style.display = 'none';
             mv.activateAR();
-        });
+        };
 
-        // AR Events
+        // AUDIO TRIGGER ON PLACEMENT
         mv.addEventListener('ar-status', (e) => {
             if (e.detail.status === 'object-placed') {
-                arAudio.currentTime = 0; arAudio.play();
-            } else if (e.detail.status === 'not-presenting') {
-                mv.style.display = 'none';
-                arAudio.pause();
+                snd.currentTime = 0; snd.play();
             }
         });
 
-        // 3. CERTIFICATE LOGIC
-        certBtn.addEventListener('click', async () => {
+        // FULL PDF LOGIC
+        document.getElementById('btn-cert').onclick = async () => {
             if (typeof PDFLib === 'undefined') return;
             const { PDFDocument, rgb, StandardFonts } = PDFLib;
             try {
-                const res = await fetch('certificates/sugarlump_app_certificate.pdf');
-                const existingPdfBytes = await res.arrayBuffer();
-                const pdfDoc = await PDFDocument.load(existingPdfBytes);
-                const page = pdfDoc.getPages()[0];
+                const b = await fetch('certificates/sugarlump_app_certificate.pdf').then(res => res.arrayBuffer());
+                const doc = await PDFDocument.load(b);
+                const page = doc.getPages()[0];
+                const bold = await doc.embedFont(StandardFonts.HelveticaBold);
                 
-                const today = new Date();
-                const dateStr = today.toLocaleDateString();
-                const helvBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
-                
-                // Stamp Data
-                page.drawText("Tercek Real Estate Group", { x: 95, y: 365, size: 18, font: helvBold, color: rgb(0.03, 0.46, 0.56) });
-                page.drawText(`Date: ${dateStr}`, { x: 95, y: 303, size: 10, font: helvBold });
+                page.drawText("Tercek Real Estate Group", { x: 95, y: 365, size: 18, font: bold, color: rgb(0.03, 0.46, 0.56) });
+                page.drawText(`Date: ${new Date().toLocaleDateString()}`, { x: 95, y: 303, size: 10, font: bold });
 
-                const pdfBytes = await pdfDoc.save();
-                const blobUrl = URL.createObjectURL(new Blob([pdfBytes], { type: 'application/pdf' }));
-                
-                document.getElementById('cert-iframe').src = blobUrl;
-                document.getElementById('cert-modal').style.display = 'flex';
-                
-                const link = document.createElement('a');
-                link.href = blobUrl;
-                link.download = "Sugarlump_Certificate.pdf";
-                link.click();
+                const pdfBytes = await doc.save();
+                const url = URL.createObjectURL(new Blob([pdfBytes], { type: 'application/pdf' }));
+                window.open(url, '_blank'); // Opens in new tab for easiest printing
             } catch (err) { alert("PDF Error: " + err.message); }
-        });
+        };
     </script>
 </body>
 </html>
