@@ -13,22 +13,22 @@
         gtag('config', '0-0000000000');
     </script>
     <style>
-        /* [cite: 17-225] Restored Original Styles & Spacing */
+        [cite_start]/* [cite: 17-225] Restored Original Styles */
         html, body { margin: 0; padding: 0; overflow-x: hidden; font-family: Google Sans, Noto, Roboto, Helvetica Neue, sans-serif; color: #244376; background-color: #ffff99; }
         .container { max-width: 600px; width: 100%; box-sizing: border-box; padding: 0 10px; margin: 0 auto; }
         .card { background-color: rgb(255, 255, 153); border: 2px solid rgb(255, 255, 153); padding: 10px; margin-bottom: 1em; display: flex; flex-direction: column; align-items: center; text-align: center; border-radius: 6px; overflow: hidden; }
         
         a { color: #59cbe8; text-decoration: none; font-weight: bold; }
-        /* [cite: 146-149] Keep model hidden on landing UI */
+        /* Hides the 3D model from landing UI as requested */
         model-viewer#reveal { display: none; }
         
-        .main-button { background-color: #ffffff; border-radius: 8px; border: 2px solid #59cbe8; height: 60px; min-width: 250px; display: flex; align-items: center; justify-content: center; cursor: pointer; margin-top: 10px; }
+        .main-button { background-color: #ffffff; border-radius: 8px; border: 2px solid #59cbe8; height: 60px; min-width: 280px; display: flex; align-items: center; justify-content: center; cursor: pointer; margin-top: 10px; }
         
         @font-face { font-family: 'Chalet LondonNineteenEighty Regular'; src: url('fonts/Chalet LondonNineteenEighty Regular.otf') format('opentype'); }
         @font-face { font-family: 'DaisyByhapppyal-Regular'; src: url('fonts/DaisyByhapppyal-Regular.otf') format('opentype'); }
 
-        .card h2 { margin: 5px 0; }
-        .card h2 p { margin: 5px 0; }
+        .card h2 { margin: 2px 0; }
+        .card h2 p { margin: 2px 0; }
     </style>
 </head>
 <body>
@@ -61,7 +61,7 @@
         </div>
 
         <div class="card" style="margin-top: 20px;">
-            <img src="images/erin_video_scenes-34.png" style="width: 300px;">
+            <img src="images/erin_video_scenes-34.png" style="width: 300px; margin-bottom: 10px;">
             <h2><p style="color: #ff69b4;"><b>about:</b><a href="https://sugarlump.love/about" target="_blank"> creativity + kindness</a></p></h2>
             <h2><p style="color: #ff69b4;"><b>rewards:</b><a href="https://sugarlump.love/" target="_blank"> the kindness project</a></p></h2>
             <h2><p style="color: #ff69b4;"><b>join:</b><a href="https://sugarlump.love/contact" target="_blank"> sugarlump kindness club</a></p></h2>
@@ -89,97 +89,62 @@
     <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
 
     <script>
-        // --- IMPROVED RECORD MISSION TAB ---
-function openRecordingTab() {
-    const recWin = window.open("", "_blank");
-    recWin.document.write(`
-        <html><head><title>Mission Recorder</title>
-        <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.js"><\/script>
-        <style>
-            body { margin: 0; background: #ffff99; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; font-family: sans-serif; text-align: center; }
-            model-viewer { width: 100%; height: 60vh; background: #ffff99; }
-            .ui-box { background: white; padding: 15px; border-radius: 15px; border: 3px solid #59cbe8; width: 85%; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-            .btn-row { display: flex; gap: 10px; justify-content: center; margin-top: 15px; }
-            button { padding: 12px 20px; border-radius: 8px; border: 2px solid #59cbe8; background: white; color: #000099; font-weight: bold; cursor: pointer; font-size: 16px; }
-            .play-btn { background: #59cbe8; color: white; font-size: 20px; width: 100%; }
-            .step { color: #ff69b4; font-weight: bold; font-size: 14px; margin-bottom: 5px; }
-        </style></head>
-        <body>
-            <model-viewer id="m" src="Models/entire_family_99cm.glb" shadow-intensity="1" camera-controls interaction-prompt="none"></model-viewer>
-            <audio id="music" src="Sound/sweet_neighbor_of_mine3.mp3" loop></audio>
+        // --- 1. ENHANCED RECORD MISSION TAB (SYNCED AUDIO + LARGER UI) ---
+        function openRecordingTab() {
+            const recWin = window.open("", "_blank");
+            recWin.document.write(`
+                <html><head><title>Mission Recorder</title>
+                <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.js"><\/script>
+                <style>
+                    body { margin: 0; background: #ffff99; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; font-family: sans-serif; text-align: center; }
+                    model-viewer { width: 100%; height: 55vh; background: #ffff99; }
+                    .instr { background: white; padding: 15px; border-radius: 12px; width: 90%; border: 3px solid #59cbe8; box-sizing: border-box; }
+                    .instr p { font-size: 14px; font-weight: bold; color: #ff69b4; margin: 5px 0; }
+                    .play-btn { width: 100%; height: 70px; background: #59cbe8; color: white; border: none; border-radius: 10px; font-size: 24px; font-weight: bold; margin-top: 15px; cursor: pointer; }
+                    .exit-btn { margin-top: 15px; background: none; border: none; color: #000099; text-decoration: underline; font-size: 16px; }
+                </style></head>
+                <body>
+                    <model-viewer id="m" src="Models/entire_family_99cm.glb" camera-controls interaction-prompt="none" shadow-intensity="1"></model-viewer>
+                    <audio id="music" src="Sound/sweet_neighbor_of_mine3.mp3" loop></audio>
+                    <div class="instr">
+                        <p>iOS: Swipe down top-right corner & tap 🔴</p>
+                        <p>ANDROID: Swipe down twice & tap "Screen Record"</p>
+                        <button id="ctrl" class="play-btn" onclick="sync()">▶ START SHOW</button>
+                        <button class="exit-btn" onclick="window.close()">Back to Mission</button>
+                    </div>
+                    <script>
+                        function sync() {
+                            const m = document.getElementById('m');
+                            const a = document.getElementById('music');
+                            const btn = document.getElementById('ctrl');
+                            if(a.paused) { a.play(); m.play(); btn.innerText = "❚❚ PAUSE"; btn.style.background = "#ff69b4"; }
+                            else { a.pause(); m.pause(); btn.innerText = "▶ RESUME"; btn.style.background = "#59cbe8"; }
+                        }
+                    <\/script>
+                </body></html>`);
+            recWin.document.close();
+        }
 
-            <div class="ui-box">
-                <div class="step">STEP 1: Swipe for Screen Recorder 🔴</div>
-                <div class="step">STEP 2: Press Play Below</div>
-                
-                <button id="pBtn" class="play-btn" onclick="togglePlayback()">▶ START MISSION</button>
-                
-                <div class="btn-row">
-                    <button onclick="window.close()">✕ EXIT</button>
-                    <button onclick="resetMission()">⟲ RESET</button>
-                </div>
-            </div>
-
-            <script>
-                const model = document.getElementById('m');
-                const audio = document.getElementById('music');
-                const btn = document.getElementById('pBtn');
-
-                function togglePlayback() {
-                    if (audio.paused) {
-                        audio.play();
-                        model.play();
-                        btn.innerText = "❚❚ PAUSE MISSION";
-                        btn.style.background = "#ff69b4";
-                    } else {
-                        audio.pause();
-                        model.pause();
-                        btn.innerText = "▶ RESUME MISSION";
-                        btn.style.background = "#59cbe8";
-                    }
-                }
-
-                function resetMission() {
-                    audio.pause();
-                    audio.currentTime = 0;
-                    model.pause();
-                    model.currentTime = 0;
-                    btn.innerText = "▶ START MISSION";
-                    btn.style.background = "#59cbe8";
-                }
-            <\/script>
-        </body></html>`);
-    recWin.document.close();
-}
         document.addEventListener("DOMContentLoaded", function () {
             const mv = document.getElementById('reveal');
             const video = document.getElementById('video-overlay');
             const playBtn = document.getElementById('play-pause-button');
 
-            // [cite: 461-487] AR Launch
+            // Launch AR
             document.getElementById('ar-button').addEventListener('click', () => {
                 if (mv.canActivateAR) { mv.activateAR(); }
-                else { alert("AR is not available on this device."); }
+                else { alert("AR works best on mobile!"); }
             });
 
-            //  RESTORED: Video Play/Pause Features
+            [cite_start]// Video Controls [cite: 439-460]
             function toggleVideo() {
-                if (video.paused || video.ended) {
-                    video.play();
-                    video.muted = false;
-                    playBtn.innerHTML = "❚❚";
-                    playBtn.style.display = "none"; 
-                } else {
-                    video.pause();
-                    playBtn.innerHTML = "▶";
-                    playBtn.style.display = "block";
-                }
+                if (video.paused) { video.play(); video.muted = false; playBtn.style.display = "none"; }
+                else { video.pause(); playBtn.style.display = "block"; }
             }
-            video.addEventListener('click', toggleVideo);
             playBtn.addEventListener('click', toggleVideo);
-            video.addEventListener('pause', () => { playBtn.style.display = "block"; });
+            video.addEventListener('click', toggleVideo);
 
-            // [cite: 526-654] RESTORED: Certificate Logic
+            // --- 2. RESTORED CERTIFICATE LOGIC: Full Styling & Expiration ---
             document.getElementById('viewPrintCertificateButton').addEventListener('click', async () => {
                 const { PDFDocument, rgb, StandardFonts } = PDFLib;
                 try {
@@ -192,17 +157,28 @@ function openRecordingTab() {
 
                     const now = new Date();
                     const dateStr = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+                    const exp = new Date(); exp.setDate(now.getDate() + 30);
+                    const expStr = exp.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
                     const certNo = "SL-" + Date.now().toString().slice(-8);
 
-                    page.drawText("Tercek Real Estate Group", { x: 80, y: height - 230, size: 16, font: fontB, color: rgb(8/255, 119/255, 144/255) });
-                    page.drawText("Sweet Neighbor of Mine", { x: 80, y: height - 250, size: 18, font: fontB, color: rgb(254/255, 63/255, 178/255) });
-                    page.drawText(`Certificate No: ${certNo}`, { x: 80, y: height - 275, size: 12, font: fontR, color: rgb(8/255, 119/255, 144/255) });
-                    page.drawText(`Download Date: ${dateStr}`, { x: 80, y: height - 295, size: 12, font: fontR, color: rgb(8/255, 119/255, 144/255) });
+                    [cite_start]// [cite: 586-642] Exact Coordinates & Colors from Original
+                    const x = 80;
+                    const baseLineY = height - 250;
+                    
+                    // Sponsor (Teal)
+                    page.drawText("Tercek Real Estate Group", { x, y: baseLineY + 20, size: 16, font: fontB, color: rgb(8/255, 119/255, 144/255) });
+                    // Project Title (Pink)
+                    page.drawText("Sweet Neighbor of Mine", { x, y: baseLineY, size: 16, font: fontB, color: rgb(254/255, 63/255, 178/255) });
+                    // Cert No
+                    page.drawText(`Certificate No: ${certNo}`, { x, y: baseLineY - 20, size: 12, font: fontR, color: rgb(8/255, 119/255, 144/255) });
+                    // Date
+                    page.drawText(`Download Date: ${dateStr}`, { x, y: baseLineY - 40, size: 12, font: fontR, color: rgb(8/255, 119/255, 144/255) });
+                    // Expiry (Red)
+                    page.drawText(`Valid until: ${expStr}`, { x, y: baseLineY - 60, size: 14, font: fontB, color: rgb(0.8, 0.2, 0.2) });
 
                     const pdfData = await pdfDoc.save();
-                    const blob = new Blob([pdfData], { type: 'application/pdf' });
-                    window.open(URL.createObjectURL(blob), '_blank');
-                } catch (e) { alert("Error generating certificate."); }
+                    window.open(URL.createObjectURL(new Blob([pdfData], { type: 'application/pdf' })), '_blank');
+                } catch (e) { alert("Error generating PDF."); }
             });
         });
     </script>
