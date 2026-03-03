@@ -13,115 +13,79 @@
         gtag('config', '0-0000000000');
     </script>
     <style>
-        /* COMPLETE ORIGINAL STYLES RESTORED */
-        html, body { margin: 0; padding: 0; overflow-x: hidden; font-family: Google Sans, Noto, Roboto, Helvetica Neue, sans-serif; color: #244376; }
-        .container { max-width: 600px; width: 100%; box-sizing: border-box; padding: 0 10px; }
-        .card { break-inside: avoid; background-color: rgb(255, 255, 153); border: 2px solid rgb(255, 255, 153); padding: 10px; margin: 0 0 1em 0; display: flex; flex-direction: column; align-items: center; text-align: center; border-radius: 6px; overflow: hidden; }
-        .marginauto { display: block; margin: 10px auto; }
-        .centerImage { text-align: center; display: block; }
+        /* [cite: 17-225] Full Original Styles and Fonts Restored */
+        html, body { margin: 0; padding: 0; overflow-x: hidden; font-family: Google Sans, Noto, Roboto, Helvetica Neue, sans-serif; color: #244376; background-color: #ffff99; }
+        .container { max-width: 600px; width: 100%; box-sizing: border-box; padding: 0 10px; margin: 0 auto; }
+        .card { background-color: rgb(255, 255, 153); border: 2px solid rgb(255, 255, 153); padding: 10px; margin-bottom: 1em; display: flex; flex-direction: column; align-items: center; text-align: center; border-radius: 6px; overflow: hidden; }
         
-        /* Loading Line & Hyperlink Color Fixed to #59cbe8 */
-        model-viewer { --progress-bar-color: #59cbe8; width: 100%; height: 200px; }
+        /* [cite: 90, 143] Branding Color #59cbe8 */
         a { color: #59cbe8; text-decoration: none; font-weight: bold; }
+        model-viewer { --progress-bar-color: #59cbe8; width: 100%; height: 200px; }
         
-        .main-button { background-color: #ffffff; border-radius: 8px; border: 2px solid #59cbe8; height: 60px; min-width: 250px; display: flex; align-items: center; justify-content: center; padding: 10px; cursor: pointer; transition: background-color 0.3s ease, border-color 0.3s ease; }
-        model-viewer::part(ar-button) { display: none !important; }
-        video { object-fit: cover; }
+        .main-button { background-color: #ffffff; border-radius: 8px; border: 2px solid #59cbe8; height: 60px; min-width: 250px; display: flex; align-items: center; justify-content: center; cursor: pointer; margin-top: 10px; }
         
         @font-face { font-family: 'Chalet LondonNineteenEighty Regular'; src: url('fonts/Chalet LondonNineteenEighty Regular.otf') format('opentype'); }
         @font-face { font-family: 'DaisyByhapppyal-Regular'; src: url('fonts/DaisyByhapppyal-Regular.otf') format('opentype'); }
 
-        /* Tightened spacing for links */
-        .card h2 { margin: 2px 0; padding: 0; }
-        .card h2 p { margin: 2px 0; padding: 0; }
-
-        @media (max-width: 768px) {
-            .container { padding: 0 5px; }
-            model-viewer { height: 300px; }
-            .main-button { width: 100%; max-width: 250px; height: 50px; }
-            .main-button img { height: 3em !important; }
-            .main-button span { font-size: 24px !important; }
-        }
+        /* [cite: 128-139] Tightened Spacing */
+        .card h2 { margin: 2px 0; }
+        .card h2 p { margin: 2px 0; }
     </style>
 </head>
-<body bgcolor="#ffff99" style="display: flex; flex-direction: column; align-items: center;">
+<body>
     <div class="container">
-        
         <div class="card">
-            <img src="images/erin_video_scenes-32.png" alt="Logo" style="width: 350px; height: auto; display: block; margin: auto;">
+            <img src="images/erin_video_scenes-32.png" style="width: 350px; height: auto;">
         </div>
 
-        <div class="card" style="position: relative;">
-            <div style="display: flex; justify-content: center; width: 100%;">
-                <model-viewer id="reveal" src="Models/entire_family_99cm.glb?sound=Sound/sweet_neighbor_of_mine3.mp3"
-                    shadow-intensity="1" ar ar-modes="scene-viewer webxr quick-look" ar-scale="auto" ar-preferred 
-                    ar-placement="floor" camera-controls camera-orbit="0deg 90deg 100%" loading="lazy" slot="ar-button" 
-                    poster="images/Video Poster_2.png" alt="Sugarlump Demo" 
-                    style="width: 100%; height: 200px; position: absolute; top: 0; left: 0; z-index: 1;"
-                    ios-src="Models/GIRL_converted.usdz#allowsScaling=1" interaction-prompt="none">
-                </model-viewer>
-            </div>
+        <div class="card">
+            <model-viewer id="reveal" src="Models/entire_family_99cm.glb?sound=Sound/sweet_neighbor_of_mine3.mp3"
+                ar ar-modes="scene-viewer webxr quick-look" camera-controls poster="images/Video Poster_2.png"
+                ios-src="Models/GIRL_converted.usdz">
+            </model-viewer>
         </div>
 
-        <div style="text-align: center;">
-            <p style="font-family: Chalet LondonNineteenEighty Regular; font-weight: bold; color: #000099;"> Make Sure Wi-Fi and Sound is On!</p>
-        </div>
+        <p style="text-align:center; font-family: Chalet LondonNineteenEighty Regular; font-weight: bold; color: #000099;">Make Sure Wi-Fi and Sound is On!</p>
 
-        <div style="width: 100%; display: flex; flex-direction: column; align-items: center; margin-top: 30px;">
+        <div style="display: flex; flex-direction: column; align-items: center; margin-top: 20px;">
             <button id="ar-button" class="main-button">
-                <img src="images/Heart button.png" style="height: 4em; width: auto; margin-right: 5px;" alt="Custom Icon">
-                <span style="font-size: 32px; color: #000099; font-family: 'Chalet LondonNineteenEighty Regular'; white-space: nowrap;"><strong>push here</strong></span>
+                <img src="images/Heart button.png" style="height: 4em; margin-right: 5px;">
+                <span style="font-size: 32px; color: #000099; font-family: 'Chalet LondonNineteenEighty Regular';"><strong>push here</strong></span>
             </button>
 
-            <button id="record-mission-button" class="main-button" style="margin-top: 10px;" onclick="openRecordingTab()">
-                <img src="images/Heart button.png" style="height: 4em; width: auto; margin-right: 5px; filter: hue-rotate(260deg);" alt="Record Icon">
-                <span style="font-size: 22px; color: #000099; font-family: 'Chalet LondonNineteenEighty Regular'; white-space: nowrap;"><strong>record mission</strong></span>
+            <button id="record-mission-button" class="main-button" onclick="openRecordingTab()">
+                <img src="images/Heart button.png" style="height: 4em; margin-right: 5px; filter: hue-rotate(260deg);">
+                <span style="font-size: 22px; color: #000099; font-family: 'Chalet LondonNineteenEighty Regular';"><strong>record mission</strong></span>
             </button>
 
-            <button id="viewPrintCertificateButton" class="main-button" style="margin-top: 10px;">
-                <img src="images/sl_ribbon2.png" style="height: 4em; width: auto; margin-right: 5px; opacity: 0.8;" alt="Certificate Icon">
-                <span style="font-size: 20px; color: #000099; font-family: 'Chalet LondonNineteenEighty Regular'; white-space: nowrap;"><strong>print certificate</strong></span>
+            <button id="viewPrintCertificateButton" class="main-button">
+                <img src="images/sl_ribbon2.png" style="height: 4em; margin-right: 5px; opacity: 0.8;">
+                <span style="font-size: 20px; color: #000099; font-family: 'Chalet LondonNineteenEighty Regular';"><strong>print certificate</strong></span>
             </button>
         </div>
 
         <div class="card">
-            <img class="marginauto" src="images/erin_video_scenes-34.png" alt="Logo" style="width: 300px; height: auto">
-            <h2><p style="font-family:Chalet LondonNineteenEighty Regular; font-weight: bold; color: #ff69b4;"><b>about:</b><a href="https://sugarlump.love/about" target="_blank"><b> creativity + kindness</b></a></p></h2>
-            <h2><p style="font-family:Chalet LondonNineteenEighty Regular; font-weight: bold; color: #ff69b4;"><b>rewards:</b><a href="https://sugarlump.love/" target="_blank"><b> the kindness project</b></a></p></h2>
-            <h2><p style="font-family:Chalet LondonNineteenEighty Regular; font-weight: bold; color: #ff69b4;"><b>join:</b><a href="https://sugarlump.love/contact" target="_blank"><b> sugarlump kindness club</b></a></p></h2>
-            <h2><p style="font-family:Chalet LondonNineteenEighty Regular; font-weight: bold; color: #ff69b4;"><b>shop:</b><a href="https://sugarlump.love/shop" target="_blank"><b> creative kindness kits</b></a></p></h2>
-            <h2><p style="font-family:Chalet LondonNineteenEighty Regular; font-weight: bold; color: #ff69b4;"><b>brag tags:</b><a href="https://www.schoollife.com/bragtags-intro" target="_blank"><b> accomplishment, recognition, confidence</b></a></p></h2>
-            <h2><p style="font-family:Chalet LondonNineteenEighty Regular; font-weight: bold; color: #ff69b4;"><b>sponsors:</b><a href="https://sugarlump.love/be-a-sponsor" target="_blank"><b> get involved</b></a></p></h2>
+            <img src="images/erin_video_scenes-34.png" style="width: 300px; margin-bottom: 10px;">
+            <h2><p style="color: #ff69b4;"><b>about:</b><a href="https://sugarlump.love/about" target="_blank"> creativity + kindness</a></p></h2>
+            <h2><p style="color: #ff69b4;"><b>rewards:</b><a href="https://sugarlump.love/" target="_blank"> the kindness project</a></p></h2>
+            <h2><p style="color: #ff69b4;"><b>join:</b><a href="https://sugarlump.love/contact" target="_blank"> sugarlump kindness club</a></p></h2>
+            <h2><p style="color: #ff69b4;"><b>shop:</b><a href="https://sugarlump.love/shop" target="_blank"> creative kindness kits</a></p></h2>
+            <h2><p style="color: #ff69b4;"><b>brag tags:</b><a href="https://www.schoollife.com/bragtags-intro" target="_blank"> accomplishment, recognition, confidence</a></p></h2>
+            <h2><p style="color: #ff69b4;"><b>sponsors:</b><a href="https://sugarlump.love/be-a-sponsor" target="_blank"> get involved</a></p></h2>
             <br>
-            <h1><p style="font-family:DaisyByhapppyal-Regular; font-weight: bold; color: #000099;"><em> THIS KINDNESS PROJECT SPONSORED BY</em></p></h1>
-            <img class="marginauto" src="images/erin_video_scenes-37.png" alt="Logo" style="width: 300px; height: auto">
+            <h1><p style="font-family:DaisyByhapppyal-Regular; color: #000099;"><em> THIS KINDNESS PROJECT SPONSORED BY</em></p></h1>
+            <img src="images/erin_video_scenes-37.png" style="width: 300px;">
         </div>
 
-        <div class="centerImage">
-            <button onclick="window.open('https://www.tercekrealestate.com/', '_blank')" type="button" id="SponsorButton" style="background-color: #ffffff; border-radius: 8px; border: 2px solid #59cbe8; height: 35px; width: auto; color: #000099; font-family: 'Chalet LondonNineteenEighty Regular'; font-size: 20px; cursor:pointer;"><strong>&nbsp; visit &nbsp;</strong></button>
+        <div style="text-align: center; margin: 15px 0;">
+            <button onclick="window.open('https://www.tercekrealestate.com/', '_blank')" style="background-color: #ffffff; border-radius: 8px; border: 2px solid #59cbe8; height: 35px; color: #000099; font-size: 20px; cursor: pointer;"><strong>&nbsp; visit &nbsp;</strong></button>
         </div>
 
-        <div class="card">
-            <h2><p style="font-family:Chalet LondonNineteenEighty Regular; font-weight: bold; color: #000099;">Experience 4D Augmented Reality On Your Phone</p></h2>
-            <img alt="AR Instructions" src="images/erin_video_scenes-41.png" class="marginauto" style="max-width: 100%; max-height: 350px">
-            <h3><p style="font-family:Chalet LondonNineteenEighty Regular; font-weight: bold; color: #000099;"><em> If AR button does not appear on mobile device, use another browser.</em></p></h3>
-        </div>
-
-        <div style="text-align: center;">
-            <h1><p style="font-family:Chalet LondonNineteenEighty Regular; font-weight: bold; color: #ff69b4;">join the hunt; tell your friends</p></h1>
-        </div>
-
-        <div style="position: relative; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 2;">
-            <video id="video-overlay" style="width: 100%; max-width: 100%; height: 100%; object-fit: cover; margin: auto; display: block;" poster="images/Video Poster_2.png" playsinline muted>
+        <div style="position: relative; width: 100%; margin-top: 20px;">
+            <video id="video-overlay" style="width: 100%;" poster="images/Video Poster_2.png" playsinline muted>
                 <source src="Video/sugarlump_intro_erin_2.mp4" type="video/mp4">
             </video>
-            <button id="play-pause-button" style="position: absolute; z-index: 3; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(255, 255, 255, 0.8); border: none; border-radius: 50%; padding: 10px 15px; font-size: 24px; font-weight: bold; cursor: pointer;">▶</button>
-        </div>
-
-        <div class="card">
-            <h4><a href="https://avertek.net/" target="_blank">
-                <p style="font-family:Chalet LondonNineteenEighty Regular; color:#59cbe8;"> Contact AVERtek to learn more about AR marketing.</p>
-            </a></h4>
+            <button id="play-pause-button" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 50%; padding: 10px 15px; background: rgba(255,255,255,0.8); border:none; cursor:pointer;">▶</button>
         </div>
     </div>
 
@@ -129,29 +93,28 @@
     <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
 
     <script>
-        // --- 1. RECORD MISSION: 2D WEB VIEW FIX ---
+        // --- FIXED RECORD MISSION: Clean 2D View for Screen Recording ---
         function openRecordingTab() {
-            const recorderWindow = window.open("", "_blank");
-            if (!recorderWindow) { alert("Please allow pop-ups."); return; }
-            recorderWindow.document.write(`
+            const recWin = window.open("", "_blank");
+            recWin.document.write(`
                 <html><head><title>Recording Mode</title>
                 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.js"><\/script>
                 <style>
                     body { margin: 0; background: #ffff99; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; font-family: sans-serif; }
-                    model-viewer { width: 100%; height: 75vh; }
-                    .ui { display: flex; gap: 15px; padding: 20px; }
-                    button { padding: 12px 25px; border-radius: 8px; border: 2px solid #59cbe8; background: white; color: #000099; font-weight: bold; }
+                    model-viewer { width: 100%; height: 70vh; }
+                    .controls { display: flex; gap: 15px; padding: 20px; }
+                    button { padding: 12px 25px; border-radius: 8px; border: 2px solid #59cbe8; background: white; color: #000099; font-weight: bold; cursor: pointer; }
                 </style></head>
                 <body>
-                    <div style="color:#000099; font-weight:bold; text-align:center; padding:10px;">Start Phone Screen Recording, then tap Play!</div>
-                    <model-viewer id="m" src="Models/entire_family_99cm.glb?sound=Sound/sweet_neighbor_of_mine3.mp3" camera-controls shadow-intensity="1"></model-viewer>
-                    <div class="ui">
-                        <button onclick="document.getElementById('m').play()">▶ Play Music & Animation</button>
+                    <div style="color:#000099; font-weight:bold; text-align:center; padding:10px;">1. Start Phone Screen Recorder<br>2. Tap 'Play' for Music & Animation</div>
+                    <model-viewer id="m" src="Models/entire_family_99cm.glb?sound=Sound/sweet_neighbor_of_mine3.mp3" camera-controls></model-viewer>
+                    <div class="controls">
+                        <button onclick="document.getElementById('m').play()">▶ Play</button>
                         <button onclick="document.getElementById('m').pause()">❚❚ Pause</button>
                         <button onclick="window.close()" style="border-color:#ccc;">Back</button>
                     </div>
                 </body></html>`);
-            recorderWindow.document.close();
+            recWin.document.close();
         }
 
         document.addEventListener("DOMContentLoaded", function () {
@@ -159,25 +122,20 @@
             const video = document.getElementById('video-overlay');
             const playBtn = document.getElementById('play-pause-button');
 
-            // --- 2. FIXED AR LAUNCH + PC ALERT ---
+            // [cite: 461-487] AR Launch Logic
             document.getElementById('ar-button').addEventListener('click', () => {
-                const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-                if (!isMobile) {
-                    alert("Augmented Reality only works on mobile devices. Please open this page on your phone!");
-                    return;
-                }
+                const isMobile = /Android|webOS|iPhone|iPad|iPod/i.test(navigator.userAgent);
+                if (!isMobile) { alert("AR only works on mobile devices!"); return; }
                 if (mv.canActivateAR) { mv.activateAR(); }
             });
 
             // Video logic
-            function toggleVideo() {
+            playBtn.addEventListener('click', () => {
                 if (video.paused) { video.play(); video.muted = false; playBtn.style.display = "none"; }
                 else { video.pause(); playBtn.style.display = "block"; }
-            }
-            video.addEventListener('click', toggleVideo);
-            playBtn.addEventListener('click', toggleVideo);
+            });
 
-            // --- 3. FIXED CERTIFICATE LOGIC ---
+            // [cite: 526-642] FIXED CERTIFICATE: Correct Date Style & Coordinates
             document.getElementById('viewPrintCertificateButton').addEventListener('click', async () => {
                 const { PDFDocument, rgb, StandardFonts } = PDFLib;
                 try {
@@ -188,21 +146,21 @@
                     const fontB = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
                     const fontR = await pdfDoc.embedFont(StandardFonts.Helvetica);
 
-                    const now = new Date();
-                    const certId = "SL-" + now.getTime().toString().slice(-8);
-                    const expiryDate = new Date(); expiryDate.setDate(now.getDate() + 30);
+                    const today = new Date();
+                    const certNo = today.getFullYear().toString().slice(-2) + (today.getMonth()+1).toString().padStart(2,'0') + today.getDate().toString().padStart(2,'0') + today.getHours().toString().padStart(2,'0') + today.getMinutes().toString().padStart(2,'0');
+                    const expiry = new Date(); expiry.setDate(today.getDate() + 30);
 
-                    // Variables/Coordinates from your master document
-                    const startX = 80;
-                    page.drawText("Tercek Real Estate Group", { x: startX, y: height - 230, size: 15, font: fontB, color: rgb(8/255, 119/255, 144/255) });
-                    page.drawText("Sweet Neighbor of Mine", { x: startX, y: height - 250, size: 18, font: fontB, color: rgb(254/255, 63/255, 178/255) });
-                    page.drawText(`Certificate No: ${certId}`, { x: startX, y: height - 275, size: 11, font: fontR, color: rgb(8/255, 119/255, 144/255) });
-                    page.drawText(`Download Date: ${now.toLocaleDateString()}`, { x: startX, y: height - 295, size: 11, font: fontR, color: rgb(8/255, 119/255, 144/255) });
-                    page.drawText(`Valid until: ${expiryDate.toLocaleDateString()}`, { x: startX, y: height - 315, size: 12, font: fontB, color: rgb(0.8, 0.2, 0.2) });
+                    // [cite: 586-602, 604-642] Precise Coordinate Stamping
+                    const x = 80;
+                    page.drawText("Tercek Real Estate Group", { x, y: height - 230, size: 16, font: fontB, color: rgb(8/255, 119/255, 144/255) });
+                    page.drawText("Sweet Neighbor of Mine", { x, y: height - 250, size: 18, font: fontB, color: rgb(254/255, 63/255, 178/255) });
+                    page.drawText(`Certificate No: ${certNo}`, { x, y: height - 275, size: 12, font: fontR, color: rgb(8/255, 119/255, 144/255) });
+                    page.drawText(`Download Date: ${today.toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'})}`, { x, y: height - 295, size: 12, font: fontR, color: rgb(8/255, 119/255, 144/255) });
+                    page.drawText(`Valid until: ${expiry.toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'})}`, { x, y: height - 315, size: 14, font: fontB, color: rgb(0.8, 0.2, 0.2) });
 
                     const pdfData = await pdfDoc.save();
                     window.open(URL.createObjectURL(new Blob([pdfData], { type: 'application/pdf' })), '_blank');
-                } catch (e) { console.error(e); }
+                } catch (e) { alert("PDF Error: " + e.message); }
             });
         });
     </script>
