@@ -12,14 +12,36 @@
         gtag('config', '0-0000000000');
     </script>
     <style>
-        /* [cite: 17-60, 101-126] Global & Button Styles */
+        /* Global & Button Styles */
         html, body { margin: 0; padding: 0; overflow-x: hidden; font-family: Google Sans, Noto, Roboto, Helvetica Neue, sans-serif; color: #244376; background-color: #ffff99; }
         .container { max-width: 600px; width: 100%; box-sizing: border-box; padding: 0 10px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
         .card { background-color: rgb(255, 255, 153); border: 2px solid rgb(255, 255, 153); padding: 10px; margin-bottom: 1em; display: flex; flex-direction: column; align-items: center; text-align: center; border-radius: 6px; overflow: hidden; width: 100%; box-sizing: border-box; }
+        
+        /* Sugarlump Blue Loading Bar */
+        model-viewer {
+            --progress-bar-color: #59cbe8;
+        }
+
+        /* Closing the gaps between links */
+        .card h2 { margin: 2px 0; padding: 0; }
+        .card h2 p { margin: 0; padding: 0; }
+
         .main-button { background-color: #ffffff; border-radius: 8px; border: 2px solid #59cbe8; height: 60px; min-width: 250px; display: flex; align-items: center; justify-content: center; cursor: pointer; margin-top: 10px; }
+        
         @font-face { font-family: 'Chalet LondonNineteenEighty Regular'; src: url('fonts/Chalet LondonNineteenEighty Regular.otf') format('opentype'); }
         @font-face { font-family: 'DaisyByhapppyal-Regular'; src: url('fonts/DaisyByhapppyal-Regular.otf') format('opentype'); }
+        
         a { color: #59cbe8; text-decoration: none; font-weight: bold; }
+        
+        /* Centered stack for mobile */
+        .hunt-header {
+            font-family: 'Chalet LondonNineteenEighty Regular'; 
+            color: #ff69b4; 
+            text-align: center; 
+            width: 100%;
+            margin: 20px 0;
+        }
+
         model-viewer#reveal { display: none; }
     </style>
 </head>
@@ -66,7 +88,7 @@
             <h3 style="font-family:'Chalet LondonNineteenEighty Regular'; color: #000099;"><em>If AR button does not appear on mobile, use another browser.</em></h3>
         </div>
 
-        <h1 style="font-family:'Chalet LondonNineteenEighty Regular'; color: #ff69b4;">join the hunt; tell your friends</h1>
+        <h1 class="hunt-header">join the hunt; tell your friends</h1>
 
         <div style="position: relative; width: 100%;">
             <video id="video-overlay" style="width: 100%;" poster="images/Video Poster_2.png" playsinline muted>
@@ -84,7 +106,6 @@
     <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
 
     <script>
-        //  RESTORED: Sync Functionality
         function Sync(selector, audioSelector) {
             var modelViewer = document.querySelector(selector);
             var sound = document.querySelector(audioSelector);
@@ -93,13 +114,11 @@
             sound.addEventListener("play", () => { modelViewer.play(); });
         }
 
-        //  RESTORED: Visibility Change Logic
         document.addEventListener("visibilitychange", () => {
             const audio = document.querySelector("#music");
             if (document.visibilityState !== "visible" && audio) { audio.pause(); }
         });
 
-        // Record Mission Tab UI
         function openRecordingTab() {
             const recWin = window.open("", "_blank");
             recWin.document.write(`
@@ -107,7 +126,7 @@
                 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.js"><\/script>
                 <style>
                     body { margin: 0; background: #ffff99; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; font-family: sans-serif; text-align: center; }
-                    model-viewer { width: 100%; height: 50vh; }
+                    model-viewer { width: 100%; height: 50vh; --progress-bar-color: #59cbe8; }
                     .instr { background: white; padding: 20px; border-radius: 12px; border: 3px solid #59cbe8; width: 85%; }
                     .instr p { font-size: 22px; font-weight: bold; color: #ff69b4; margin: 10px 0; }
                     .play-btn { width: 100%; height: 70px; background: #59cbe8; color: white; border-radius: 10px; font-size: 24px; font-weight: bold; border: none; cursor: pointer; }
@@ -129,7 +148,6 @@
             const playBtn = document.getElementById('play-pause-button');
             const mv = document.getElementById('reveal');
 
-            // [cite: 439-460] Video Toggle
             function toggleVideo() {
                 if (video.paused) { video.play(); video.muted = false; playBtn.style.display = "none"; }
                 else { video.pause(); playBtn.style.display = "block"; }
@@ -137,7 +155,6 @@
             playBtn.addEventListener('click', toggleVideo);
             video.addEventListener('click', toggleVideo);
 
-            //  RESTORED: Full openPdfInNewTab Mobile/Desktop Logic
             function openPdfInNewTab(blob, certificateNumber) {
                 const url = URL.createObjectURL(blob);
                 const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -154,7 +171,6 @@
                 }
             }
 
-            // [cite: 526-642] Certificate Stamping
             document.getElementById('viewPrintCertificateButton').addEventListener('click', async () => {
                 const { PDFDocument, rgb, StandardFonts } = PDFLib;
                 try {
@@ -183,7 +199,14 @@
                 } catch (e) { alert("Error loading certificate template."); }
             });
 
-            document.getElementById('ar-button').addEventListener('click', () => { mv.activateAR(); });
+            // PC Warning Fix for AR button
+            document.getElementById('ar-button').addEventListener('click', () => { 
+                if (mv.canActivateAR) {
+                    mv.activateAR(); 
+                } else {
+                    alert("AR features require a mobile device (iPhone or Android). Please open this link on your phone to experience the 4D Augmented Reality!");
+                }
+            });
         });
     </script>
 </body>
