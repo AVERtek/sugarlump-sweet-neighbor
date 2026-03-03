@@ -336,9 +336,8 @@
             alt="Sugarlump Demo"
             style="width: 100%; height: 200px; position: absolute; top: 0; left: 0; z-index: 1;"
             ios-src="Models/GIRL_converted.usdz#allowsScaling=1" 
-            interaction-prompt="none">
-            
-            <button slot="ar-button" id="hidden-ar-trigger" style="display:none;"></button>
+            interaction-prompt="none"
+            autoplay="false"> <button slot="ar-button" id="hidden-ar-trigger" style="display:none;"></button>
         </model-viewer>
     </div>
 </div>
@@ -349,15 +348,15 @@
 
 <div style="width: 100%; display: flex; flex-direction: column; align-items: center; margin-top: 30px;">
     
-    <button id="ar-launch-1" class="main-button" style="width: 250px;" onclick="document.getElementById('hidden-ar-trigger').click();">
+    <button id="ar-launch-button" class="main-button" style="width: 250px;" onclick="document.getElementById('hidden-ar-trigger').click();">
         <img src="images/Heart button.png" style="height: 4em; width: auto; margin-right: 5px;" alt="Custom Icon">
         <span style="font-size: 32px; color: #000099; font-family: 'Chalet LondonNineteenEighty Regular', sans-serif; white-space: nowrap;">
             <strong>push here</strong>
         </span>
     </button>
 
-    <button id="record-mission-button" class="main-button" style="width: 250px; margin-top: 10px;" onclick="document.getElementById('hidden-ar-trigger').click();">
-        <img src="images/Heart button.png" style="height: 4em; width: auto; margin-right: 5px;" alt="Record Icon">
+    <button id="record-mission-button" class="main-button" style="width: 250px; margin-top: 10px;" onclick="document.querySelector('#reveal').play();">
+        <img src="images/Heart button.png" style="height: 4em; width: auto; margin-right: 5px; filter: saturate(1.5);" alt="Record Icon">
         <span style="font-size: 22px; color: #000099; font-family: 'Chalet LondonNineteenEighty Regular', sans-serif; white-space: nowrap;">
             <strong>record mission</strong>
         </span>
