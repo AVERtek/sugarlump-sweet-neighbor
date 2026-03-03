@@ -336,8 +336,7 @@
             alt="Sugarlump Demo"
             style="width: 100%; height: 200px; position: absolute; top: 0; left: 0; z-index: 1;"
             ios-src="Models/GIRL_converted.usdz#allowsScaling=1" 
-            interaction-prompt="none"
-            autoplay="false">
+            interaction-prompt="none">
             
             <button slot="ar-button" id="real-ar-trigger" style="display: none;"></button>
         </model-viewer>
@@ -358,13 +357,14 @@
         </span>
     </button>
 
-    <button id="record-mission-button" class="main-button" style="width: 250px; margin-top: 10px;" 
-            onclick="toggleAnimation()">
-        <img src="images/Heart button.png" id="record-icon" style="height: 4em; width: auto; margin-right: 5px; filter: hue-rotate(260deg);" alt="Record Icon">
-        <span id="record-text" style="font-size: 22px; color: #000099; font-family: 'Chalet LondonNineteenEighty Regular', sans-serif; white-space: nowrap;">
-            <strong>record mission</strong>
-        </span>
-    </button>
+    <a href="Models/GIRL_converted.usdz#allowsScaling=1" rel="ar" style="text-decoration: none;">
+        <button id="record-mission-button" class="main-button" style="width: 250px; margin-top: 10px;">
+            <img src="images/Heart button.png" style="height: 4em; width: auto; margin-right: 5px; filter: hue-rotate(260deg);" alt="Record Icon">
+            <span style="font-size: 22px; color: #000099; font-family: 'Chalet LondonNineteenEighty Regular', sans-serif; white-space: nowrap;">
+                <strong>record mission</strong>
+            </span>
+        </button>
+    </a>
 
     <button id="viewPrintCertificateButton" class="main-button" style="width: 250px; margin-top: 10px;">
         <img src="images/sl_ribbon2.png" style="height: 4em; width: auto; margin-right: 5px; opacity: 0.8;" alt="Certificate Icon">
@@ -373,23 +373,6 @@
         </span>
     </button>
 </div>
-
-<script>
-    function toggleAnimation() {
-        const mv = document.querySelector('#reveal');
-        const btnText = document.querySelector('#record-text strong');
-        
-        if (mv.paused) {
-            mv.play();
-            btnText.textContent = 'stop recording';
-        } else {
-            mv.pause();
-            mv.currentTime = 0; // Resets animation to start
-            btnText.textContent = 'record mission';
-        }
-    }
-</script>
-
         <div class="card">
             <h2>
                 <p style="font-family:Chalet LondonNineteenEighty Regular; font-weight: bold; color: #000099;">
