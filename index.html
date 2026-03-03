@@ -318,7 +318,7 @@
             </button>
         </div> -->
 
-        <div class="card" style="position: relative;">
+       <div class="card" style="position: relative; height: 200px;">
     <div style="display: flex; justify-content: center; width: 100%;">
         <model-viewer 
             id="reveal" 
@@ -337,7 +337,9 @@
             style="width: 100%; height: 200px; position: absolute; top: 0; left: 0; z-index: 1;"
             ios-src="Models/GIRL_converted.usdz#allowsScaling=1" 
             interaction-prompt="none"
-            autoplay="false"> <button slot="ar-button" id="hidden-ar-trigger" style="display:none;"></button>
+            autoplay="false">
+            
+            <button slot="ar-button" id="real-ar-trigger" style="display: none;"></button>
         </model-viewer>
     </div>
 </div>
@@ -348,16 +350,18 @@
 
 <div style="width: 100%; display: flex; flex-direction: column; align-items: center; margin-top: 30px;">
     
-    <button id="ar-launch-button" class="main-button" style="width: 250px;" onclick="document.getElementById('hidden-ar-trigger').click();">
+    <button id="ar-launch-button" class="main-button" style="width: 250px;" 
+            onclick="document.getElementById('real-ar-trigger').click();">
         <img src="images/Heart button.png" style="height: 4em; width: auto; margin-right: 5px;" alt="Custom Icon">
         <span style="font-size: 32px; color: #000099; font-family: 'Chalet LondonNineteenEighty Regular', sans-serif; white-space: nowrap;">
             <strong>push here</strong>
         </span>
     </button>
 
-    <button id="record-mission-button" class="main-button" style="width: 250px; margin-top: 10px;" onclick="document.querySelector('#reveal').play();">
-        <img src="images/Heart button.png" style="height: 4em; width: auto; margin-right: 5px; filter: saturate(1.5);" alt="Record Icon">
-        <span style="font-size: 22px; color: #000099; font-family: 'Chalet LondonNineteenEighty Regular', sans-serif; white-space: nowrap;">
+    <button id="record-mission-button" class="main-button" style="width: 250px; margin-top: 10px;" 
+            onclick="toggleAnimation()">
+        <img src="images/Heart button.png" id="record-icon" style="height: 4em; width: auto; margin-right: 5px; filter: hue-rotate(260deg);" alt="Record Icon">
+        <span id="record-text" style="font-size: 22px; color: #000099; font-family: 'Chalet LondonNineteenEighty Regular', sans-serif; white-space: nowrap;">
             <strong>record mission</strong>
         </span>
     </button>
@@ -369,56 +373,22 @@
         </span>
     </button>
 </div>
+
+<script>
+    function toggleAnimation() {
+        const mv = document.querySelector('#reveal');
+        const btnText = document.querySelector('#record-text strong');
         
-        <div class="card">
-            <img class="marginauto" src="images/erin_video_scenes-34.png" alt="Logo" style="width: 300px; height: auto">
-            <h2>
-                <p style="font-family:Chalet LondonNineteenEighty Regular; font-weight: bold; color: #ff69b4;"><b>about:</b><a
-                        href="https://sugarlump.love/about" target="_blank" rel="noopener noreferrer"><b
-                                style="color:#59cbe8;"> creativity + kindness</b></a></p>
-            </h2>
-            <h2>
-                <p style="font-family:Chalet LondonNineteenEighty Regular; font-weight: bold; color: #ff69b4;"><b>rewards:</b><a
-                        href="https://sugarlump.love/" target="_blank" rel="noopener noreferrer"><b
-                                style="color:#59cbe8;"><b> the kindness project</b></b></a></p>
-            </h2>
-            <h2>
-                <p style="font-family:Chalet LondonNineteenEighty Regular; font-weight: bold; color: #ff69b4;"><b>join:</b><a
-                        href="https://sugarlump.love/contact" target="_blank" rel="noopener noreferrer"><b
-                                style="color:#59cbe8;"> sugarlump kindness club</b></a></p>
-            </h2>
-            <h2>
-                <p style="font-family:Chalet LondonNineteenEighty Regular; font-weight: bold; color: #ff69b4;"><b>shop:</b><a
-                        href="https://sugarlump.love/shop" target="_blank" rel="noopener noreferrer"><b
-                                style="color:#59cbe8;"> creative kindness kits</b></a></p>
-            </h2>
-            <h2>
-                <p style="font-family:Chalet LondonNineteenEighty Regular; font-weight: bold; color: #ff69b4;"><b>brag
-                                tags:</b><a href="https://www.schoollife.com/bragtags-intro" target="_blank"
-                        rel="noopener noreferrer"><b style="color:#59cbe8;"> accomplishment, recognition,
-                                confidence</b></a></p>
-            </h2>
-            <h2>
-                <p style="font-family:Chalet LondonNineteenEighty Regular; font-weight: bold; color: #ff69b4;"><b>sponsors:</b><a
-                        href="https://sugarlump.love/be-a-sponsor" target="_blank" rel="noopener noreferrer"><b
-                                style="color:#59cbe8;"><b> get involved</b></b></a></p>
-            </h2>
-            <br>
-
-            <h1>
-                <p style="font-family:DaisyByhapppyal-Regular; font-weight: bold; color: #000099;"><em> THIS KINDNESS
-                                PROJECT SPONSORED BY</em></p>
-            </h1>
-            <img class="marginauto" src="images/erin_video_scenes-37.png" alt="Logo" style="width: 300px; height: auto">
-        </div>
-
-        <div class="centerImage">
-            <button onclick="window.open('https://www.tercekrealestate.com/', '_blank')" type="button"
-                id="SponsorButton"
-                style="z-index: 9; background-color: #ffffff; border-radius: 8px; border: 2px solid #59cbe8; height: 35px; width: auto; color: #000099; font-family: 'Chalet LondonNineteenEighty Regular', sans-serif; font-size: 20px;">
-                <strong>&nbsp; visit &nbsp;</strong>
-            </button>
-        </div>
+        if (mv.paused) {
+            mv.play();
+            btnText.textContent = 'stop recording';
+        } else {
+            mv.pause();
+            mv.currentTime = 0; // Resets animation to start
+            btnText.textContent = 'record mission';
+        }
+    }
+</script>
 
         <div class="card">
             <h2>
