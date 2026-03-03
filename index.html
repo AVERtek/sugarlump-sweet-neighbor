@@ -13,22 +13,22 @@
         gtag('config', '0-0000000000');
     </script>
     <style>
-        /* [Source: 17-225] ALL ORIGINAL STYLES PRESERVED */
+        /* [cite: 17-225] Original Styles Restored */
         html, body { margin: 0; padding: 0; overflow-x: hidden; font-family: Google Sans, Noto, Roboto, Helvetica Neue, sans-serif; color: #244376; background-color: #ffff99; }
         .container { max-width: 600px; width: 100%; box-sizing: border-box; padding: 0 10px; margin: 0 auto; }
         .card { background-color: rgb(255, 255, 153); border: 2px solid rgb(255, 255, 153); padding: 10px; margin-bottom: 1em; display: flex; flex-direction: column; align-items: center; text-align: center; border-radius: 6px; overflow: hidden; }
         
-        /* Branding & Link Colors #59cbe8 */
         a { color: #59cbe8; text-decoration: none; font-weight: bold; }
-        model-viewer { --progress-bar-color: #59cbe8; width: 100%; height: 250px; z-index: 1; }
+        /* Hidden the model viewer on landing UI as requested */
+        model-viewer#reveal { display: none; }
         
-        .main-button { background-color: #ffffff; border-radius: 8px; border: 2px solid #59cbe8; height: 60px; min-width: 250px; display: flex; align-items: center; justify-content: center; cursor: pointer; margin-top: 10px; position: relative; z-index: 10; }
+        .main-button { background-color: #ffffff; border-radius: 8px; border: 2px solid #59cbe8; height: 60px; min-width: 250px; display: flex; align-items: center; justify-content: center; cursor: pointer; margin-top: 10px; }
         
         @font-face { font-family: 'Chalet LondonNineteenEighty Regular'; src: url('fonts/Chalet LondonNineteenEighty Regular.otf') format('opentype'); }
         @font-face { font-family: 'DaisyByhapppyal-Regular'; src: url('fonts/DaisyByhapppyal-Regular.otf') format('opentype'); }
 
-        /* [Source: 128-139] Tightened Link Spacing */
-        .card h2 { margin: 2px 0; line-height: 1.1; }
+        /* [cite: 128-139] Spacing for links */
+        .card h2 { margin: 2px 0; }
         .card h2 p { margin: 2px 0; }
     </style>
 </head>
@@ -38,12 +38,9 @@
             <img src="images/erin_video_scenes-32.png" style="width: 350px; height: auto;">
         </div>
 
-        <div class="card" style="position: relative; height: 260px;">
-            <model-viewer id="reveal" src="Models/entire_family_99cm.glb?sound=Sound/sweet_neighbor_of_mine3.mp3"
-                ar ar-modes="scene-viewer webxr quick-look" camera-controls poster="images/Video Poster_2.png"
-                ios-src="Models/GIRL_converted.usdz">
-            </model-viewer>
-        </div>
+        <model-viewer id="reveal" src="Models/entire_family_99cm.glb?sound=Sound/sweet_neighbor_of_mine3.mp3"
+            ar ar-modes="scene-viewer webxr quick-look" ios-src="Models/GIRL_converted.usdz">
+        </model-viewer>
 
         <p style="text-align:center; font-family: 'Chalet LondonNineteenEighty Regular'; font-weight: bold; color: #000099;">Make Sure Wi-Fi and Sound is On!</p>
 
@@ -65,7 +62,7 @@
         </div>
 
         <div class="card" style="margin-top: 20px;">
-            <img src="images/erin_video_scenes-34.png" style="width: 300px; margin-bottom: 10px;">
+            <img src="images/erin_video_scenes-34.png" style="width: 300px;">
             <h2><p style="color: #ff69b4;"><b>about:</b><a href="https://sugarlump.love/about" target="_blank"> creativity + kindness</a></p></h2>
             <h2><p style="color: #ff69b4;"><b>rewards:</b><a href="https://sugarlump.love/" target="_blank"> the kindness project</a></p></h2>
             <h2><p style="color: #ff69b4;"><b>join:</b><a href="https://sugarlump.love/contact" target="_blank"> sugarlump kindness club</a></p></h2>
@@ -78,14 +75,14 @@
         </div>
 
         <div style="text-align: center; margin: 15px 0;">
-            <button onclick="window.open('https://www.tercekrealestate.com/', '_blank')" style="background-color: #ffffff; border-radius: 8px; border: 2px solid #59cbe8; height: 35px; color: #000099; font-size: 20px; cursor: pointer; font-family: 'Chalet LondonNineteenEighty Regular';"><strong>&nbsp; visit &nbsp;</strong></button>
+            <button onclick="window.open('https://www.tercekrealestate.com/', '_blank')" style="background-color: #ffffff; border-radius: 8px; border: 2px solid #59cbe8; height: 35px; color: #000099; font-size: 20px; font-family: 'Chalet LondonNineteenEighty Regular';"><strong>&nbsp; visit &nbsp;</strong></button>
         </div>
 
         <div style="position: relative; width: 100%; margin-top: 20px;">
             <video id="video-overlay" style="width: 100%;" poster="images/Video Poster_2.png" playsinline muted>
                 <source src="Video/sugarlump_intro_erin_2.mp4" type="video/mp4">
             </video>
-            <button id="play-pause-button" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 50%; padding: 10px 15px; background: rgba(255,255,255,0.8); border:none; cursor:pointer; font-size: 24px;">▶</button>
+            <button id="play-pause-button" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 50%; padding: 10px 15px; background: rgba(255,255,255,0.8); border:none; cursor:pointer;">▶</button>
         </div>
     </div>
 
@@ -93,7 +90,7 @@
     <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
 
     <script>
-        // --- 1. FIXED RECORD MISSION: Audio Logic + Screen Record Prompt ---
+        // --- RECORD MISSION: Animation + Audio Sync for Screen Recording ---
         function openRecordingTab() {
             const recWin = window.open("", "_blank");
             recWin.document.write(`
@@ -101,18 +98,15 @@
                 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.js"><\/script>
                 <style>
                     body { margin: 0; background: #ffff99; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; font-family: sans-serif; }
-                    model-viewer { width: 100%; height: 75vh; }
-                    .ui { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 20px; }
-                    button { padding: 15px 30px; border-radius: 10px; border: 2px solid #59cbe8; background: white; color: #000099; font-weight: bold; font-size: 20px; cursor: pointer; }
-                    .record-hint { color: #cc0000; font-weight: bold; font-size: 14px; text-align: center; }
+                    model-viewer { width: 100%; height: 70vh; }
+                    button { padding: 15px 30px; border-radius: 10px; border: 2px solid #59cbe8; background: white; color: #000099; font-weight: bold; cursor: pointer; font-size: 18px; }
                 </style></head>
                 <body>
+                    <div style="color:#000099; font-weight:bold; text-align:center; padding:10px;">1. Start Phone Screen Recorder<br>2. Tap 'Sync & Play'</div>
                     <model-viewer id="m" src="Models/entire_family_99cm.glb" camera-controls shadow-intensity="1"></model-viewer>
                     <audio id="music" src="Sound/sweet_neighbor_of_mine3.mp3" loop></audio>
-                    <div class="ui">
-                        <div class="record-hint">1. Swipe for Phone Screen Recorder<br>2. Tap PLAY below to sync Music & 3D</div>
-                        <button onclick="document.getElementById('m').play(); document.getElementById('music').play(); this.style.display='none';">▶ SYNC & PLAY</button>
-                        <button onclick="window.close()" style="font-size: 14px; border-color: #ccc; margin-top: 10px;">Back to Mission</button>
+                    <div style="margin-top:20px;">
+                        <button onclick="document.getElementById('m').play(); document.getElementById('music').play(); this.innerText='Playing...';">▶ SYNC & PLAY</button>
                     </div>
                 </body></html>`);
             recWin.document.close();
@@ -123,20 +117,34 @@
             const video = document.getElementById('video-overlay');
             const playBtn = document.getElementById('play-pause-button');
 
-            // AR Launch + Mobile Device Check
+            // [cite: 461-487] Launch AR
             document.getElementById('ar-button').addEventListener('click', () => {
-                const isMobile = /Android|webOS|iPhone|iPad|iPod/i.test(navigator.userAgent);
-                if (!isMobile) { alert("AR works best on mobile! Please open this on your phone."); return; }
                 if (mv.canActivateAR) { mv.activateAR(); }
+                else { alert("AR is not available on this device."); }
             });
 
-            // Video logic
+            // Video Controls [cite: 439-460]
             playBtn.addEventListener('click', () => {
                 if (video.paused) { video.play(); video.muted = false; playBtn.style.display = "none"; }
                 else { video.pause(); playBtn.style.display = "block"; }
             });
 
-            // --- 2. FIXED CERTIFICATE: Long Month Date Style & Exact Logic ---
+            // [cite: 489-524] PDF Helper
+            function isMobileDevice() { return /Android|webOS|iPhone|iPad|iPod/i.test(navigator.userAgent); }
+
+            function openPdfInNewTab(blob, certificateNumber) {
+                const url = URL.createObjectURL(blob);
+                const fileName = `SweetNeighborCertificate_${certificateNumber}.pdf`;
+                if (isMobileDevice()) {
+                    const a = document.createElement('a'); a.href = url; a.download = fileName;
+                    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+                } else {
+                    const newWindow = window.open(url, '_blank');
+                    if (newWindow) newWindow.focus();
+                }
+            }
+
+            // [cite: 526-654] CERTIFICATE STAMPING LOGIC
             document.getElementById('viewPrintCertificateButton').addEventListener('click', async () => {
                 const { PDFDocument, rgb, StandardFonts } = PDFLib;
                 try {
@@ -148,21 +156,20 @@
                     const fontR = await pdfDoc.embedFont(StandardFonts.Helvetica);
 
                     const now = new Date();
-                    const dateOptions = { month: 'long', day: 'numeric', year: 'numeric' };
-                    const certNo = "SL-" + now.getTime().toString().slice(-8);
-                    const expiry = new Date(); expiry.setDate(now.getDate() + 30);
+                    const dateStr = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+                    const expiryStr = new Date(now.setDate(now.getDate() + 30)).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+                    const certNo = "SL-" + Date.now().toString().slice(-8);
 
-                    [cite_start]// Precise coordinate stamping [cite: 586-642]
-                    const startX = 80;
-                    page.drawText("Tercek Real Estate Group", { x: startX, y: height - 230, size: 14, font: fontB, color: rgb(8/255, 119/255, 144/255) });
-                    page.drawText("Sweet Neighbor of Mine", { x: startX, y: height - 250, size: 18, font: fontB, color: rgb(254/255, 63/255, 178/255) });
-                    page.drawText(`Certificate No: ${certNo}`, { x: startX, y: height - 275, size: 11, font: fontR, color: rgb(8/255, 119/255, 144/255) });
-                    page.drawText(`Download Date: ${now.toLocaleDateString('en-US', dateOptions)}`, { x: startX, y: height - 295, size: 11, font: fontR, color: rgb(8/255, 119/255, 144/255) });
-                    page.drawText(`Valid until: ${expiry.toLocaleDateString('en-US', dateOptions)}`, { x: startX, y: height - 315, size: 12, font: fontB, color: rgb(0.8, 0.2, 0.2) });
+                    const x = 80;
+                    page.drawText("Tercek Real Estate Group", { x, y: height - 230, size: 16, font: fontB, color: rgb(8/255, 119/255, 144/255) });
+                    page.drawText("Sweet Neighbor of Mine", { x, y: height - 250, size: 18, font: fontB, color: rgb(254/255, 63/255, 178/255) });
+                    page.drawText(`Certificate No: ${certNo}`, { x, y: height - 275, size: 12, font: fontR, color: rgb(8/255, 119/255, 144/255) });
+                    page.drawText(`Download Date: ${dateStr}`, { x, y: height - 295, size: 12, font: fontR, color: rgb(8/255, 119/255, 144/255) });
+                    page.drawText(`Valid until: ${expiryStr}`, { x, y: height - 315, size: 14, font: fontB, color: rgb(0.8, 0.2, 0.2) });
 
-                    const pdfData = await pdfDoc.save();
-                    window.open(URL.createObjectURL(new Blob([pdfData], { type: 'application/pdf' })), '_blank');
-                } catch (e) { alert("PDF Error: " + e.message); }
+                    const pdfBytes = await pdfDoc.save();
+                    openPdfInNewTab(new Blob([pdfBytes], { type: 'application/pdf' }), certNo);
+                } catch (e) { alert("Error generating certificate. Ensure the PDF template exists."); }
             });
         });
     </script>
