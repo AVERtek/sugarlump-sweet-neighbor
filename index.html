@@ -89,31 +89,68 @@
     <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
 
     <script>
-        // --- RECORD MISSION: With Restore Play/Pause Features ---
-        function openRecordingTab() {
-            const recWin = window.open("", "_blank");
-            recWin.document.write(`
-                <html><head><title>Recording Mode</title>
-                <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.js"><\/script>
-                <style>
-                    body { margin: 0; background: #ffff99; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; font-family: sans-serif; text-align: center; }
-                    model-viewer { width: 100%; height: 65vh; }
-                    .controls { display: flex; gap: 20px; margin-top: 20px; }
-                    button { padding: 15px 30px; border-radius: 10px; border: 2px solid #59cbe8; background: white; color: #000099; font-weight: bold; cursor: pointer; font-size: 18px; }
-                    .instruction { color: #ff69b4; font-weight: bold; margin-bottom: 10px; padding: 0 20px; }
-                </style></head>
-                <body>
-                    <div class="instruction">1. Swipe down and start your phone's Screen Recorder.<br>2. Press PLAY below to start the show!</div>
-                    <model-viewer id="m" src="Models/entire_family_99cm.glb" camera-controls></model-viewer>
-                    <audio id="music" src="Sound/sweet_neighbor_of_mine3.mp3" loop></audio>
-                    <div class="controls">
-                        <button id="pBtn" onclick="document.getElementById('m').play(); document.getElementById('music').play();">▶ PLAY</button>
-                        <button onclick="document.getElementById('m').pause(); document.getElementById('music').pause();">❚❚ PAUSE</button>
-                    </div>
-                </body></html>`);
-            recWin.document.close();
-        }
+        // --- IMPROVED RECORD MISSION TAB ---
+function openRecordingTab() {
+    const recWin = window.open("", "_blank");
+    recWin.document.write(`
+        <html><head><title>Mission Recorder</title>
+        <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.js"><\/script>
+        <style>
+            body { margin: 0; background: #ffff99; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; font-family: sans-serif; text-align: center; }
+            model-viewer { width: 100%; height: 60vh; background: #ffff99; }
+            .ui-box { background: white; padding: 15px; border-radius: 15px; border: 3px solid #59cbe8; width: 85%; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+            .btn-row { display: flex; gap: 10px; justify-content: center; margin-top: 15px; }
+            button { padding: 12px 20px; border-radius: 8px; border: 2px solid #59cbe8; background: white; color: #000099; font-weight: bold; cursor: pointer; font-size: 16px; }
+            .play-btn { background: #59cbe8; color: white; font-size: 20px; width: 100%; }
+            .step { color: #ff69b4; font-weight: bold; font-size: 14px; margin-bottom: 5px; }
+        </style></head>
+        <body>
+            <model-viewer id="m" src="Models/entire_family_99cm.glb" shadow-intensity="1" camera-controls interaction-prompt="none"></model-viewer>
+            <audio id="music" src="Sound/sweet_neighbor_of_mine3.mp3" loop></audio>
 
+            <div class="ui-box">
+                <div class="step">STEP 1: Swipe for Screen Recorder 🔴</div>
+                <div class="step">STEP 2: Press Play Below</div>
+                
+                <button id="pBtn" class="play-btn" onclick="togglePlayback()">▶ START MISSION</button>
+                
+                <div class="btn-row">
+                    <button onclick="window.close()">✕ EXIT</button>
+                    <button onclick="resetMission()">⟲ RESET</button>
+                </div>
+            </div>
+
+            <script>
+                const model = document.getElementById('m');
+                const audio = document.getElementById('music');
+                const btn = document.getElementById('pBtn');
+
+                function togglePlayback() {
+                    if (audio.paused) {
+                        audio.play();
+                        model.play();
+                        btn.innerText = "❚❚ PAUSE MISSION";
+                        btn.style.background = "#ff69b4";
+                    } else {
+                        audio.pause();
+                        model.pause();
+                        btn.innerText = "▶ RESUME MISSION";
+                        btn.style.background = "#59cbe8";
+                    }
+                }
+
+                function resetMission() {
+                    audio.pause();
+                    audio.currentTime = 0;
+                    model.pause();
+                    model.currentTime = 0;
+                    btn.innerText = "▶ START MISSION";
+                    btn.style.background = "#59cbe8";
+                }
+            <\/script>
+        </body></html>`);
+    recWin.document.close();
+}
         document.addEventListener("DOMContentLoaded", function () {
             const mv = document.getElementById('reveal');
             const video = document.getElementById('video-overlay');
