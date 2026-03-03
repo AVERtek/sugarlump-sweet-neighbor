@@ -318,7 +318,7 @@
             </button>
         </div> -->
 
-       <div class="card" style="position: relative;">
+       <div class="card">
     <div style="display: flex; justify-content: center; width: 100%;">
         <model-viewer 
             id="reveal" 
@@ -369,27 +369,65 @@
     </button>
 </div>
 
+<div class="card">
+    <h2>
+        <p style="font-family:Chalet LondonNineteenEighty Regular; font-weight: bold; color: #000099;">
+            Experience 4D Augmented Reality On Your Phone</p>
+    </h2>
+    <img alt="AR Instructions" src="images/erin_video_scenes-41.png" class="marginauto" style="max-width: 100%; max-height: 350px">
+    <h3>
+        <p style="font-family:Chalet LondonNineteenEighty Regular; font-weight: bold; color: #000099;"><em> If AR button does not appear on mobile device, use another browser.</em></p>
+    </h3>
+</div>
+
+<div style="text-align: center;">
+    <h1>
+        <p style="font-family:Chalet LondonNineteenEighty Regular; font-weight: bold; color: #ff69b4;">join the hunt; tell your friends</p>
+    </h1>
+</div>
+
+<div style="position: relative; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 2;">
+    <video id="video-overlay" style="width: 100%; max-width: 100%; height: 100%; object-fit: cover; margin: auto; display: block;" poster="images/Video Poster_2.png" playsinline muted>
+        <source src="Video/sugarlump_intro_erin_2.mp4" type="video/mp4">
+    </video>
+    <button id="play-pause-button" style="position: absolute; z-index: 3; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(255, 255, 255, 0.8); border: none; border-radius: 50%; padding: 10px 15px; font-size: 24px; font-weight: bold; cursor: pointer;">▶</button>
+</div>
+
+<div class="card">
+    <h4><a href="https://avertek.net/" target="_blank" rel="noopener noreferrer">
+        <p style="font-family:Chalet LondonNineteenEighty Regular; color:#59cbe8;"> Contact AVERtek to learn more about AR marketing.</p>
+    </a></h4>
+</div>
+
 <script>
+    // New function specifically for the Record Mission button
     function openRecordingTab() {
         const recorderWindow = window.open("", "_blank");
+        if (!recorderWindow) {
+            alert("Please allow pop-ups to record the mission.");
+            return;
+        }
         recorderWindow.document.write(`
+            <!DOCTYPE html>
             <html>
             <head>
-                <title>Record Your Mission</title>
+                <title>Recording Mode</title>
                 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.js"><\/script>
                 <style>
-                    body { margin: 0; background: #fff; display: flex; align-items: center; justify-content: center; height: 100vh; overflow: hidden; }
+                    body { margin: 0; background: white; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
                     model-viewer { width: 100%; height: 100%; }
                 </style>
             </head>
             <body>
                 <model-viewer 
                     src="Models/entire_family_99cm.glb?sound=Sound/sweet_neighbor_of_mine3.mp3" 
-                    autoplay camera-controls touch-action="pan-y">
+                    autoplay 
+                    camera-controls>
                 </model-viewer>
             </body>
             </html>
         `);
+        recorderWindow.document.close();
     }
 </script>
         
