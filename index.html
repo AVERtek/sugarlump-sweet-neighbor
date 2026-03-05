@@ -196,7 +196,7 @@
 
                     const now = new Date();
                     const dateStr = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-                    const exp = new Date(); exp.setDate(now.getDate() + 30);
+                    const exp = new Date(); exp.setDate(now.getDate() + 31);
                     const expStr = exp.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
                     const certNo = Date.now().toString().slice(-8);
 
