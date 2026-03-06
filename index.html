@@ -28,18 +28,16 @@ model-viewer {
 .card h2 { margin: 2px 0; padding: 0; }
 .card h2 p { margin: 0; padding: 0; }
 
-/* UPDATED: Uniform Scaling Buttons */
+/* UPDATED: Buttons scaled to 300px width and ~42px height (70% of original) */
 .main-button { 
     background-color: #ffffff; 
     border-radius: 8px; 
     border: 2px solid #59cbe8; 
-    height: 75px; 
-    width: 90%; 
-    max-width: 350px; 
+    height: 42px; 
+    width: 300px; 
     display: flex; 
     align-items: center; 
-    justify-content: flex-start; 
-    padding: 0 15px;
+    justify-content: center; 
     cursor: pointer; 
     margin-top: 10px; 
     box-sizing: border-box;
@@ -64,25 +62,25 @@ model-viewer#reveal { display: none; }
 <body>
 <div class="container">
 <div class="card">
-<img src="images/erin_video_scenes-32.png" style="width: 350px; max-width: 100%; height: auto;">
+<img src="images/erin_video_scenes-32.png" style="width: 350px; height: auto;">
 </div>
 <model-viewer id="reveal" src="Models/entire_family_99cm.glb?sound=Sound/sweet_neighbor_of_mine3.mp3" ar ar-modes="scene-viewer webxr quick-look" ios-src="Models/GIRL_converted.usdz"></model-viewer>
 <p style="text-align:center; font-family: 'Chalet LondonNineteenEighty Regular'; font-weight: bold; color: #000099;">Make Sure Wi-Fi and Sound is On!</p>
 
-<div style="display: flex; flex-direction: column; align-items: center; margin-top: 20px; width: 100%;">
+<div style="display: flex; flex-direction: column; align-items: center; margin-top: 20px;">
 <button id="ar-button" class="main-button">
-<img src="images/Heart button.png" style="height: 3.5em; margin-right: 10px;"><span style="font-size: 28px; color: #000099; font-family: 'Chalet LondonNineteenEighty Regular';"><strong>1.push here</strong></span>
+<img src="images/Heart button.png" style="height: 2.5em; margin-right: 5px;"><span style="font-size: 22px; color: #000099; font-family: 'Chalet LondonNineteenEighty Regular';"><strong>1.push here</strong></span>
 </button>
 <button id="record-mission-button" class="main-button" onclick="openRecordingTab()">
-<img src="images/cartoon-phone_t.png" style="height: 3.5em; margin-right: 10px; filter: hue-rotate(260deg);"><span style="font-size: 22px; color: #000099; font-family: 'Chalet LondonNineteenEighty Regular';"><strong>2.record project</strong></span>
+<img src="images/cartoon-phone_t.png" style="height: 2.5em; margin-right: 5px; filter: hue-rotate(260deg);"><span style="font-size: 16px; color: #000099; font-family: 'Chalet LondonNineteenEighty Regular';"><strong>2.record project</strong></span>
 </button>
 <button id="viewPrintCertificateButton" class="main-button">
-<img src="images/sl_ribbon2.png" style="height: 3.5em; margin-right: 10px; opacity: 0.8;"><span style="font-size: 20px; color: #000099; font-family: 'Chalet LondonNineteenEighty Regular';"><strong>3.print certificate</strong></span>
+<img src="images/sl_ribbon2.png" style="height: 2.5em; margin-right: 5px; opacity: 0.8;"><span style="font-size: 15px; color: #000099; font-family: 'Chalet LondonNineteenEighty Regular';"><strong>3.print certificate</strong></span>
 </button>
 </div>
 
 <div class="card" style="margin-top: 20px;">
-<img src="images/erin_video_scenes-34.png" style="width: 300px; max-width: 90%; margin-bottom: 10px;">
+<img src="images/erin_video_scenes-34.png" style="width: 300px; margin-bottom: 10px;">
 <h2><p style="font-family:'Chalet LondonNineteenEighty Regular'; color: #ff69b4;"><b>about:</b><a href="https://sugarlump.love/about" target="_blank"> creativity + kindness</a></p></h2>
 <h2><p style="font-family:'Chalet LondonNineteenEighty Regular'; color: #ff69b4;"><b>rewards:</b><a href="https://sugarlump.love/" target="_blank"> the kindness project</a></p></h2>
 <h2><p style="font-family:'Chalet LondonNineteenEighty Regular'; color: #ff69b4;"><b>join:</b><a href="https://sugarlump.love/contact" target="_blank"> sugarlump kindness club</a></p></h2>
@@ -90,18 +88,15 @@ model-viewer#reveal { display: none; }
 <h2><p style="font-family:'Chalet LondonNineteenEighty Regular'; color: #ff69b4;"><b>brag tags:</b><a href="https://www.schoollife.com/bragtags-intro" target="_blank"> accomplishment, recognition, confidence</a></p></h2>
 <h2><p style="font-family:'Chalet LondonNineteenEighty Regular'; color: #ff69b4;"><b>sponsors:</b><a href="https://sugarlump.love/be-a-sponsor" target="_blank"> get involved</a></p></h2>
 <br>
-<h1><p style="font-family: 'DaisyByhapppyal-Regular'; color: #000099; font-size: 22px;"><em> THIS KINDNESS PROJECT SPONSORED BY</em></p></h1>
-<img src="images/erin_video_scenes-37.png" style="width: 300px; max-width: 90%;">
+<h1><p style="font-family: 'DaisyByhapppyal-Regular'; color: #000099;"><em> THIS KINDNESS PROJECT SPONSORED BY</em></p></h1>
+<img src="images/erin_video_scenes-37.png" style="width: 300px;">
 </div>
-
 <button onclick="window.open('https://www.tercekrealestate.com/', '_blank')" style="background-color: #ffffff; border-radius: 8px; border: 2px solid #59cbe8; height: 35px; color: #000099; font-size: 20px; font-family: 'Chalet LondonNineteenEighty Regular'; margin: 15px 0; cursor: pointer;"><strong>&nbsp; visit &nbsp;</strong></button>
-
 <div class="card">
 <h2 style="font-family:'Chalet LondonNineteenEighty Regular'; color: #000099;">Experience 4D Augmented Reality On Your Phone</h2>
 <img src="images/erin_video_scenes-41.png" style="width: 100%; max-width: 350px;">
 <h3 style="font-family:'Chalet LondonNineteenEighty Regular'; color: #000099;"><em>If AR button does not appear on mobile, use another browser.</em></h3>
 </div>
-
 <h1 class="hunt-header">join the hunt; tell your friends</h1>
 <div style="position: relative; width: 100%;">
 <video id="video-overlay" style="width: 100%;" poster="images/Video Poster_2.png" playsinline muted>
@@ -125,10 +120,10 @@ recWin.document.write(`
 <style>
 body { margin: 0; background: #ffff99; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; font-family: sans-serif; text-align: center; }
 model-viewer { width: 100%; height: 50vh; --progress-bar-color: #59cbe8; background-color: #ffff99; }
-.instr { background: white; padding: 20px; border-radius: 12px; border: 3px solid #59cbe8; width: 85%; max-width: 400px; }
-.instr p { font-size: 20px; font-weight: bold; color: #ff69b4; margin: 10px 0; display: flex; align-items: center; justify-content: center; }
+.instr { background: white; padding: 20px; border-radius: 12px; border: 3px solid #59cbe8; width: 85%; }
+.instr p { font-size: 22px; font-weight: bold; color: #ff69b4; margin: 10px 0; }
 .play-btn { width: 100%; height: 70px; background: #59cbe8; color: white; border-radius: 10px; font-size: 24px; font-weight: bold; border: none; cursor: pointer; }
-.rec-img { height: 30px; margin-left: 10px; vertical-align: middle; }
+.rec-img { height: 28px; vertical-align: middle; margin-left: 5px; }
 </style></head>
 <body>
 <model-viewer id="m" src="Models/entire_family_99cm.glb" poster="images/Poster SN Scene.png" reveal="auto" loading="eager" interaction-prompt="none" camera-controls></model-viewer>
@@ -151,7 +146,6 @@ function toggleVideo() {
 if (video.paused) { video.play(); video.muted = false; playBtn.style.display = "none"; }
 else { video.pause(); playBtn.style.display = "block"; }
 }
-
 playBtn.addEventListener('click', toggleVideo);
 video.addEventListener('click', toggleVideo);
 
@@ -161,7 +155,7 @@ const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/
 if (isMobile) {
 const a = document.createElement('a');
 a.href = url;
-a.download = \`SweetNeighborCertificate_\${certificateNumber}.pdf\`;
+a.download = `SweetNeighborCertificate_${certificateNumber}.pdf`;
 document.body.appendChild(a);
 a.click();
 document.body.removeChild(a);
