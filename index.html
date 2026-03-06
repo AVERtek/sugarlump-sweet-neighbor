@@ -20,7 +20,7 @@
         /* Sugarlump Blue Loading Bar */
         model-viewer { --progress-bar-color: #59cbe8; }
         
-        /* UPDATED: 1/2 space (0.5em) between About/Sponsor links */
+        /* UPDATED: 1/2 space (0.5em) between links */
         .card h2 { margin: 0.5em 0; padding: 0; line-height: 1.2; }
         .card h2 p { margin: 0; padding: 0; }
 
@@ -125,7 +125,7 @@
             body { margin: 0; background: #ffff99; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; font-family: sans-serif; text-align: center; }
             model-viewer { width: 100%; height: 50vh; --progress-bar-color: #59cbe8; background-color: #ffff99; }
             
-            /* Instruction container using Flexbox to center contents */
+            /* Instruction container using Flexbox to center the button */
             .instr { 
                 background: white; 
                 padding: 20px; 
@@ -140,11 +140,10 @@
             
             .instr p { font-size: 20px; font-weight: bold; color: #ff69b4; margin: 10px 0; display: flex; align-items: center; justify-content: center; }
             
-            /* Button border now "hugs" the text on a single line */
+            /* FIXED: width: auto and white-space: nowrap for the 'hugging' look */
             .play-btn { 
-                display: inline-block;
                 width: auto; 
-                min-width: 220px;
+                min-width: 220px; 
                 height: 60px; 
                 background: #59cbe8; 
                 color: white; 
@@ -154,8 +153,8 @@
                 border: none; 
                 cursor: pointer; 
                 margin-top: 15px; 
-                padding: 0 30px;
-                white-space: nowrap; 
+                padding: 0 35px;
+                white-space: nowrap;
             }
             .rec-img { height: 24px; vertical-align: middle; margin-left: 8px; }
         </style></head>
