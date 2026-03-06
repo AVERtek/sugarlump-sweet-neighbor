@@ -1,209 +1,241 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>sugarlump sweet neighbor</title>
-<script async src="https://www.googletagmanager.com/gtag/js?id=0-0000000000"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag() { dataLayer.push(arguments); }
-gtag('js', new Date());
-gtag('config', '0-0000000000');
-</script>
-<style>
-/* Global & Button Styles */
-html, body { margin: 0; padding: 0; overflow-x: hidden; font-family: Google Sans, Noto, Roboto, Helvetica Neue, sans-serif; color: #244376;
-background-color: #ffff99; }
-.container { max-width: 600px; width: 100%; box-sizing: border-box; padding: 0 10px; margin: 0 auto; display: flex; flex-direction: column; align-items: center;
-}
-.card { background-color: rgb(255, 255, 153); border: 2px solid rgb(255, 255, 153); padding: 10px; margin-bottom: 1em; display: flex; flex-direction: column;
-align-items: center; text-align: center; border-radius: 6px; overflow: hidden; width: 100%; box-sizing: border-box; }
-/* Sugarlump Blue Loading Bar */
-model-viewer { --progress-bar-color: #59cbe8; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>sugarlump sweet neighbor</title>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=0-0000000000"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', '0-0000000000');
+    </script>
+    <style>
+        /* Global & Button Styles */
+        html, body { margin: 0; padding: 0; overflow-x: hidden; font-family: Google Sans, Noto, Roboto, Helvetica Neue, sans-serif; color: #244376; background-color: #ffff99; }
+        .container { max-width: 600px; width: 100%; box-sizing: border-box; padding: 0 10px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
+        .card { background-color: rgb(255, 255, 153); border: 2px solid rgb(255, 255, 153); padding: 10px; margin-bottom: 1em; display: flex; flex-direction: column; align-items: center; text-align: center; border-radius: 6px; overflow: hidden; width: 100%; box-sizing: border-box; }
 
-/* UPDATED: 1/2 space (0.5em) between About/Sponsor links */
-.card h2 { margin: 0.5em 0; padding: 0; line-height: 1.2; }
-.card h2 p { margin: 0; padding: 0; }
+        /* Sugarlump Blue Loading Bar */
+        model-viewer { --progress-bar-color: #59cbe8; }
+        
+        /* UPDATED: 1/2 space (0.5em) between About/Sponsor links */
+        .card h2 { margin: 0.5em 0; padding: 0; line-height: 1.2; }
+        .card h2 p { margin: 0; padding: 0; }
 
-/* UNIFORM MAIN BUTTONS: 300px width, 42px height */
-.main-button {
-background-color: #ffffff;
-border-radius: 8px;
-border: 2px solid #59cbe8;
-height: 42px;
-width: 300px;
-display: flex;
-align-items: center;
-justify-content: center;
-cursor: pointer;
-margin-top: 10px;
-box-sizing: border-box;
-padding: 0 10px;
-}
-/* Scaled Icons inside buttons */
-.main-button img { height: 28px; margin-right: 8px; flex-shrink: 0; }
-@font-face { font-family: 'Chalet LondonNineteenEighty Regular'; src: url('fonts/Chalet LondonNineteenEighty Regular.otf') format('opentype'); }
-@font-face { font-family: 'DaisyByhapppyal-Regular'; src: url('fonts/DaisyByhapppyal-Regular.otf') format('opentype'); }
-a { color: #59cbe8; text-decoration: none; font-weight: bold; }
-.hunt-header { font-family: 'Chalet LondonNineteenEighty Regular'; color: #ff69b4; text-align: center; width: 100%; margin: 20px 0; }
-model-viewer#reveal { display: none; }
-</style>
+        /* UNIFORM MAIN BUTTONS: 300px width, 42px height */
+        .main-button { 
+            background-color: #ffffff; 
+            border-radius: 8px; 
+            border: 2px solid #59cbe8; 
+            height: 42px; 
+            width: 300px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            cursor: pointer; 
+            margin-top: 10px; 
+            box-sizing: border-box;
+            padding: 0 10px;
+        }
+
+        .main-button img { height: 28px; margin-right: 8px; flex-shrink: 0; }
+
+        @font-face { font-family: 'Chalet LondonNineteenEighty Regular'; src: url('fonts/Chalet LondonNineteenEighty Regular.otf') format('opentype'); }
+        @font-face { font-family: 'DaisyByhapppyal-Regular'; src: url('fonts/DaisyByhapppyal-Regular.otf') format('opentype'); }
+
+        a { color: #59cbe8; text-decoration: none; font-weight: bold; }
+
+        .hunt-header { font-family: 'Chalet LondonNineteenEighty Regular'; color: #ff69b4; text-align: center; width: 100%; margin: 20px 0; }
+        model-viewer#reveal { display: none; }
+    </style>
 </head>
 <body>
 <div class="container">
-<div class="card">
-<img src="images/erin_video_scenes-32.png" style="width: 350px; max-width: 100%; height: auto;">
-</div>
-<model-viewer id="reveal" src="Models/entire_family_99cm.glb?sound=Sound/sweet_neighbor_of_mine3.mp3" ar ar-modes="scene-viewer webxr quick-look" ios-src="Models/GIRL_converted.usdz"></model-viewer>
+    <div class="card">
+        <img src="images/erin_video_scenes-32.png" style="width: 350px; max-width: 100%; height: auto;">
+    </div>
 
-<p style="text-align:center; font-family: 'Chalet LondonNineteenEighty Regular'; font-weight: bold; color: #000099; font-size: 14px;">Make Sure Wi-Fi and Sound is On!</p>
-<div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
-<button id="ar-button" class="main-button">
-<img src="images/Heart button.png">
-<span style="font-size: 18px; color: #000099; font-family: 'Chalet LondonNineteenEighty Regular';"><strong>1. push here</strong></span>
-</button>
-<button id="record-mission-button" class="main-button" onclick="openRecordingTab()">
-<img src="images/cartoon-phone_t.png" style="filter: hue-rotate(260deg);">
-<span style="font-size: 18px; color: #000099; font-family: 'Chalet LondonNineteenEighty Regular';"><strong>2. record project</strong></span>
-</button>
-<button id="viewPrintCertificateButton" class="main-button">
-<img src="images/sl_ribbon2.png" style="opacity: 0.8;">
-<span style="font-size: 18px; color: #000099; font-family: 'Chalet LondonNineteenEighty Regular';"><strong>3. print certificate</strong></span>
-</button>
+    <model-viewer id="reveal" src="Models/entire_family_99cm.glb?sound=Sound/sweet_neighbor_of_mine3.mp3" ar ar-modes="scene-viewer webxr quick-look" ios-src="Models/GIRL_converted.usdz"></model-viewer>
+    
+    <p style="text-align:center; font-family: 'Chalet LondonNineteenEighty Regular'; font-weight: bold; color: #000099; font-size: 14px;">Make Sure Wi-Fi and Sound is On!</p>
+
+    <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+        <button id="ar-button" class="main-button">
+            <img src="images/Heart button.png">
+            <span style="font-size: 18px; color: #000099; font-family: 'Chalet LondonNineteenEighty Regular';"><strong>1. push here</strong></span>
+        </button>
+
+        <button id="record-mission-button" class="main-button" onclick="openRecordingTab()">
+            <img src="images/cartoon-phone_t.png" style="filter: hue-rotate(260deg);">
+            <span style="font-size: 18px; color: #000099; font-family: 'Chalet LondonNineteenEighty Regular';"><strong>2. record project</strong></span>
+        </button>
+
+        <button id="viewPrintCertificateButton" class="main-button">
+            <img src="images/sl_ribbon2.png" style="opacity: 0.8;">
+            <span style="font-size: 18px; color: #000099; font-family: 'Chalet LondonNineteenEighty Regular';"><strong>3. print certificate</strong></span>
+        </button>
+    </div>
+
+    <div class="card" style="margin-top: 20px;">
+        <img src="images/erin_video_scenes-34.png" style="width: 300px; max-width: 90%; margin-bottom: 10px;">
+        <h2><p style="font-family:'Chalet LondonNineteenEighty Regular'; color: #ff69b4; font-size: 20px;"><b>about:</b><a href="https://sugarlump.love/about" target="_blank"> creativity + kindness</a></p></h2>
+        <h2><p style="font-family:'Chalet LondonNineteenEighty Regular'; color: #ff69b4; font-size: 20px;"><b>rewards:</b><a href="https://sugarlump.love/" target="_blank"> the kindness project</a></p></h2>
+        <h2><p style="font-family:'Chalet LondonNineteenEighty Regular'; color: #ff69b4; font-size: 20px;"><b>join:</b><a href="https://sugarlump.love/contact" target="_blank"> sugarlump kindness club</a></p></h2>
+        <h2><p style="font-family:'Chalet LondonNineteenEighty Regular'; color: #ff69b4; font-size: 20px;"><b>shop:</b><a href="https://sugarlump.love/shop" target="_blank"> creative kindness kits</a></p></h2>
+        <h2><p style="font-family:'Chalet LondonNineteenEighty Regular'; color: #ff69b4; font-size: 20px;"><b>brag tags:</b><a href="https://www.schoollife.com/bragtags-intro" target="_blank"> accomplishment, recognition, confidence</a></p></h2>
+        <h2><p style="font-family:'Chalet LondonNineteenEighty Regular'; color: #ff69b4; font-size: 20px;"><b>sponsors:</b><a href="https://sugarlump.love/be-a-sponsor" target="_blank"> get involved</a></p></h2>
+        <br>
+        <h1><p style="font-family: 'DaisyByhapppyal-Regular'; color: #000099; font-size: 20px;"><em> THIS KINDNESS PROJECT SPONSORED BY</em></p></h1>
+        <img src="images/erin_video_scenes-37.png" style="width: 300px; max-width: 90%;">
+    </div>
+
+    <button onclick="window.open('https://www.tercekrealestate.com/', '_blank')" style="background-color: #ffffff; border-radius: 8px; border: 2px solid #59cbe8; height: 35px; color: #000099; font-size: 18px; font-family: 'Chalet LondonNineteenEighty Regular'; margin: 15px 0; cursor: pointer;"><strong>&nbsp; visit &nbsp;</strong></button>
+
+    <div class="card">
+        <h2 style="font-family:'Chalet LondonNineteenEighty Regular'; color: #000099;">Experience 4D Augmented Reality On Your Phone</h2>
+        <img src="images/erin_video_scenes-41.png" style="width: 100%; max-width: 350px;">
+        <h3 style="font-family:'Chalet LondonNineteenEighty Regular'; color: #000099; font-size: 14px;"><em>If AR button does not appear on mobile, use another browser.</em></h3>
+    </div>
+
+    <h1 class="hunt-header">join the hunt; tell your friends</h1>
+    <div style="position: relative; width: 100%;">
+        <video id="video-overlay" style="width: 100%;" poster="images/Video Poster_2.png" playsinline muted>
+            <source src="Video/sugarlump_intro_erin_2.mp4" type="video/mp4">
+        </video>
+        <button id="play-pause-button" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 50%; padding: 10px 15px; background: rgba(255,255,255,0.8); border:none; font-size: 30px; cursor:pointer;">  ▶  </button>
+    </div>
+
+    <div class="card" style="margin-top: 20px;">
+        <a href="https://avertek.net/" target="_blank"><p style="font-family:'Chalet LondonNineteenEighty Regular'; color:#59cbe8; font-size: 14px;">Contact AVERtek to learn more about AR marketing.</p></a>
+    </div>
 </div>
-<div class="card" style="margin-top: 20px;">
-<img src="images/erin_video_scenes-34.png" style="width: 300px; max-width: 90%; margin-bottom: 10px;">
-<h2><p style="font-family:'Chalet LondonNineteenEighty Regular'; color: #ff69b4; font-size: 20px;"><b>about:</b><a href="https://sugarlump.love/about" target="_blank"> creativity + kindness</a></p></h2>
-<h2><p style="font-family:'Chalet LondonNineteenEighty Regular'; color: #ff69b4; font-size: 20px;"><b>rewards:</b><a href="https://sugarlump.love/" target="_blank"> the kindness project</a></p></h2>
-<h2><p style="font-family:'Chalet LondonNineteenEighty Regular'; color: #ff69b4; font-size: 20px;"><b>join:</b><a href="https://sugarlump.love/contact" target="_blank"> sugarlump kindness club</a></p></h2>
-<h2><p style="font-family:'Chalet LondonNineteenEighty Regular'; color: #ff69b4; font-size: 20px;"><b>shop:</b><a href="https://sugarlump.love/shop" target="_blank"> creative kindness kits</a></p></h2>
-<h2><p style="font-family:'Chalet LondonNineteenEighty Regular'; color: #ff69b4; font-size: 20px;"><b>brag tags:</b><a href="https://www.schoollife.com/bragtags-intro" target="_blank"> accomplishment, recognition, confidence</a></p></h2>
-<h2><p style="font-family:'Chalet LondonNineteenEighty Regular'; color: #ff69b4; font-size: 20px;"><b>sponsors:</b><a href="https://sugarlump.love/be-a-sponsor" target="_blank"> get involved</a></p></h2>
-<br>
-<h1><p style="font-family: 'DaisyByhapppyal-Regular'; color: #000099; font-size: 20px;"><em> THIS KINDNESS PROJECT SPONSORED BY</em></p></h1>
-<img src="images/erin_video_scenes-37.png" style="width: 300px; max-width: 90%;">
-</div>
-<button onclick="window.open('https://www.tercekrealestate.com/', '_blank')" style="background-color: #ffffff; border-radius: 8px; border: 2px solid #59cbe8; height: 35px; color: #000099; font-size: 18px; font-family: 'Chalet LondonNineteenEighty Regular'; margin: 15px 0; cursor: pointer;"><strong>&nbsp;
-visit &nbsp;</strong></button>
-<div class="card">
-<h2 style="font-family:'Chalet LondonNineteenEighty Regular'; color: #000099;">Experience 4D Augmented Reality On Your Phone</h2>
-<img src="images/erin_video_scenes-41.png" style="width: 100%; max-width: 350px;">
-<h3 style="font-family:'Chalet LondonNineteenEighty Regular'; color: #000099; font-size: 14px;"><em>If AR button does not appear on mobile, use another browser.</em></h3>
-</div>
-<h1 class="hunt-header">join the hunt; tell your friends</h1>
-<div style="position: relative; width: 100%;">
-<video id="video-overlay" style="width: 100%;" poster="images/Video Poster_2.png" playsinline muted>
-<source src="Video/sugarlump_intro_erin_2.mp4" type="video/mp4">
-</video>
-<button id="play-pause-button" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 50%; padding: 10px 15px; background: rgba(255,255,255,0.8); border:none; font-size: 30px; cursor:pointer;">  ▶  </button>
-</div>
-<div class="card" style="margin-top: 20px;">
-<a href="https://avertek.net/" target="_blank"><p style="font-family:'Chalet LondonNineteenEighty Regular'; color:#59cbe8; font-size: 14px;">Contact AVERtek to learn more about AR marketing.</p></a>
-</div>
-</div>
+
 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.js"></script>
 <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
-<script>
-function openRecordingTab() {
-const recWin = window.open("", "_blank");
-recWin.document.write(`
-<html><head><title>Project Recorder</title>
-<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.js"><\/script>
-<style>
-body { margin: 0; background: #ffff99; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; font-family: sans-serif; text-align: center;
-}
-model-viewer { width: 100%; height: 50vh; --progress-bar-color: #59cbe8; background-color: #ffff99; }
-.instr { background: white; padding: 20px; border-radius: 12px; border: 3px solid #59cbe8; width: 85%; max-width: 450px; display: flex; flex-direction: column; align-items: center; }
-.instr p { font-size: 20px; font-weight: bold; color: #ff69b4; margin: 10px 0; display: flex; align-items: center; justify-content: center; }
-/* UPDATED: Dynamic width that hugs text, single line, no wrap */
-.play-btn { 
-display: inline-block;
-width: auto; 
-min-width: 200px;
-height: 60px; 
-background: #59cbe8; 
-color: white; 
-border-radius: 10px; 
-font-size: 22px; 
-font-weight: bold; 
-border: none; 
-cursor: pointer; 
-margin-top: 10px; 
-padding: 0 30px;
-white-space: nowrap; 
-}
-.rec-img { height: 24px; vertical-align: middle; margin-left: 8px; }
-</style></head>
-<body>
-<model-viewer id="m" src="Models/entire_family_99cm.glb" poster="images/Poster SN Scene.png" reveal="auto" loading="eager" interaction-prompt="none" camera-controls></model-viewer>
-<audio id="music" src="Sound/sweet_neighbor_of_mine3.mp3" loop></audio>
-<div class="instr">
-<p>Screen Record iOS: Swipe down top-right & tap <img src="images/iPhone Record Button 9.png" class="rec-img"></p>
-<p>ANDROID: Swipe down twice & tap "Screen Record"</p>
-<button id="ctrl" class="play-btn" onclick="const a=document.getElementById('music'); const m=document.getElementById('m'); if(a.paused){a.play(); m.play(); this.innerText='   ❚❚    PAUSE'; this.style.background='#ff69b4';}else{a.pause(); m.pause(); this.innerText='   ▶    START SHOW'; this.style.background='#59cbe8';}">   ▶    START SHOW</button>
-</div>
-</body></html>`);
-recWin.document.close();
-}
-document.addEventListener("DOMContentLoaded", function () {
-const video = document.getElementById('video-overlay');
-const playBtn = document.getElementById('play-pause-button');
-const mv = document.getElementById('reveal');
-function toggleVideo() {
-if (video.paused) { video.play(); video.muted = false; playBtn.style.display = "none"; }
-else { video.pause(); playBtn.style.display = "block"; }
-}
-playBtn.addEventListener('click', toggleVideo);
-video.addEventListener('click', toggleVideo);
-function openPdfInNewTab(blob, certificateNumber) {
-const url = URL.createObjectURL(blob);
-const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-if (isMobile) {
-const a = document.createElement('a');
-a.href = url;
-a.download = `SweetNeighborCertificate_${certificateNumber}.pdf`;
-document.body.appendChild(a);
-a.click();
-document.body.removeChild(a);
-} else {
-const newWindow = window.open(url, '_blank');
-if (!newWindow) alert('Please allow pop-ups to view the certificate.');
-}
-}
-document.getElementById('viewPrintCertificateButton').addEventListener('click', async () => {
-const { PDFDocument, rgb, StandardFonts } = PDFLib;
-try {
-const bytes = await fetch('certificates/sugarlump_app_certificate.pdf').then(res => res.arrayBuffer());
-const pdfDoc = await PDFDocument.load(bytes);
-const page = pdfDoc.getPages()[0];
-const { height } = page.getSize();
-const fontB = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
-const fontR = await pdfDoc.embedFont(StandardFonts.Helvetica);
 
-const now = new Date();
-const dateStr = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-const exp = new Date(); exp.setDate(now.getDate() + 31);
-const expStr = exp.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-const certNo = Date.now().toString().slice(-8);
-const x = 80; const baseY = height - 250;
-page.drawText("Tercek Real Estate Group", { x, y: baseY + 20, size: 16, font: fontB, color: rgb(8/255, 119/255, 144/255) });
-page.drawText("Sweet Neighbor of Mine", { x, y: baseY, size: 16, font: fontB, color: rgb(254/255, 63/255, 178/255) });
-page.drawText(`Certificate No: ${certNo}`, { x, y: baseY - 20, size: 12, font: fontR, color: rgb(8/255, 119/255, 144/255) });
-page.drawText(`Download Date: ${dateStr}`, { x, y: baseY - 40, size: 12, font: fontR, color: rgb(8/255, 119/255, 144/255) });
-page.drawText(`Valid until: ${expStr}`, { x, y: baseY - 60, size: 14, font: fontB, color: rgb(0.8, 0.2, 0.2) });
-const pdfData = await pdfDoc.save();
-openPdfInNewTab(new Blob([pdfData], { type: 'application/pdf' }), certNo);
-} catch (e) { alert("Error loading certificate template."); }
-});
-document.getElementById('ar-button').addEventListener('click', () => {
-if (mv.canActivateAR) {
-mv.activateAR();
-} else {
-alert("AR features require a mobile device (iPhone or Android). Please open this link on your phone to experience the 4D Augmented Reality!");
-}
-});
-});
+<script>
+    function openRecordingTab() {
+        const recWin = window.open("", "_blank");
+        recWin.document.write(`
+        <html><head><title>Project Recorder</title>
+        <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.js"><\/script>
+        <style>
+            body { margin: 0; background: #ffff99; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; font-family: sans-serif; text-align: center; }
+            model-viewer { width: 100%; height: 50vh; --progress-bar-color: #59cbe8; background-color: #ffff99; }
+            
+            /* Instruction container using Flexbox to center contents */
+            .instr { 
+                background: white; 
+                padding: 20px; 
+                border-radius: 12px; 
+                border: 3px solid #59cbe8; 
+                width: 85%; 
+                max-width: 450px; 
+                display: flex; 
+                flex-direction: column; 
+                align-items: center; 
+            }
+            
+            .instr p { font-size: 20px; font-weight: bold; color: #ff69b4; margin: 10px 0; display: flex; align-items: center; justify-content: center; }
+            
+            /* Button border now "hugs" the text on a single line */
+            .play-btn { 
+                display: inline-block;
+                width: auto; 
+                min-width: 220px;
+                height: 60px; 
+                background: #59cbe8; 
+                color: white; 
+                border-radius: 10px; 
+                font-size: 22px; 
+                font-weight: bold; 
+                border: none; 
+                cursor: pointer; 
+                margin-top: 15px; 
+                padding: 0 30px;
+                white-space: nowrap; 
+            }
+            .rec-img { height: 24px; vertical-align: middle; margin-left: 8px; }
+        </style></head>
+        <body>
+            <model-viewer id="m" src="Models/entire_family_99cm.glb" poster="images/Poster SN Scene.png" reveal="auto" loading="eager" interaction-prompt="none" camera-controls></model-viewer>
+            <audio id="music" src="Sound/sweet_neighbor_of_mine3.mp3" loop></audio>
+            <div class="instr">
+                <p>Screen Record iOS: Swipe down top-right & tap <img src="images/iPhone Record Button 9.png" class="rec-img"></p>
+                <p>ANDROID: Swipe down twice & tap "Screen Record"</p>
+                <button id="ctrl" class="play-btn" onclick="const a=document.getElementById('music'); const m=document.getElementById('m'); if(a.paused){a.play(); m.play(); this.innerText='   ❚❚    PAUSE'; this.style.background='#ff69b4';}else{a.pause(); m.pause(); this.innerText='   ▶    START SHOW'; this.style.background='#59cbe8';}">   ▶    START SHOW</button>
+            </div>
+        </body></html>`);
+        recWin.document.close();
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const video = document.getElementById('video-overlay');
+        const playBtn = document.getElementById('play-pause-button');
+        const mv = document.getElementById('reveal');
+
+        function toggleVideo() {
+            if (video.paused) { video.play(); video.muted = false; playBtn.style.display = "none"; }
+            else { video.pause(); playBtn.style.display = "block"; }
+        }
+
+        playBtn.addEventListener('click', toggleVideo);
+        video.addEventListener('click', toggleVideo);
+
+        function openPdfInNewTab(blob, certificateNumber) {
+            const url = URL.createObjectURL(blob);
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            if (isMobile) {
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `SweetNeighborCertificate_${certificateNumber}.pdf`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            } else {
+                const newWindow = window.open(url, '_blank');
+                if (!newWindow) alert('Please allow pop-ups to view the certificate.');
+            }
+        }
+
+        document.getElementById('viewPrintCertificateButton').addEventListener('click', async () => {
+            const { PDFDocument, rgb, StandardFonts } = PDFLib;
+            try {
+                const bytes = await fetch('certificates/sugarlump_app_certificate.pdf').then(res => res.arrayBuffer());
+                const pdfDoc = await PDFDocument.load(bytes);
+                const page = pdfDoc.getPages()[0];
+                const { height } = page.getSize();
+                const fontB = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+                const fontR = await pdfDoc.embedFont(StandardFonts.Helvetica);
+                
+                const now = new Date();
+                const dateStr = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+                const exp = new Date(); exp.setDate(now.getDate() + 31);
+                const expStr = exp.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+                const certNo = Date.now().toString().slice(-8);
+
+                const x = 80; const baseY = height - 250;
+                page.drawText("Tercek Real Estate Group", { x, y: baseY + 20, size: 16, font: fontB, color: rgb(8/255, 119/255, 144/255) });
+                page.drawText("Sweet Neighbor of Mine", { x, y: baseY, size: 16, font: fontB, color: rgb(254/255, 63/255, 178/255) });
+                page.drawText(`Certificate No: ${certNo}`, { x, y: baseY - 20, size: 12, font: fontR, color: rgb(8/255, 119/255, 144/255) });
+                page.drawText(`Download Date: ${dateStr}`, { x, y: baseY - 40, size: 12, font: fontR, color: rgb(8/255, 119/255, 144/255) });
+                page.drawText(`Valid until: ${expStr}`, { x, y: baseY - 60, size: 14, font: fontB, color: rgb(0.8, 0.2, 0.2) });
+
+                const pdfData = await pdfDoc.save();
+                openPdfInNewTab(new Blob([pdfData], { type: 'application/pdf' }), certNo);
+            } catch (e) { alert("Error loading certificate template."); }
+        });
+
+        document.getElementById('ar-button').addEventListener('click', () => {
+            if (mv.canActivateAR) {
+                mv.activateAR();
+            } else {
+                alert("AR features require a mobile device (iPhone or Android). Please open this link on your phone to experience the 4D Augmented Reality!");
+            }
+        });
+    });
 </script>
 </body>
 </html>
