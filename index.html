@@ -105,7 +105,7 @@
         <video id="video-overlay" style="width: 100%;" poster="images/Video Poster_2.png" playsinline muted>
             <source src="Video/sugarlump_intro_erin_2.mp4" type="video/mp4">
         </video>
-        <button id="play-pause-button" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 50%; padding: 10px 15px; background: rgba(255,255,255,0.8); border:none; font-size: 30px; cursor:pointer;"> ▶ </button>
+        <button id="play-pause-button" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 50%; padding: 10px 15px; background: rgba(255,255,255,0.8); border:none; font-size: 30px; cursor:pointer;">  ▶  </button>
     </div>
 
     <div class="card" style="margin-top: 20px;">
@@ -120,12 +120,12 @@
     function openRecordingTab() {
         const recWin = window.open("", "_blank");
         recWin.document.write(`
-        <html><head><title>Mission Recorder</title>
+        <html><head><title>Project Recorder</title>
         <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.js"><\/script>
         <style>
             body { margin: 0; background: #ffff99; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; font-family: sans-serif; text-align: center; }
             model-viewer { width: 100%; height: 50vh; --progress-bar-color: #59cbe8; background-color: #ffff99; }
-            .instr { background: white; padding: 20px; border-radius: 12px; border: 3px solid #59cbe8; width: 85%; max-width: 450px; }
+            .instr { background: white; padding: 20px; border-radius: 12px; border: 3px solid #59cbe8; width: 80%; max-width: 450px; display: flex; flex-direction: column; align-items: center; }
             .instr p { font-size: 20px; font-weight: bold; color: #ff69b4; margin: 10px 0; display: flex; align-items: center; justify-content: center; }
             .play-btn { width: 100%; height: 60px; background: #59cbe8; color: white; border-radius: 10px; font-size: 22px; font-weight: bold; border: none; cursor: pointer; }
             .rec-img { height: 24px; vertical-align: middle; margin-left: 8px; }
@@ -136,7 +136,7 @@
             <div class="instr">
                 <p>Screen Record iOS: Swipe down top-right & tap <img src="images/iPhone Record Button 9.png" class="rec-img"></p>
                 <p>ANDROID: Swipe down twice & tap "Screen Record"</p>
-                <button id="ctrl" class="play-btn" onclick="const a=document.getElementById('music'); const m=document.getElementById('m'); if(a.paused){a.play(); m.play(); this.innerText='  ❚❚   PAUSE'; this.style.background='#ff69b4';}else{a.pause(); m.pause(); this.innerText='  ▶   START SHOW'; this.style.background='#59cbe8';}">  ▶   START SHOW</button>
+                <button id="ctrl" class="play-btn" onclick="const a=document.getElementById('music'); const m=document.getElementById('m'); if(a.paused){a.play(); m.play(); this.innerText='   ❚❚    PAUSE'; this.style.background='#ff69b4';}else{a.pause(); m.pause(); this.innerText='   ▶    START SHOW'; this.style.background='#59cbe8';}">   ▶    START SHOW</button>
             </div>
         </body></html>`);
         recWin.document.close();
