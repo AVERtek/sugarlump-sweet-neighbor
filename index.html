@@ -20,7 +20,7 @@
         /* Sugarlump Blue Loading Bar */
         model-viewer { --progress-bar-color: #59cbe8; }
         
-        /* UPDATED: 1/2 space (0.5em) between About/Sponsor links */
+        /* UPDATED: 1/2 space (0.5em) between links for professional spacing */
         .card h2 { margin: 0.5em 0; padding: 0; line-height: 1.2; }
         .card h2 p { margin: 0; padding: 0; }
 
@@ -122,45 +122,42 @@
         <html><head><title>Project Recorder</title>
         <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.js"><\/script>
         <style>
-            body { margin: 0; background: #ffff99; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; font-family: sans-serif; text-align: center; padding: 20px; box-sizing: border-box; }
+            body { margin: 0; background: #ffff99; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; font-family: sans-serif; text-align: center; padding: 10px; box-sizing: border-box; }
             model-viewer { width: 100%; height: 50vh; --progress-bar-color: #59cbe8; background-color: #ffff99; }
             
-            /* The Instruction Box */
+            /* Center children strictly using flex */
             .instr { 
                 background: white; 
                 padding: 20px; 
                 border-radius: 12px; 
                 border: 3px solid #59cbe8; 
                 width: 90%; 
-                max-width: 500px; 
+                max-width: 480px; 
                 display: flex; 
                 flex-direction: column; 
-                align-items: center; /* Center children horizontally */
+                align-items: center; 
                 box-sizing: border-box;
             }
             
-            .instr p { font-size: 20px; font-weight: bold; color: #ff69b4; margin: 10px 0; display: flex; align-items: center; justify-content: center; width: 100%; }
+            .instr p { font-size: 18px; font-weight: bold; color: #ff69b4; margin: 8px 0; display: flex; align-items: center; justify-content: center; }
             
-            /* The START SHOW Button - SINGLE LINE / NO WRAP */
+            /* THE FIX: Use display: table to force 'hugging' and prevent wrapping */
             .play-btn { 
-                width: auto;              /* Button only as wide as content */
-                max-width: 100%;          /* Don't exceed instruction box width */
-                height: auto;             /* Let padding control height */
-                min-height: 60px;
+                display: table;
+                margin: 15px auto 0 auto;
+                width: auto !important; 
+                min-width: 240px;
+                height: 64px; 
                 background: #59cbe8; 
                 color: white; 
-                border-radius: 10px; 
+                border-radius: 12px; 
                 font-size: 22px; 
                 font-weight: bold; 
                 border: none; 
                 cursor: pointer; 
-                margin-top: 15px; 
-                padding: 10px 30px;       /* Horizontal space for the border hug */
-                white-space: nowrap;      /* FORBID WRAPPING */
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                box-sizing: border-box;
+                padding: 0 40px;
+                white-space: nowrap !important;
+                line-height: 64px; /* Centers text vertically for table display */
             }
             .rec-img { height: 24px; vertical-align: middle; margin-left: 8px; flex-shrink: 0; }
         </style></head>
