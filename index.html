@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>[TITLE_HERE]</title>
+    <title>sugarlump sweet neighbor</title>
     <script async src="https://www.googletagmanager.com/gtag/js?id=0-0000000000"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -12,16 +12,38 @@
         gtag('config', '0-0000000000');
     </script>
     <style>
+        /* Global & Button Styles */
         html, body { margin: 0; padding: 0; overflow-x: hidden; font-family: Google Sans, Noto, Roboto, Helvetica Neue, sans-serif; color: #244376; background-color: #ffff99; }
         .container { max-width: 600px; width: 100%; box-sizing: border-box; padding: 0 10px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
         .card { background-color: rgb(255, 255, 153); border: 2px solid rgb(255, 255, 153); padding: 10px; margin-bottom: 1em; display: flex; flex-direction: column; align-items: center; text-align: center; border-radius: 6px; overflow: hidden; width: 100%; box-sizing: border-box; }
+
         model-viewer { --progress-bar-color: #59cbe8; }
+        
+        /* 1/2 line space (0.5em) between links */
         .card h2 { margin: 0.5em 0; padding: 0; line-height: 1.2; }
         .card h2 p { margin: 0; padding: 0; }
-        .main-button { background-color: #ffffff; border-radius: 8px; border: 2px solid #59cbe8; height: 42px; width: 300px; display: flex; align-items: center; justify-content: center; cursor: pointer; margin-top: 10px; box-sizing: border-box; padding: 0 10px; }
+
+        /* UNIFORM MAIN BUTTONS */
+        .main-button { 
+            background-color: #ffffff; 
+            border-radius: 8px; 
+            border: 2px solid #59cbe8; 
+            height: 42px; 
+            width: 300px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            cursor: pointer; 
+            margin-top: 10px; 
+            box-sizing: border-box;
+            padding: 0 10px;
+        }
+
         .main-button img { height: 28px; margin-right: 8px; flex-shrink: 0; }
+
         @font-face { font-family: 'Chalet LondonNineteenEighty Regular'; src: url('fonts/Chalet LondonNineteenEighty Regular.otf') format('opentype'); }
         @font-face { font-family: 'DaisyByhapppyal-Regular'; src: url('fonts/DaisyByhapppyal-Regular.otf') format('opentype'); }
+
         a { color: #59cbe8; text-decoration: none; font-weight: bold; }
         .hunt-header { font-family: 'Chalet LondonNineteenEighty Regular'; color: #ff69b4; text-align: center; width: 100%; margin: 20px 0; }
         model-viewer#reveal { display: none; }
@@ -30,14 +52,10 @@
 <body>
 <div class="container">
     <div class="card">
-        <img src="images/[HEADER_IMAGE_NAME]" style="width: 350px; max-width: 100%; height: auto;">
+        <img src="images/sugarlump_experience_AR_assets-01.png" style="width: 350px; max-width: 100%; height: auto;">
     </div>
 
-    <model-viewer id="reveal" 
-        src="Models/[GLB_MODEL_NAME].glb?sound=Sound/[SOUND_FILE_NAME].mp3" 
-        ar ar-modes="scene-viewer webxr quick-look" 
-        ios-src="Models/[USDZ_MODEL_NAME].usdz">
-    </model-viewer>
+    <model-viewer id="reveal" src="Models/entire_family_99cm.glb?sound=Sound/sweet_neighbor_of_mine3.mp3" ar ar-modes="scene-viewer webxr quick-look" ios-src="Models/GIRL_converted.usdz"></model-viewer>
     
     <p style="text-align:center; font-family: 'Chalet LondonNineteenEighty Regular'; font-weight: bold; color: #000099; font-size: 14px;">Make Sure Wi-Fi and Sound is On!</p>
 
@@ -72,7 +90,7 @@
         <img src="images/erin_video_scenes-37.png" style="width: 300px; max-width: 90%;">
     </div>
     
-    <button onclick="window.open('https://[SPONSOR_URL_HERE]', '_blank')" style="background-color: #ffffff; border-radius: 8px; border: 2px solid #59cbe8; height: 35px; color: #000099; font-size: 18px; font-family: 'Chalet LondonNineteenEighty Regular'; margin: 15px 0; cursor: pointer;"><strong>&nbsp; visit &nbsp;</strong></button>
+    <button onclick="window.open('https://www.tercekrealestate.com/', '_blank')" style="background-color: #ffffff; border-radius: 8px; border: 2px solid #59cbe8; height: 35px; color: #000099; font-size: 18px; font-family: 'Chalet LondonNineteenEighty Regular'; margin: 15px 0; cursor: pointer;"><strong>&nbsp; visit &nbsp;</strong></button>
 
     <div class="card">
         <h2 style="font-family:'Chalet LondonNineteenEighty Regular'; color: #000099;">Experience 4D Augmented Reality On Your Phone</h2>
@@ -82,7 +100,7 @@
 
     <h1 class="hunt-header">join the hunt; tell your friends</h1>
     <div style="position: relative; width: 100%;">
-        <video id="video-overlay" style="width: 100%;" poster="images/[VIDEO_POSTER_NAME]" playsinline muted>
+        <video id="video-overlay" style="width: 100%;" poster="images/Family Demo Poster.png" playsinline muted>
             <source src="Video/sugarlump_family_video.mp4" type="video/mp4">
         </video>
         <button id="play-pause-button" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 50%; padding: 10px 15px; background: rgba(255,255,255,0.8); border:none; font-size: 30px; cursor:pointer;">  ▶  </button>
@@ -105,18 +123,60 @@
         <style>
             body { margin: 0; background: #ffff99; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; font-family: sans-serif; text-align: center; padding: 10px; box-sizing: border-box; }
             model-viewer { width: 100%; height: 50vh; --progress-bar-color: #59cbe8; background-color: #ffff99; }
-            .instr { background: white; padding: 15px 25px; border-radius: 12px; border: 3px solid #59cbe8; width: 95%; max-width: 600px; display: flex; flex-direction: column; align-items: center; box-sizing: border-box; }
-            .instr p { font-size: 18px; font-weight: bold; color: #ff69b4; margin: 8px 0; display: flex; align-items: center; justify-content: center; white-space: nowrap; }
-            .play-btn { display: inline-block !important; width: auto !important; min-width: 250px; height: 60px !important; background: #59cbe8; color: white; border-radius: 10px; font-size: 22px; font-weight: bold; border: none; cursor: pointer; margin-top: 15px; padding: 0 40px !important; white-space: nowrap !important; line-height: 60px; }
+            
+            /* WIDER INSTRUCTION BOX - Max width increased to 95% of screen */
+            .instr { 
+                background: white; 
+                padding: 15px 25px; 
+                border-radius: 12px; 
+                border: 3px solid #59cbe8; 
+                width: 95%; 
+                max-width: 600px; 
+                display: flex; 
+                flex-direction: column; 
+                align-items: center; 
+                box-sizing: border-box;
+            }
+            
+            /* FORCING INSTRUCTIONS TO STAY ON ONE LINE */
+            .instr p { 
+                font-size: 18px; 
+                font-weight: bold; 
+                color: #ff69b4; 
+                margin: 8px 0; 
+                display: flex; 
+                align-items: center; 
+                justify-content: center; 
+                white-space: nowrap; 
+            }
+            
+            /* THE HUGGING BUTTON - No wrap, width determined by content */
+            .play-btn { 
+                display: inline-block !important;
+                width: auto !important; 
+                min-width: 250px;
+                height: 60px !important; 
+                background: #59cbe8; 
+                color: white; 
+                border-radius: 10px; 
+                font-size: 22px; 
+                font-weight: bold; 
+                border: none; 
+                cursor: pointer; 
+                margin-top: 15px; 
+                padding: 0 40px !important;
+                white-space: nowrap !important;
+                line-height: 60px;
+            }
             .rec-img { height: 24px; vertical-align: middle; margin-left: 8px; flex-shrink: 0; }
         </style></head>
         <body>
-            <model-viewer id="m" src="Models/[GLB_MODEL_NAME].glb" poster="images/[POPUP_POSTER_NAME]" reveal="auto" loading="eager" interaction-prompt="none" camera-controls></model-viewer>
-            <audio id="music" src="Sound/[SOUND_FILE_NAME].mp3" loop></audio>
+            <model-viewer id="m" src="Models/entire_family_99cm.glb" poster="images/Poster_SN_Scene.png" reveal="auto" loading="eager" interaction-prompt="none" camera-controls></model-viewer>
+            <audio id="music" src="Sound/sweet_neighbor_of_mine3.mp3" loop></audio>
             <div class="instr">
                 <p>SCREEN RECORD iOS: Swipe down top-right & tap <img src="images/iPhone Record Button 9.png" class="rec-img"></p>
                 <p>ANDROID: Swipe down twice & tap "Screen Record"</p>
-                <button id="ctrl" class="play-btn" onclick="const a=document.getElementById('music'); const m=document.getElementById('m'); if(a.paused){a.play(); m.play(); this.innerText='    ❚❚    PAUSE'; this.style.background='#ff69b4';}else{a.pause(); m.pause(); this.innerText='    ▶    START SHOW'; this.style.background='#59cbe8';}">    ▶    START SHOW</button>
+                <button id="ctrl" class="play-btn" onclick="const a=document.getElementById('music'); const m=document.getElementById('m'); if(a.paused){a.play(); m.play(); this.innerText='   ❚❚    PAUSE'; this.style.background='#ff69b4';}else{a.pause(); m.pause(); this.innerText='   ▶    START SHOW'; this.style.background='#59cbe8';}">   ▶    START SHOW</button>
             </div>
         </body></html>`);
         recWin.document.close();
