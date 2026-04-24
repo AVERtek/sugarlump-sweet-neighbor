@@ -19,8 +19,8 @@
 
         model-viewer { --progress-bar-color: #59cbe8; }
         
-        /* 1/2 line space (0.5em) between links */
-        .card h2 { margin: 0.5em 0; padding: 0; line-height: 1.2; }
+        /* ADJUSTED: Reduced space between links to 0.25em (1/2 of original 0.5em) */
+        .card h2 { margin: 0.25em 0; padding: 0; line-height: 1.2; }
         .card h2 p { margin: 0; padding: 0; }
 
         /* UNIFORM MAIN BUTTONS */
@@ -66,7 +66,7 @@
         </button>
 
         <button id="record-mission-button" class="main-button" onclick="openRecordingTab()">
-            <img src="images/Pink_Play.png" style="filter: hue-rotate(260deg);">
+            <img src="images/Pink_Play.png">
             <span style="font-size: 18px; color: #000099; font-family: 'Chalet LondonNineteenEighty Regular';"><strong>2. record project</strong></span>
         </button>
 
@@ -82,7 +82,9 @@
         <img src="images/erin_video_scenes-34.png" style="width: 300px; max-width: 90%; margin-bottom: 10px;">
         <h2><p style="font-family:'Chalet LondonNineteenEighty Regular'; color: #ff69b4; font-size: 20px;"><b>about:</b><a href="https://sugarlump.love/about" target="_blank"> creativity + kindness</a></p></h2>
         <h2><p style="font-family:'Chalet LondonNineteenEighty Regular'; color: #ff69b4; font-size: 20px;"><b>sponsors:</b><a href="https://sugarlump.love/be-a-sponsor" target="_blank"> get involved</a></p></h2>
-        <br>
+        
+        <div style="margin-top: 1px;"></div>
+        
         <h1><p style="font-family: 'DaisyByhapppyal-Regular'; color: #000099; font-size: 20px;"><em> this kindness project sponsored by</em></p></h1>
         <img src="images/erin_video_scenes-37.png" style="width: 300px; max-width: 90%;">
     </div>
@@ -100,7 +102,7 @@
         <video id="video-overlay" style="width: 100%;" poster="images/Family Demo Poster.png" playsinline muted>
             <source src="Video/sugarlump_family_video.mp4" type="video/mp4">
         </video>
-        <button id="play-pause-button" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 50%; padding: 10px 15px; background: rgba(255,255,255,0.8); border:none; font-size: 30px; cursor:pointer;">  ▶  </button>
+        <button id="play-pause-button" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 50%; padding: 10px 15px; background: #ff69b4; color: white; border:none; font-size: 30px; cursor:pointer;">  ▶  </button>
     </div>
 
     <div class="card" style="margin-top: 20px;">
@@ -121,7 +123,6 @@
             body { margin: 0; background: #ffff99; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; font-family: sans-serif; text-align: center; padding: 10px; box-sizing: border-box; }
             model-viewer { width: 100%; height: 50vh; --progress-bar-color: #59cbe8; background-color: #ffff99; }
             
-            /* WIDER INSTRUCTION BOX - Max width increased to 95% of screen */
             .instr { 
                 background: white; 
                 padding: 15px 25px; 
@@ -135,7 +136,6 @@
                 box-sizing: border-box;
             }
             
-            /* FORCING INSTRUCTIONS TO STAY ON ONE LINE */
             .instr p { 
                 font-size: 18px; 
                 font-weight: bold; 
@@ -147,7 +147,6 @@
                 white-space: nowrap; 
             }
             
-            /* THE HUGGING BUTTON - No wrap, width determined by content */
             .play-btn { 
                 display: inline-block !important;
                 width: auto !important; 
@@ -173,7 +172,7 @@
             <div class="instr">
                 <p>SCREEN RECORD iOS: Swipe down top-right & tap <img src="images/iPhone Record Button 9.png" class="rec-img"></p>
                 <p>ANDROID: Swipe down twice & tap "Screen Record"</p>
-                <button id="ctrl" class="play-btn" onclick="const a=document.getElementById('music'); const m=document.getElementById('m'); if(a.paused){a.play(); m.play(); this.innerText='   ❚❚    PAUSE'; this.style.background='#ff69b4';}else{a.pause(); m.pause(); this.innerText='   ▶    START SHOW'; this.style.background='#59cbe8';}">   ▶    START SHOW</button>
+                <button id="ctrl" class="play-btn" onclick="const a=document.getElementById('music'); const m=document.getElementById('m'); if(a.paused){a.play(); m.play(); this.innerText='    ❚❚    PAUSE'; this.style.background='#ff69b4';}else{a.pause(); m.pause(); this.innerText='    ▶    START SHOW'; this.style.background='#59cbe8';}">    ▶    START SHOW</button>
             </div>
         </body></html>`);
         recWin.document.close();
