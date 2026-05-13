@@ -11,7 +11,7 @@
         gtag('js', new Date());
         gtag('config', '0-0000000000');
     </script>
-    <!-- ========================================================= -->
+<!-- ========================================================= -->
     <!-- REDIRECT TOGGLE: REMOVE "/*" ABOVE AND "*/" BELOW TO ACTIVATE -->
    <!-- <script>
         window.location.replace("https://avertek.github.io/404-Redirect/");
@@ -29,8 +29,8 @@
             height: 100vh; 
             text-align: center;
         }
-    </style> -->
-    <!-- ========================================================= -->
+    </style> --> 
+<!-- ========================================================= -->
     <style>
         /* Global & Button Styles */
         html, body { margin: 0; padding: 0; overflow-x: hidden; font-family: Google Sans, Noto, Roboto, Helvetica Neue, sans-serif; color: #244376; background-color: #ffff99; }
@@ -39,7 +39,6 @@
 
         model-viewer { --progress-bar-color: #59cbe8; }
         
-        /* ADJUSTED: Reduced space between links to 0.25em (1/2 of original 0.5em) */
         .card h2 { margin: 0.25em 0; padding: 0; line-height: 1.2; }
         .card h2 p { margin: 0; padding: 0; }
 
@@ -75,7 +74,14 @@
         <img src="images/sugarlump_experience_AR_assets-01.png" style="width: 350px; max-width: 100%; height: auto;">
     </div>
 
-    <model-viewer id="reveal" src="Models/entire_family_99cm.glb?sound=Sound/sweet_neighbor_of_mine3.mp3" ar ar-modes="scene-viewer webxr quick-look" ios-src="Models/GIRL_converted.usdz"></model-viewer>
+    <!-- Hidden Main Page AR Model -->
+    <model-viewer id="reveal" 
+    src=" Models/entire_family_99cm.glb?sound=Sound/sweet_neighbor_of_mine3.mp3" 
+    ar ar-modes="scene-viewer webxr quick-look" 
+    ios-src="Models/GIRL_converted.usdz"
+    rotation="0 0deg 0"
+    camera-orbit="0deg 0deg 105%">
+</model-viewer>
     
     <p style="text-align:center; font-family: 'Chalet LondonNineteenEighty Regular'; font-weight: bold; color: #000099; font-size: 14px;">make sure Wi-Fi and sound is on!</p>
 
@@ -109,7 +115,7 @@
         <img src="images/erin_video_scenes-37.png" style="width: 300px; max-width: 90%;">
     </div>
     
-    <button onclick="window.open('https://www.tercekrealestate.com/', '_blank')" style="background-color: #ffffff; border-radius: 8px; border: 2px solid #59cbe8; height: 35px; color: #000099; font-size: 18px; font-family: 'Chalet LondonNineteenEighty Regular'; margin: 15px 0; cursor: pointer;"><strong>&nbsp; visit &nbsp;</strong></button>
+    <button onclick="window.open('https://tercekrealestate.com/', '_blank')" style="background-color: #ffffff; border-radius: 8px; border: 2px solid #59cbe8; height: 35px; color: #000099; font-size: 18px; font-family: 'Chalet LondonNineteenEighty Regular'; margin: 15px 0; cursor: pointer;"><strong>&nbsp; visit &nbsp;</strong></button>
 
     <div class="card">
         <h2 style="font-family:'Chalet LondonNineteenEighty Regular'; color: #000099;">experience 4D Augmented Reality on your phone</h2>
@@ -135,70 +141,49 @@
 
 <script>
     function openRecordingTab() {
-        const recWin = window.open("", "_blank");
-        recWin.document.write(`
-        <html><head><title>Project Recorder</title>
-        <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.js"><\/script>
-        <style>
-            body { margin: 0; background: #ffff99; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; font-family: sans-serif; text-align: center; padding: 10px; box-sizing: border-box; }
-            model-viewer { width: 100%; height: 50vh; --progress-bar-color: #59cbe8; background-color: #ffff99; }
-            
-            .instr { 
-                background: white; 
-                padding: 15px 25px; 
-                border-radius: 12px; 
-                border: 3px solid #59cbe8; 
-                width: 95%; 
-                max-width: 600px; 
-                display: flex; 
-                flex-direction: column; 
-                align-items: center; 
-                box-sizing: border-box;
-            }
-            
-            .instr p { 
-                font-size: 18px; 
-                font-weight: bold; 
-                color: #ff69b4; 
-                margin: 8px 0; 
-                display: flex; 
-                align-items: center; 
-                justify-content: center; 
-                white-space: nowrap; 
-            }
-            
-            .play-btn { 
-                display: inline-block !important;
-                width: auto !important; 
-                min-width: 250px;
-                height: 60px !important; 
-                background: #59cbe8; 
-                color: white; 
-                border-radius: 10px; 
-                font-size: 22px; 
-                font-weight: bold; 
-                border: none; 
-                cursor: pointer; 
-                margin-top: 15px; 
-                padding: 0 40px !important;
-                white-space: nowrap !important;
-                line-height: 60px;
-            }
-            .rec-img { height: 24px; vertical-align: middle; margin-left: 8px; flex-shrink: 0; }
-        </style></head>
-        <body>
-            <model-viewer id="m" src="Models/entire_family_99cm.glb" poster="images/Poster_SN_Scene.png" reveal="auto" loading="eager" interaction-prompt="none" camera-controls></model-viewer>
-            <audio id="music" src="Sound/sweet_neighbor_of_mine3.mp3" loop></audio>
-            <div class="instr">
-                <p>SCREEN RECORD iOS: swipe down top-right & tap <img src="images/iPhone Record Button 9.png" class="rec-img"></p>
-                <p>ANDROID: swipe down twice & tap "Screen Record"</p>
-                <button id="ctrl" class="play-btn" onclick="const a=document.getElementById('music'); const m=document.getElementById('m'); if(a.paused){a.play(); m.play(); this.innerText='    ❚❚    PAUSE'; this.style.background='#ff69b4';}else{a.pause(); m.pause(); this.innerText='    ▶    START SHOW'; this.style.background='#59cbe8';}">    ▶    START SHOW</button>
-                <p style="color: #59cbe8;">record, complete, show sponsor, share on social</p>
-            </div>
-        </body></html>`);
-        recWin.document.close();
-    }
-
+    const recWin = window.open("", "_blank");
+    recWin.document.write(`
+    <html><head><title>Project Recorder</title>
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.js"><\/script>
+    <style>
+        body { margin: 0; background: #ffff99; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; font-family: sans-serif; text-align: center; padding: 10px; box-sizing: border-box; }
+        /* Focus strictly on 2D view */
+        model-viewer { width: 100%; height: 50vh; --progress-bar-color: #59cbe8; background-color: #ffff99; }
+        .instr { background: white; padding: 15px 25px; border-radius: 12px; border: 3px solid #59cbe8; width: 95%; max-width: 600px; display: flex; flex-direction: column; align-items: center; box-sizing: border-box; }
+        .instr p { font-size: 18px; font-weight: bold; color: #ff69b4; margin: 8px 0; display: flex; align-items: center; justify-content: center; }
+        .play-btn { display: inline-block !important; min-width: 250px; height: 60px; background: #59cbe8; color: white; border-radius: 10px; font-size: 22px; font-weight: bold; border: none; cursor: pointer; margin-top: 15px; padding: 0 40px; line-height: 60px; }
+        .rec-img { height: 24px; vertical-align: middle; margin-left: 8px; }
+    </style></head>
+    <body>
+        <model-viewer id="m" 
+            src=" Models/entire_family_99cm.glb" 
+            poster="images/Poster_SN_Scene.png" 
+            reveal="auto" loading="eager" interaction-prompt="none" camera-controls>
+        </model-viewer>
+        <audio id="music" src="Sound/sweet_neighbor_of_mine3.mp3" loop></audio>
+        <div class="instr">
+            <p>SCREEN RECORD iOS: Swipe down top-right & tap <img src="images/iPhone Record Button 9.png" class="rec-img"></p>
+            <p>ANDROID: Swipe down twice & tap "Screen Record"</p>
+            <button id="ctrl" class="play-btn" onclick="
+                const a=document.getElementById('music'); 
+                const m=document.getElementById('m'); 
+                if(a.paused){
+                    a.play(); 
+                    m.play(); 
+                    m.dismissPoster();
+                    this.innerText='  ❚❚   PAUSE'; 
+                    this.style.background='#ff69b4';
+                } else {
+                    a.pause(); 
+                    m.pause(); 
+                    this.innerText='  ▶   START SHOW'; 
+                    this.style.background='#59cbe8';
+                }
+            ">  ▶   START SHOW</button>
+        </div>
+    </body></html>`);
+    recWin.document.close();
+}
     document.addEventListener("DOMContentLoaded", function () {
         const video = document.getElementById('video-overlay');
         const playBtn = document.getElementById('play-pause-button');
@@ -245,8 +230,8 @@
                 const certNo = Date.now().toString().slice(-8);
 
                 const x = 80; const baseY = height - 250;
-                page.drawText("Tercek Real Estate Group", { x, y: baseY + 20, size: 16, font: fontB, color: rgb(8/255, 119/255, 144/255) });
-                page.drawText("Sweet Neighbor of Mine", { x, y: baseY, size: 16, font: fontB, color: rgb(254/255, 63/255, 178/255) });
+                page.drawText("MacAdam Forbes", { x, y: baseY + 20, size: 16, font: fontB, color: rgb(8/255, 119/255, 144/255) });
+                page.drawText("Street Sweets", { x, y: baseY, size: 16, font: fontB, color: rgb(254/255, 63/255, 178/255) });
                 page.drawText(`Certificate No: ${certNo}`, { x, y: baseY - 20, size: 12, font: fontR, color: rgb(8/255, 119/255, 144/255) });
                 page.drawText(`Download Date: ${dateStr}`, { x, y: baseY - 40, size: 12, font: fontR, color: rgb(8/255, 119/255, 144/255) });
                 page.drawText(`Valid until: ${expStr}`, { x, y: baseY - 60, size: 14, font: fontB, color: rgb(0.8, 0.2, 0.2) });
